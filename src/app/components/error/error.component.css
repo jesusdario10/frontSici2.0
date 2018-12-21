@@ -1,0 +1,14 @@
+.medio{
+    width: 90vw;
+    height: 90vh !important;
+    margin: 0 auto;
+    padding: 100px;
+    text-align: center;
+
+}
+.masmedio{
+    margin:  auto;
+    width: 50vw !important;
+    text-align: center
+
+}

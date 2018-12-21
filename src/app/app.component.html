@@ -1,0 +1,25 @@
+
+<div class="col-sm-12 contenido">
+  <div *ngIf="identity != null">
+      <nav class="navbar ">
+        <div class="navbar-header">
+            <img class="logo" src="assets/img/logo/logo.png" alt="">
+        </div>
+        <ul class="nav justify-content-end">
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['/dashboard']">Dashboard</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown"  role="button" aria-haspopup="true" aria-expanded="false">{{identity.nombre}}</a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" [routerLink]="['/perfil']">Perfil</a>
+                <a class="dropdown-item">Manual</a>
+                <div class="dropdown-divider"></div>
+                <a (click)="logout()" [routerLink]="['/inicio']" class="dropdown-item" >Cerrar Sesion</a>
+              </div>
+            </li>
+          </ul>
+      </nav>
+    </div>
+</div>
+<router-outlet></router-outlet>

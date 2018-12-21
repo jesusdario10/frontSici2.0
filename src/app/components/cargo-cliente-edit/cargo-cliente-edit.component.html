@@ -1,0 +1,45 @@
+<div class="col-sm-12 fondo">
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3 ">
+      <div class="card">
+        <h5 style="text-align:center; padding: 1vh;">Editar Cargos</h5>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-12">
+              <form ngNativeValidate [formGroup]="form"  #cargoFormE="ngForm" (ngSubmit)="editCargo(form, cargoFormE)">
+                <div class="col-md-12 col-sm-12">
+                    <div class="form-group">
+                      <label for="nombreCargo" class="negrita">Nombre del Cargo</label>
+                      <input type="text"  formControlName="nombreC"  [(ngModel)]="nombreCargo" class="form-control" required>
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12">
+                  <div class="form-group">
+                    <label for="vhora" class="negrita">Valor de la Hora Hombre</label>
+                    <input type="number"   formControlName="vhora_hombreC" [(ngModel)]="valorHHombre"  class="form-control"  required>
+                  </div>
+                </div>
+                <div class="form-group">
+                  
+                  <div class="form-group padselect">
+                    <label for="selectCargo">Estado</label>
+                    <select class="form-control" name="estadoC" formControlName="estadoC" [(ngModel)]="estado">
+                      <option [value]="estado" selected>{{estado}}</option>
+                      <option>ACTIVO</option>
+                      <option>INACTIVO</option>
+                    </select>
+                  </div>
+                </div>  
+                <div style="text-align:center">
+                  <input type="submit" class="btn btn-outline-success" value="Editar">
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

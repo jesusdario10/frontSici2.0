@@ -1,0 +1,68 @@
+<div class="col-sm-12 fondo">
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-sm-12">
+      <div class="card">
+        <div class="card-body">
+          <h5 style="text-align:center">Informacion del perfil</h5>
+          <br><br>
+          <form >
+              <div class="col-md-12 col-sm-12">
+                  <div class="form-group">
+                    <label for="nombreUsuario" class="negrita">Nombre de Usuario</label>
+                    <input type="text" name="name" #name="ngModel" [(ngModel)]="identity.nombre" class="form-control">
+                  </div>
+              </div>
+              <div class="col-md-12 col-sm-12">
+                <div class="form-group">
+                  <label for="correo" class="negrita">Correo Electronico</label>
+                  <input type="email" name="correo" #name="ngModel" [(ngModel)]="identity.correo" class="form-control"  required  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+                </div>
+              </div>
+              <div class="col-md-12 col-sm-12">
+                <div class="form-group">
+                  <label for="celular" class="negrita">No Celular</label>
+                  <input type="text" name="celular" #name="ngModel" [(ngModel)]="identity.celular"  class="form-control">
+                </div>
+              </div>             
+            
+            <div style="text-align:center">
+              <input type="submit" class="btn btn-outline-success" value="Actualizar">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 col-sm-12">
+        <div class="card">
+          <div class="card-body">
+            <h5 style="text-align:center">Editar Contraseña</h5>
+            <br><br>
+            <div class="row">
+              <div class="col-md-12">
+                <form>
+                  <div class="form-group">
+                    <label for="passantigua" class="negrita">Contraseña Anterior</label>
+                    <input type="password" name="passwordAnt"  [(ngModel)]="passwordAnt" class="form-control" required class="form-control">
+                  </div>
+                  <div class="form-group">
+                      <label for="passnueva" class="negrita">Nueva Contraseña</label>
+                      <input type="password" name="passwordNew"  [(ngModel)]="passwordNew"  class="form-control">
+                  </div>
+                  <div class="form-group">
+                      <label for="confirmar" class="negrita">Confirmar Contraseña</label>
+                      <input type="password" name="passwordConfirm"  [(ngModel)]="passwordConfirm" class="form-control">
+                  </div>
+                  
+                  <div style="text-align:center">
+                      <input type="submit" class="btn btn-outline-success" value="Actualizar">
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>

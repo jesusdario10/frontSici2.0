@@ -1,0 +1,38 @@
+.logo{
+    height: 30px;
+  }
+  .nav{
+    border: 1px solid transparent;
+    border-top-left-radius: .25rem;
+    border-top-right-radius: .25rem;
+    color: black !important;
+  }
+  .nav-item:hover{
+    font-weight: bold;
+  
+  }
+  a{
+    color: black !important;
+    
+  }
+  .navbar{
+    background-color: #fff !important;
+    background-color: rgb(16,108,200);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  
+  /*contenido*/
+  .contenido{
+    margin: 0px;
+    padding: 0px;
+  }
+  .contenido3{
+    z-index: 3;
+    position: relative;
+    padding-top: 30vh;
+  }
+  .row{
+    padding: 0px;
+    margin:0px;
+    border:0px;
+  }

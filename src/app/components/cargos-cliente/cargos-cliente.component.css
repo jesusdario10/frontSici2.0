@@ -1,0 +1,27 @@
+/*fondo del componente principal*/
+.fondo{
+    background-image: url(../../../assets/img/logo/bgc.jpg);
+    background-position: left;
+    border: 1px solid black !important;
+    background-size: cover;
+    height: 118% !important;
+    opacity: 0.2;
+    z-index: 1;
+    position: absolute;
+}
+.container{
+    z-index: 2;
+    position: relative;
+}
+.espacios{
+    padding: 2vh;
+}
+button{
+    margin: 3vh;
+}
+.espacios div{
+    padding-top: 3vh;
+}
+.pointer{
+    cursor: pointer;
+}

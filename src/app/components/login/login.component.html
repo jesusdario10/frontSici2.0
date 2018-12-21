@@ -1,0 +1,25 @@
+<div class="col-sm-12 fondo">
+
+</div>
+<div class="col-lg-12 contenido">
+  <div class="wrapper fadeInDown">
+      <div id="formContent">
+        <!-- Icon -->
+        <div class="fadeIn first">
+          <img src="../../../assets/img/logo/logo.png" id="icon" alt="User Icon" />
+          <h1>Login</h1>
+        </div>
+        <!-- Login Form -->
+        <form  #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+          <input type="email"name="correo" #correo="ngModel" [(ngModel)]="user.correo"  class="fadeIn second" required  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" placeholder="username">
+          <input type="password" name="password" #password="ngModel" [(ngModel)]="user.password" class="fadeIn third"  placeholder="password" required>
+          <input type="submit"   class="fadeIn fourth boton" value="Log In" [disabled]="!loginForm.form.valid">
+        </form>
+        <!-- Remind Passowrd -->
+        <div id="formFooter">
+          
+        </div>
+    
+      </div>
+    </div>
+</div>

@@ -1,0 +1,40 @@
+/*fondo del componente principal*/
+.fondo{
+    background-image: url(../../../assets/img/logo/bgc.jpg);
+    background-position: left;
+    border: 1px solid black !important;
+    background-size: cover;
+    height: 99.80% !important;
+    opacity: 0.2;
+    z-index: 1;
+    position: absolute;
+}
+/*contenido*/
+.contenido{
+    z-index: 2;
+    position: absolute;
+}
+section{
+    margin-top: 30vh;
+}
+p{
+    text-align: justify;
+}
+button{
+    width: 100%;
+}
+@media (max-width: 767px) {
+    .fondo{
+        background-image: url(../../../assets/img/logo/bgc.jpg);
+        background-position: left;
+        border: 1px solid black !important;
+        background-size:cover;
+        height: 100% !important;
+        opacity: 0.2px;
+        z-index: 1;
+        position: absolute;
+    }
+    section{
+        margin-top: 0px !important;
+    }
+}
