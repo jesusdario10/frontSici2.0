@@ -11,6 +11,8 @@ import { PerfilComponent } from './components/perfil/perfil.component';
 import { ConfigClienteComponent } from './components/config-cliente/config-cliente.component';
 import { CargosClienteComponent } from './components/cargos-cliente/cargos-cliente.component';
 import { CargoClienteEditComponent } from './components/cargo-cliente-edit/cargo-cliente-edit.component';
+import { UbicacionClientComponent } from './components/ubicacion-client/ubicacion-client.component';
+import { UbicacionClientEditComponent } from './components/ubicacion-client-edit/ubicacion-client-edit.component';
 
 
 const appRoutes : Routes = [
@@ -23,6 +25,8 @@ const appRoutes : Routes = [
     {path: 'config', component: ConfigClienteComponent, canActivate:[UserGuard]},
     {path: 'cargos/:page', component: CargosClienteComponent, canActivate:[UserGuard]},
     {path: 'cargosedit/:id', component: CargoClienteEditComponent, canActivate:[UserGuard]},
+    {path: 'ubicacion/:page', component: UbicacionClientComponent, canActivate:[UserGuard]},
+    {path: 'ubicacionedit/:id', component: UbicacionClientEditComponent, canActivate:[UserGuard]},
     {path: '**', component: ErrorComponent},
     
 ];

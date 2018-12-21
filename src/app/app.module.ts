@@ -25,6 +25,8 @@ import { PerfilComponent } from './components/perfil/perfil.component';
 import { ConfigClienteComponent } from './components/config-cliente/config-cliente.component';
 import { CargosClienteComponent } from './components/cargos-cliente/cargos-cliente.component';
 import { CargoClienteEditComponent } from './components/cargo-cliente-edit/cargo-cliente-edit.component';
+import { UbicacionClientComponent } from './components/ubicacion-client/ubicacion-client.component';
+import { UbicacionClientEditComponent } from './components/ubicacion-client-edit/ubicacion-client-edit.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { CargoClienteEditComponent } from './components/cargo-cliente-edit/cargo
     PerfilComponent,
     ConfigClienteComponent,
     CargosClienteComponent,
-    CargoClienteEditComponent
+    CargoClienteEditComponent,
+    UbicacionClientComponent,
+    UbicacionClientEditComponent
   ],
   imports: [
     BrowserModule,

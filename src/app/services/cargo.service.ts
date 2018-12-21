@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http'; 
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject, pipe } from 'rxjs';
 import { GLOBAL } from './global';
-import { map, catchError } from "rxjs/operators"; 
-import { throwError } from "rxjs/internal/observable/throwError"; 
+import { map, catchError } from "rxjs/operators";
+import { throwError } from "rxjs/internal/observable/throwError";
 import swal from 'sweetalert';
 import { CargoModel } from '../models/cargoModel';
 import { UserService } from './user.service';
@@ -26,7 +26,7 @@ export class CargoService {
     this.token = this._userServices.getToken();
    }
 
-  //Crear Cargos
+  //Crear Cargos para clientes
   createCargo(cargo:CargoModel):Observable<any>{
     let params = JSON.stringify(cargo);
     let headers = new HttpHeaders().set('Content-Type', 'application/json')
@@ -43,7 +43,7 @@ export class CargoService {
   listarCargosClientes(page=null):Observable<any>{
     let headers = new HttpHeaders().set('Content-Type', 'application/json')
                                    .set('Authorization', this.token);
-    return this._http.get(this.URL+'cargo/listarcargocliente/'+page, {headers:headers});                 
+    return this._http.get(this.URL+'cargo/listarcargocliente/'+page, {headers:headers});
   }
   //Buscar mediante el Input cargos para los clientes
   buscarCargosInputDinamico(terminio:string):Observable<any>{
@@ -55,14 +55,14 @@ export class CargoService {
   buscarUnCargoCliente(id):Observable<any>{
     let headers = new HttpHeaders().set('Content-Type', 'application/json')
                                    .set('Authorization', this.token);
-    return this._http.get(this.URL+'cargo/listarcargo/'+id, {headers:headers})   
+    return this._http.get(this.URL+'cargo/listarcargo/'+id, {headers:headers})
   }
   //Editar Cargos para clientes
   editarCargoCliente(cargo:CargoModel, id):Observable<any>{
     let params = JSON.stringify(cargo);
     let headers = new HttpHeaders().set('Content-Type', 'application/json')
                                    .set('Authorization', this.token);
-                                   
+
     return this._http.post(this.URL+'cargo/update/'+id, params, {headers:headers}).pipe((
       map((resp:any)=>{
         console.log(resp);
@@ -71,6 +71,14 @@ export class CargoService {
     ))
 
   }
+
+
+
+
+
+
+
+  //***************************Para Supersu*******************************************/
 
 
 }

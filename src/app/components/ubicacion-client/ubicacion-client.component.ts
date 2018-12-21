@@ -1,20 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
-import { CargoModel } from 'src/app/models/cargoModel';
-import { CargoService } from 'src/app/services/cargo.service';
 import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+import { UbicacionModel } from 'src/app/models/ubicacionModel';
+import { UbicacionService } from 'src/app/services/ubicacion.service';
 declare var swal:any;
 
 @Component({
-  selector: 'app-cargos-cliente',
-  templateUrl: './cargos-cliente.component.html',
-  styleUrls: ['./cargos-cliente.component.css']
+  selector: 'app-ubicacion-client',
+  templateUrl: './ubicacion-client.component.html',
+  styleUrls: ['./ubicacion-client.component.css']
 })
-export class CargosClienteComponent implements OnInit {
+export class UbicacionClientComponent implements OnInit {
   public identity : any;
-  public cargos : CargoModel[]=[];
-  public newCargo : CargoModel;
+  public ubicaciones : UbicacionModel[]=[];
+  public newUbicacion : UbicacionModel;
   public form : FormGroup;
   public formSubmit: boolean;
   page: number;
@@ -25,48 +25,45 @@ export class CargosClienteComponent implements OnInit {
 
   constructor(
     private _userServices : UserService,
-    private _cargoServices : CargoService,
+    private _ubicacionServices : UbicacionService,
     private fb: FormBuilder,
     private _router : Router,
     private _route:ActivatedRoute,
-  ) {
-   this.page = 1;
-  }
+  ) { }
 
   ngOnInit() {
     this.identity = this._userServices.getIdentity();
     //inicializando el formulario
     this.form = this.fb.group({
-      nombreC : [ "", Validators.required ],
-      vhora_hombreC: [ 0, Validators.required ]
+      nombreC : [ "", Validators.required ]
     });
-    //listarCargos
+    //listarUbicaciones y saber cual es la pagina actual
     this.actualPage();
-    this.listarCargoCliente(1);
+    this.listarUbicacionesCliente(1);
   }
-  //Crear Cargos
-  createCargo(form, createCargo){
+  //Function para crear ubicacion cliente
+  createUbicacionCliente(form, ubicacionFormC){
     const formModel = this.form.value;
-    let saveCargo: CargoModel ={
+    let saveUbicacion: UbicacionModel ={
       nombre : formModel.nombreC as string,
-      vhora_hombre :formModel.vhora_hombreC as number,
-      usuario_creador : this.identity._id,
       tercero : this.identity.tercero,
     };
-    this._cargoServices.createCargo(saveCargo)
+    this._ubicacionServices.createUbicacionCliente(saveUbicacion)
         .subscribe((datos:any)=>{
           console.log(datos);
           form.reset();
-          swal("Exito", "Cargo Creado", "success");
-          this.listarCargoCliente(this.page);
-    });
+          swal("Exito", "Ubicacion Creada", "success");    
+          this.listarUbicacionesCliente(this.page); 
+        })
   }
+
+  //Function para saber la pagina actual
   actualPage(){
     //asi capturo paramtros de la url
     this._route.params.subscribe(params=>{
       let page = +params['page'];//con el + delante lo convierto en un entero
       this.page = page;
-
+      
       if(!params['page']){
         page = 1;
       }
@@ -84,32 +81,31 @@ export class CargosClienteComponent implements OnInit {
       if(page >= this.pages){
         page = this.pages
       }
-      //ejecutar traer todos los usuarios
-      this.listarCargoCliente(page)
+      //ejecutar traer todas las ubicacionesCliente
+      this.listarUbicacionesCliente(page)
     })
   }
   //Listar Cargos de los clientes
-  listarCargoCliente(page){
-
-    this._cargoServices.listarCargosClientes(page)
+  listarUbicacionesCliente(page){
+    this._ubicacionServices.listarUbicacionesCliente(page)
       .subscribe((datos:any)=>{
         console.log(datos);
-        this.cargos = datos.cargos;
+        this.ubicaciones = datos.ubicaciones;
         this.total = datos.total;
         this.pages = datos.pages;
-
       })
   }
-  //Buscar Cargo desde el campo input dinamicamente
-  buscarCargo(termino:string){
+ //Buscar Ubicacion desde el campo input dinamicamente
+  buscarUbicacionCliente(termino:string){
     if(termino.length<=0){
-      this.listarCargoCliente(this.page)
+      this.listarUbicacionesCliente(this.page)
       return;
     }
-    this._cargoServices.buscarCargosInputDinamico(termino)
+    this._ubicacionServices.buscarUbicacionesInputDinamico(termino)
         .subscribe((datos:any)=>{
-          this.cargos = datos.cargos;
+          this.ubicaciones = datos.ubicaciones;
+          
         })
   }
-
+  
 }
