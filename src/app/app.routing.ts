@@ -13,6 +13,7 @@ import { CargosClienteComponent } from './components/cargos-cliente/cargos-clien
 import { CargoClienteEditComponent } from './components/cargo-cliente-edit/cargo-cliente-edit.component';
 import { UbicacionClientComponent } from './components/ubicacion-client/ubicacion-client.component';
 import { UbicacionClientEditComponent } from './components/ubicacion-client-edit/ubicacion-client-edit.component';
+import { EquipoClienteComponent } from './components/equipos/equipo-cliente/equipo-cliente.component';
 
 
 const appRoutes : Routes = [
@@ -27,6 +28,7 @@ const appRoutes : Routes = [
     {path: 'cargosedit/:id', component: CargoClienteEditComponent, canActivate:[UserGuard]},
     {path: 'ubicacion/:page', component: UbicacionClientComponent, canActivate:[UserGuard]},
     {path: 'ubicacionedit/:id', component: UbicacionClientEditComponent, canActivate:[UserGuard]},
+    {path: 'equipoCliente/:page', component: EquipoClienteComponent, canActivate:[UserGuard]},
     {path: '**', component: ErrorComponent},
     
 ];

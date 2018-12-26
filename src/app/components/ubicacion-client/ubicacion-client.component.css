@@ -25,3 +25,9 @@ button{
 .pointer{
     cursor: pointer;
 }
+.centroiconos {
+    text-align: center !important;
+}
+.centroiconos i{
+    color:#28a745;
+}

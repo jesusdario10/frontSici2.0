@@ -27,6 +27,8 @@ import { CargosClienteComponent } from './components/cargos-cliente/cargos-clien
 import { CargoClienteEditComponent } from './components/cargo-cliente-edit/cargo-cliente-edit.component';
 import { UbicacionClientComponent } from './components/ubicacion-client/ubicacion-client.component';
 import { UbicacionClientEditComponent } from './components/ubicacion-client-edit/ubicacion-client-edit.component';
+import { EquipoClienteComponent } from './components/equipos/equipo-cliente/equipo-cliente.component';
+
 
 @NgModule({
   declarations: [
@@ -40,7 +42,9 @@ import { UbicacionClientEditComponent } from './components/ubicacion-client-edit
     CargosClienteComponent,
     CargoClienteEditComponent,
     UbicacionClientComponent,
-    UbicacionClientEditComponent
+    UbicacionClientEditComponent,
+    EquipoClienteComponent,
+    
   ],
   imports: [
     BrowserModule,
