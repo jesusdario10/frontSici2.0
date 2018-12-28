@@ -48,6 +48,31 @@ export class EquipoService {
   buscarEquiposInputDinamico(terminio:string):Observable<any>{
     let headers = new HttpHeaders().set('Content-Type', 'application/json')
                                      .set('Authorization', this.token);
-    return this._http.get(this.URL+'busqueda/equipos/'+terminio, {headers:headers})                               ;
+    return this._http.get(this.URL+'busqueda/equipos/'+terminio, {headers:headers});                               
+  }
+  //listar Un Equipo para el cliente
+  listarUnSoloEquipoCliente(id):Observable<any>{
+    let headers = new HttpHeaders().set('Content-Type', 'application/json')
+                                   .set('Authorization', this.token);
+    return this._http.get(this.URL+'equipo/listarEquipoCliente/'+id, {headers:headers}).pipe(
+      map((resp:any)=>{
+        return resp;
+      })
+    );                               
+  }
+  //Actualizar Equipos del cliente
+  UpdateEquiposCliente(equipo:EquipoModel, id):Observable<any>{
+    let params = JSON.stringify(equipo);
+
+    let headers = new HttpHeaders().set('Content-Type', 'application/json')
+                                   .set('Authorization', this.token);
+    return this._http.post(this.URL+'equipo/updateEquiposclientes/'+id, params, {headers:headers}).pipe(
+      map((resp:any)=>{
+        return resp;
+      })
+    )
+               
+                                   
+
   }
 }

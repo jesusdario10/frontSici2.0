@@ -6,7 +6,8 @@ export class EquipoModel{
         public usuario_creador? : string,
         public tercero? : string,
         public estado? : string,
-        public user_modificador? :string,
+        public usuario_modificador? :string,
+        public ubicacion? :string,
         public _id?: string,
     ){}
 }

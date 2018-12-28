@@ -1,0 +1,54 @@
+<div class="col-sm-12 fondo">
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3 ">
+      <div class="card">
+        <h5 style="text-align:center; padding: 1vh;">Editar Cargos</h5>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-12">
+              <form ngNativeValidate [formGroup]="form"  #EquipoEditE="ngForm" (ngSubmit)="editEquipoCliente(form, EquipoEditE)">
+                <div class="col-md-12 col-sm-12" style="text-align:center">
+                    <div class="form-group">
+                      <h5 for="tagEdit" class="negrita">Tag</h5>
+                      <h6><strong><p class="estado">[{{tag}}]</p></strong></h6>
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12">
+                  <div class="form-group">
+                    <label for="vhora" class="negrita">Descripcion o Nombre</label>
+                    <input type="text"   formControlName="nombreEdit" [(ngModel)]="nombre"  class="form-control"  required>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="selectCargo">Estado <span class="estado">({{estado}})</span></label>
+                    <select class="form-control" name="ubiEdit" formControlName="estadoE" >
+                      <option>ACTIVO</option>
+                      <option>INACTIVO</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="">Ubicacion <span class="estado">({{ubicacion2}})</span></label>
+                    <select class="custom-select custom-select-lg mb-3" formControlName="ubiEdit" class="form-control"   required>
+                      
+                      <option  *ngFor="let ubicacion of ubicaciones" [value]="ubicacion._id" >{{ubicacion.nombre}}</option>
+                    </select>
+                  </div>
+                </div>
+
+                 
+                <div style="text-align:center">
+                  <input type="submit" class="btn btn-outline-success" value="Editar">
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 

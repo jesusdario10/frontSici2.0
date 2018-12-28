@@ -4,7 +4,13 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 
 //Angular Material Modules
-import {MatButtonModule, MatFormFieldModule, MatCheckboxModule, MatInputModule, MatAutocompleteModule, MatSelectModule} from '@angular/material';
+import {MatButtonModule,
+        MatFormFieldModule,
+        MatCheckboxModule,
+        MatInputModule,
+        MatAutocompleteModule,
+        MatSelectModule,
+        MatGridListModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -28,6 +34,8 @@ import { CargoClienteEditComponent } from './components/cargo-cliente-edit/cargo
 import { UbicacionClientComponent } from './components/ubicacion-client/ubicacion-client.component';
 import { UbicacionClientEditComponent } from './components/ubicacion-client-edit/ubicacion-client-edit.component';
 import { EquipoClienteComponent } from './components/equipos/equipo-cliente/equipo-cliente.component';
+import { EquipoClienteEditComponent } from './components/equipos/equipo-cliente-edit/equipo-cliente-edit.component';
+
 
 
 @NgModule({
@@ -44,10 +52,12 @@ import { EquipoClienteComponent } from './components/equipos/equipo-cliente/equi
     UbicacionClientComponent,
     UbicacionClientEditComponent,
     EquipoClienteComponent,
-    
+    EquipoClienteEditComponent,
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     MatButtonModule,
     MatCheckboxModule,
@@ -55,8 +65,7 @@ import { EquipoClienteComponent } from './components/equipos/equipo-cliente/equi
     MatInputModule,
     MatAutocompleteModule,
     MatSelectModule,
-    FormsModule,
-    ReactiveFormsModule,
+    MatGridListModule,
     HttpClientModule,
     routing
   ],

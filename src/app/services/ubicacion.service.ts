@@ -43,6 +43,17 @@ export class UbicacionService {
                                    .set('Authorization', this.token);
     return this._http.get(this.URL+'ubicacion/listarubicacionclientes/'+page, {headers:headers});
   }
+  //Listar Ubicaciones para los clientes( este listado es el que aparece en el autocomplete)
+   listarUbicacionesClienteautocomplete():Observable<any>{
+    let headers = new HttpHeaders().set('Content-Type', 'application/json')
+                                   .set('Authorization', this.token);
+    return this._http.get(this.URL+'ubicacion/listarubicacionautocomplete/', {headers:headers}).pipe(
+      map((resp:any)=>{
+        return resp;
+      })
+    )
+  }
+
   //Buscar mediante el Input cargos para los clientes
   buscarUbicacionesInputDinamico(terminio:string):Observable<any>{
     let headers = new HttpHeaders().set('Content-Type', 'application/json')
