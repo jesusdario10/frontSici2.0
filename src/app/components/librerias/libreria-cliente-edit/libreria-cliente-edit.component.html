@@ -1,0 +1,45 @@
+<div class="col-sm-12 fondo">
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3 ">
+      <div class="card">
+        <h5 style="text-align:center; padding: 1vh;">Editar Libreria</h5>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-12">
+              <form ngNativeValidate [formGroup]="form"  #libreriaFormE="ngForm" (ngSubmit)="editLibreria(form, libreriaFormE)">
+                <div class="col-md-12 col-sm-12">
+                    <div class="form-group">
+                      <label for="nombreLibreria" class="negrita">Nombre de Libreria</label>
+                      <input type="text"  formControlName="nombreL"  [(ngModel)]="nombreLibreria" class="form-control" required>
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12">
+                  <div class="form-group">
+                    <label for="vhora" class="negrita">Descripcion Libreria</label>
+                    <input type="text"   formControlName="descripcionL" [(ngModel)]="descripcionLibreria"  class="form-control"  required>
+                  </div>
+                </div>
+                <div class="form-group">
+                  
+                  <div class="form-group padselect">
+                    <label for="selectCargo">Estado</label>
+                    <select class="form-control" name="estadoL" formControlName="estadoL" [(ngModel)]="estado">
+                      <option [value]="estado" selected>{{estado}}</option>
+                      <option>ACTIVA</option>
+                      <option>INACTIVA</option>
+                    </select>
+                  </div>
+                </div>  
+                <div style="text-align:center">
+                  <input type="submit" class="btn btn-outline-success" value="Editar">
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

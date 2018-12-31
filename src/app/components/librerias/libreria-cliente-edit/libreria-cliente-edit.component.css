@@ -4,7 +4,7 @@
     background-position: left;
     border: 1px solid black !important;
     background-size: cover;
-    height: 160% !important;
+    height: 90% !important;
     opacity: 0.2;
     z-index: 1;
     position: absolute;
@@ -12,22 +12,9 @@
 .container{
     z-index: 2;
     position: relative;
+    padding: 3vh;
 }
-.espacios{
-    padding: 2vh;
-}
-button{
-    margin: 3vh;
-}
-.espacios div{
-    padding-top: 3vh;
-}
-.pointer{
-    cursor: pointer;
-}
-.centroiconos {
-    text-align: center !important;
-}
-.centroiconos i{
-    color:#ffc107
+.padselect{
+    padding-left: 14px;
+    padding-right: 14px;
 }

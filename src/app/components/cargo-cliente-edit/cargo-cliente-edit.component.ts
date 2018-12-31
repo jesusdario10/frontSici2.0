@@ -13,7 +13,6 @@ declare var swal:any;
 })
 export class CargoClienteEditComponent implements OnInit {
   public identity : any;
-  public cargos : CargoModel[]=[];
   public ediCargo : CargoModel;
   public nombreCargo : string;
   public valorHHombre : number;

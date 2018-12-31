@@ -15,6 +15,8 @@ import { UbicacionClientComponent } from './components/ubicacion-client/ubicacio
 import { UbicacionClientEditComponent } from './components/ubicacion-client-edit/ubicacion-client-edit.component';
 import { EquipoClienteComponent } from './components/equipos/equipo-cliente/equipo-cliente.component';
 import { EquipoClienteEditComponent } from './components/equipos/equipo-cliente-edit/equipo-cliente-edit.component';
+import { LibreriaClienteComponent } from './components/librerias/libreria-cliente/libreria-cliente.component';
+import { LibreriaClienteEditComponent } from './components/librerias/libreria-cliente-edit/libreria-cliente-edit.component';
 
 
 const appRoutes : Routes = [
@@ -31,6 +33,9 @@ const appRoutes : Routes = [
     {path: 'ubicacionedit/:id', component: UbicacionClientEditComponent, canActivate:[UserGuard]},
     {path: 'equipoCliente/:page', component: EquipoClienteComponent, canActivate:[UserGuard]},
     {path: 'equiposClienteEdit/:id', component: EquipoClienteEditComponent, canActivate:[UserGuard]},
+    {path: 'equiposClienteEdit/:id', component: EquipoClienteEditComponent, canActivate:[UserGuard]},
+    {path: 'libreriasCliente/:page', component: LibreriaClienteComponent, canActivate:[UserGuard]},
+    {path: 'libreriaClienteEdit/:id', component: LibreriaClienteEditComponent, canActivate:[UserGuard]},
     {path: '**', component: ErrorComponent},
     
 ];
