@@ -37,6 +37,11 @@ import { EquipoClienteComponent } from './components/equipos/equipo-cliente/equi
 import { EquipoClienteEditComponent } from './components/equipos/equipo-cliente-edit/equipo-cliente-edit.component';
 import { LibreriaClienteComponent } from './components/librerias/libreria-cliente/libreria-cliente.component';
 import { LibreriaClienteEditComponent } from './components/librerias/libreria-cliente-edit/libreria-cliente-edit.component';
+import { ConfigAdminComponent } from './components/config-admin/config-admin.component';
+import { ClientesComponent } from './components/clientes/clientes.component';
+import { ClienteEditComponent } from './components/cliente-edit/cliente-edit.component';
+import { ConsecutivosComponent } from './components/consecutivos/consecutivos.component';
+import { ConsecutivoEditComponent } from './components/consecutivo-edit/consecutivo-edit.component';
 
 
 
@@ -57,6 +62,11 @@ import { LibreriaClienteEditComponent } from './components/librerias/libreria-cl
     EquipoClienteEditComponent,
     LibreriaClienteComponent,
     LibreriaClienteEditComponent,
+    ConfigAdminComponent,
+    ClientesComponent,
+    ClienteEditComponent,
+    ConsecutivosComponent,
+    ConsecutivoEditComponent,
   ],
   imports: [
     BrowserModule,

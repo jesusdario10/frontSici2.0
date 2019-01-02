@@ -1,0 +1,128 @@
+<div class="col-sm-12 fondo">
+</div>
+<div class="container">
+  <div class="row espacios">
+    <div class="col-md-12">
+        <div class="card">
+          <div class="card-body centroiconos">
+              <h5 style="text-align:center">Creacion de Terceros</h5>
+              <i class="fas fa-american-sign-language-interpreting fa-2x fa-lg"></i>
+              <br>
+            <div class="card">
+              <div class="card-body">
+                  <form ngNativeValidate [formGroup]="form"  #terceroFormT="ngForm" (ngSubmit)="crearTerceros(form, terceroFormT)">
+                      <div class="col-md-12 col-sm-12">
+                          <div class="form-group">
+                            <label for="nit" class="negrita">Nit del Tercero</label>
+                            <input type="text"  formControlName="nitT" class="form-control" required>
+                          </div>
+                      </div>
+                      <div class="col-md-12 col-sm-12">
+                        <div class="form-group">
+                          <label for="nombre" class="negrita">Nombre del Tercero</label>
+                          <input type="text"  formControlName="nombreT" class="form-control" required>
+                        </div>
+                      </div>
+                      <div class="col-md-12 col-sm-12">
+                          <div class="form-group padselect">
+                            <label for="selectCargo">Tipo Tercero</label>
+                            <select class="form-control" name="tipoT" formControlName="tipoT" [(ngModel)]="estado">
+                              <option>CLIENTE</option>
+                              <option>PROVEEDOR</option>
+                            </select>
+                          </div>
+                      </div>
+                      <div class="col-md-12 col-sm-12">
+                        <div class="form-group">
+                          <label for="direccion" class="negrita">Direccion</label>
+                          <input type="text"  formControlName="direccionT" class="form-control" required>
+                        </div>
+                      </div>
+                      <div class="col-md-12 col-sm-12">
+                        <div class="form-group">
+                          <label for="telefono" class="negrita">Telefono</label>
+                          <input type="text"  formControlName="telefonoT" class="form-control" required>
+                        </div>
+                      </div>
+                      <div class="col-md-12 col-sm-12">
+                        <div class="form-group">
+                          <label for="contacto" class="negrita">Contacto</label>
+                          <input type="text"  formControlName="contactoT" class="form-control" required>
+                        </div>
+                      </div>
+                      <div class="col-md-12 col-sm-12">
+                        <div class="form-group">
+                          <label for="descripcion" class="negrita">Descripcion</label>
+                          <input type="text"  formControlName="descripcionT" class="form-control" required>
+                        </div>
+                      </div>
+                    <div style="text-align:center">
+                      <input type="submit" class="btn btn-outline-success" value="Agregar">
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="col-md-12 col-sm-12">
+        <div class="card">
+          <div class="card-body">
+            <h5 style="text-align:center">Buscar Clientes</h5>
+            <br>
+            <div class="card">
+              <div class="card-body">
+                <label for="">Buscar</label>
+                <input #input (keyup)="buscarTercero(input.value)" type="text" class="form-control" name="" id="">
+                <div class="row">
+                  <div class="col-md-12">
+                      <table class="table table-hover table-bordered table-responsive">
+                          <thead class="table-danger">
+                            <tr>
+                              <th>#</th>
+                              <th>Nit</th>
+                              <th>Nombre del Tercero</th>
+                              <th>Descripcion del Tercero</th>
+                              <th>Tipo</th>
+                              <th>Direccion</th>
+                              <th>Telefono</th>
+                              <th>Contacto</th>
+                              <th>Estado</th>
+                              <th>Editar</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let tercero of terceros; let i = index">
+                              <td>{{i}}</td>
+                              <td>{{tercero.nit}}</td>
+                              <td>{{tercero.nombre}}</td>
+                              <td>{{tercero.descripcion}}</td>
+                              <td>{{tercero.tipo_tercero}}</td>
+                              <td>{{tercero.direccion}}</td>
+                              <td>{{tercero.telefono}}</td>
+                              <td>{{tercero.contacto}}</td>
+                              <td>{{tercero.estado}}</td>
+                              <td style="text-align:center">
+                                <i class="fas fa-edit pointer" [routerLink]="['/terceroEdit', tercero._id]"></i>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      <!--PAGINACION -->
+                        <div class="antsig" style="text-align:center">
+                            <button type="button" *ngIf="page >= 2" [routerLink]="['/clientes', pre_page]" class="btn btn-outline-info">Anterior</button>
+                            <button type="button" *ngIf="pages != page" [routerLink]="['/clientes', next_page]" class="btn btn-outline-info ">Siguiente</button>
+                        </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+  
+
+
+ 
+</div>

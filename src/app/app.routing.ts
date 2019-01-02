@@ -17,6 +17,11 @@ import { EquipoClienteComponent } from './components/equipos/equipo-cliente/equi
 import { EquipoClienteEditComponent } from './components/equipos/equipo-cliente-edit/equipo-cliente-edit.component';
 import { LibreriaClienteComponent } from './components/librerias/libreria-cliente/libreria-cliente.component';
 import { LibreriaClienteEditComponent } from './components/librerias/libreria-cliente-edit/libreria-cliente-edit.component';
+import { ConfigAdminComponent } from './components/config-admin/config-admin.component';
+import { ClientesComponent } from './components/clientes/clientes.component';
+import { ClienteEditComponent } from './components/cliente-edit/cliente-edit.component';
+import { ConsecutivosComponent } from './components/consecutivos/consecutivos.component';
+import { ConsecutivoEditComponent } from './components/consecutivo-edit/consecutivo-edit.component';
 
 
 const appRoutes : Routes = [
@@ -36,6 +41,11 @@ const appRoutes : Routes = [
     {path: 'equiposClienteEdit/:id', component: EquipoClienteEditComponent, canActivate:[UserGuard]},
     {path: 'libreriasCliente/:page', component: LibreriaClienteComponent, canActivate:[UserGuard]},
     {path: 'libreriaClienteEdit/:id', component: LibreriaClienteEditComponent, canActivate:[UserGuard]},
+    {path: 'configsu', component: ConfigAdminComponent, canActivate:[UserGuard]},//hay que crear un guad solo para admin
+    {path: 'clientes/:page', component: ClientesComponent, canActivate:[UserGuard]},//hay que crear un guad solo para admin
+    {path: 'terceroEdit/:id', component: ClienteEditComponent, canActivate:[UserGuard]},//hay que crear un guad solo para admin
+    {path: 'consecutivos/:page', component: ConsecutivosComponent, canActivate:[UserGuard]},//hay que crear un guad solo para admin
+    {path: 'consecutivoEdit/:page', component: ConsecutivoEditComponent, canActivate:[UserGuard]},//hay que crear un guad solo para admin
     {path: '**', component: ErrorComponent},
     
 ];
