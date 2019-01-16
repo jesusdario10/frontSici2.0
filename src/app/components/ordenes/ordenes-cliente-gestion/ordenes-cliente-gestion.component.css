@@ -1,0 +1,52 @@
+
+
+/*fondo del componente principal*/
+.fondo{
+    background-image: url(../../../../assets/img/logo/bgc.jpg);
+    background-position: left;
+    border: 1px solid black !important;
+    background-size: cover;
+    height: 240vh !important;
+    opacity: 0.2;
+    z-index: 1;
+    position: absolute;
+}
+.container{
+    z-index: 2;
+    position: relative;
+}
+.espacios{
+    padding: 2vh;
+}
+.cabecera{
+    background: #9c27b0;
+    height: 10vh;
+    border-radius: 10px;
+    margin-bottom: 4vh;
+}
+h5{
+    padding: 2vh;
+    color:white;
+}
+.margenbutton{
+    margin:2vh;
+}
+.restriccion{
+    border: 1px solid red;
+    color:red;
+    font-size: bold;
+}
+.sinnada{
+    padding:0px !important;
+    margin:0px !important;
+}
+.border{
+    border: 1 px solid black;
+}
+.centrado{
+    text-align: center !important;
+}
+.eliminar{
+    color: red;
+    cursor: pointer;
+}

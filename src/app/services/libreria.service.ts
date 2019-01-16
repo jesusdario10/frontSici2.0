@@ -48,6 +48,12 @@ export class LibreriaService {
       })
     );                               
   }
+  //Listar todas las librerias del cliente sin paginacion y en orden alfabetico
+  listarLibreriasSinPaginacionCliente(tercero:string):Observable<any>{
+    let headers = new HttpHeaders().set('Content-Type', 'application/json')
+                                   .set('Authorization', this.token);
+    return this._http.get(this.URL+'libreria/listarSinPaginacionClientes/'+tercero, {headers:headers});                               
+  }
   //Listar Una sola libreria del cliente
   listarUnaLibreriaCliente(libreria:LibreriaModel):Observable<any>{
     let params = JSON.stringify(libreria);

@@ -1,0 +1,41 @@
+/*fondo del componente principal*/
+.fondo{
+    background-image: url(../../../../assets/img/logo/bgc.jpg);
+    background-position: left;
+    border: 1px solid black !important;
+    background-size: cover;
+    height: 160% !important;
+    opacity: 0.2;
+    z-index: 1;
+    position: absolute;
+}
+.container{
+    z-index: 2;
+    position: relative;
+    padding: 2vh;
+}
+.centrado{
+    text-align: center !important;
+}
+.sinnada{
+    padding: 0px !important;
+    margin: 0px !important;
+}
+.sinnadaabajo{
+    padding-bottom: 0px;
+}
+.redondo{
+    border-radius: 100px !important;
+    
+}
+.largo{
+    width: 100%;
+}
+.espacio{
+    padding: 2vh;
+}
+.cursor{
+    cursor: pointer;
+}
+
+

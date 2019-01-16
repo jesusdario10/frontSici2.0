@@ -1,0 +1,85 @@
+<div class="col-sm-12 fondo">
+</div>
+<div class="container espacios">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="card-tittle cabecera">
+            <h5 style="text-align:center">Creacion de Ordenes</h5>
+          </div>
+          <form ngNativeValidate [formGroup]="form"  #OrdenForm="ngForm" (ngSubmit)="crearOrdenCliente(form, OrdenForm)">
+            <div class="row">
+              <div class="col-md-3">
+                  <label for="fechaRequerida">Fecha Requerida</label>
+                  <input class="form-control" type="date"  formControlName="fechaRequeridaO">
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">  
+                    <div class="form-group ">
+                      <label for="selectCargo">Ubicacion</label>
+                      <select class="form-control" name="ubicacionO"  formControlName="UbicacionO">
+                        <option *ngFor="let ubicacion of ubicaciones" [value]="ubicacion._id">{{ubicacion.nombre}}</option>
+                      </select>
+                    </div>
+                </div>  
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">  
+                  <div class="form-group ">
+                    <label for="equipoO">Equipo</label>
+                    <select class="form-control" name="equipoO" formControlName="equipoO">
+                      <option *ngFor="let equipo of equipos" [value]="equipo._id">{{equipo.tag}} | {{equipo.nombre_equipo}}</option>
+                    </select>
+                  </div>
+                </div> 
+              </div>
+              <div class="col-md-3">
+                  <div class="form-group">  
+                    <div class="form-group ">
+                      <label for="libreriaO">Libreria</label>
+                      <select class="form-control" name="libreriaO" formControlName="libreriaO">
+                        <option *ngFor="let libreria of librerias" [value]="libreria._id">{{libreria.nombre}}</option>
+                      </select>
+                    </div>
+                  </div> 
+              </div>
+              <div class="col-md-3">
+                    <div class="form-group ">
+                      <label for="prioridad">Prioridad</label>
+                      <select class="form-control" name="prioridadO" formControlName="prioridadO">
+                        <option selected>Elija</option>
+                        <option value="BAJA">BAJA</option>
+                        <option value="NORMAL">NORMAL</option>
+                        <option value="MEDIA">MEDIA</option>
+                        <option value="ALTA">ALTA</option>
+                      </select>
+                    </div>
+              </div>
+              <div class="col-md-3">
+                  <div class="form-group">  
+                    <div class="form-group ">
+                      <label for="solicitanteO">Solicitante</label>
+                      <input type="text" class="form-control" name="solicitanteO" formControlName="solicitanteO">
+                    </div>
+                  </div> 
+                </div>
+              <div class="col-md-6">
+                <div class="form-group">  
+                  <div class="form-group ">
+                    <label for="descripcionO">Descripcion Labor</label>
+                    <input type="text" class="form-control" name="descripcionO" formControlName="descripcionO">
+                  </div>
+                </div> 
+              </div>
+              <div class="col-md-12" style="text-align:center">
+                <button type="submit" class="margenbutton btn btn-outline-success"> <i class="far fa-save"></i>Guardar</button>
+                <button type="button" [routerLink]="['/ordenesC/1']" class="margenbutton btn btn-outline-warning"><i class="fas fa-arrow-circle-left"></i>Atras</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

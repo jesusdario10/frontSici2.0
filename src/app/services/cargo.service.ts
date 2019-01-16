@@ -26,6 +26,29 @@ export class CargoService {
     this.token = this._userServices.getToken();
    }
 
+   /************************************************** */
+
+                /******CLIENTES************/
+
+   /*************************************************** */
+   listarCargoClienteSinpaginacion(tercero:string):Observable<any>{
+    let headers = new HttpHeaders().set('Content-Type', 'application/json')
+                                   .set('Authorization', this.token);
+    return this._http.get(this.URL+'cargo/listcarclientnopag/'+tercero, {headers})                               
+   }
+
+   listarUnCArgoparaclientessies(tercero, id):Observable<any>{
+    let headers = new HttpHeaders().set('Content-Type', 'application/json')
+                                   .set('Authorization', this.token);
+      return this._http.get(this.URL+'cargo/uncargoCliente/'+tercero+'/'+id, {headers})  
+   }
+
+   /******************************************************* */
+
+              /********ADMINISTRADORES*********** */
+
+   /******************************************************* */
+
   //Crear Cargos para clientes
   createCargo(cargo:CargoModel):Observable<any>{
     let params = JSON.stringify(cargo);
@@ -39,7 +62,7 @@ export class CargoService {
       })
     );
   }
-  //Listar Cargos para los clientes
+  //Listar Cargos para los clientes paginado
   listarCargosClientes(page=null):Observable<any>{
     let headers = new HttpHeaders().set('Content-Type', 'application/json')
                                    .set('Authorization', this.token);

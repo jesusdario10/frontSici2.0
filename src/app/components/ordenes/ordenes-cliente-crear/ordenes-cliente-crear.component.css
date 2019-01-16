@@ -1,0 +1,32 @@
+/*fondo del componente principal*/
+.fondo{
+    background-image: url(../../../../assets/img/logo/bgc.jpg);
+    background-position: left;
+    border: 1px solid black !important;
+    background-size: cover;
+    height: 160% !important;
+    opacity: 0.2;
+    z-index: 1;
+    position: absolute;
+}
+.container{
+    z-index: 2;
+    position: relative;
+}
+.espacios{
+    padding: 2vh;
+}
+.cabecera{
+    background: #2BBBAD;
+    height: 10vh;
+    border-radius: 10px;
+    margin-bottom: 4vh;
+   
+}
+h5{
+    padding: 2vh;
+    color:white;
+}
+.margenbutton{
+    margin:2vh;
+}

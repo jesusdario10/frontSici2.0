@@ -38,7 +38,7 @@ export class EquipoService {
       })
     );
   }
-  //Listar Cargos para los clientes
+  //Listar Equipos para los clientes de manera paginada
   listarEquiposClientes(page=null):Observable<any>{
     let headers = new HttpHeaders().set('Content-Type', 'application/json')
                                    .set('Authorization', this.token);
@@ -49,6 +49,12 @@ export class EquipoService {
     let headers = new HttpHeaders().set('Content-Type', 'application/json')
                                      .set('Authorization', this.token);
     return this._http.get(this.URL+'busqueda/equipos/'+terminio, {headers:headers});                               
+  }
+  //Listar todos los equipos de un cliente en orden alfabetico
+  listarTodoslosEquiposdelClientesinPaginacion(tercero:string):Observable<any>{
+    let headers = new HttpHeaders().set('Content-Type', 'application/json')
+                                   .set('Authorization', this.token);
+    return this._http.get(this.URL+'equipo/listarEquiposClientesinPaginacion/'+tercero, {headers:headers});                                 
   }
   //listar Un Equipo para el cliente
   listarUnSoloEquipoCliente(id):Observable<any>{

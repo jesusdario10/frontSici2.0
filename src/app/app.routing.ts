@@ -22,6 +22,11 @@ import { ClientesComponent } from './components/clientes/clientes.component';
 import { ClienteEditComponent } from './components/cliente-edit/cliente-edit.component';
 import { ConsecutivosComponent } from './components/consecutivos/consecutivos.component';
 import { ConsecutivoEditComponent } from './components/consecutivo-edit/consecutivo-edit.component';
+import { OrdenesClienteComponent } from './components/ordenes/ordenes-cliente/ordenes-cliente.component';
+import { OrdenesClienteCrearComponent } from './components/ordenes/ordenes-cliente-crear/ordenes-cliente-crear.component';
+import { OrdenesClienteGestionComponent } from './components/ordenes/ordenes-cliente-gestion/ordenes-cliente-gestion.component';
+import { OrdenesClienteVerComponent } from './components/ordenes/ordenes-cliente-ver/ordenes-cliente-ver.component';
+
 
 
 const appRoutes : Routes = [
@@ -46,6 +51,10 @@ const appRoutes : Routes = [
     {path: 'terceroEdit/:id', component: ClienteEditComponent, canActivate:[UserGuard]},//hay que crear un guad solo para admin
     {path: 'consecutivos/:page', component: ConsecutivosComponent, canActivate:[UserGuard]},//hay que crear un guad solo para admin
     {path: 'consecutivoEdit/:page', component: ConsecutivoEditComponent, canActivate:[UserGuard]},//hay que crear un guad solo para admin
+    {path: 'ordenesC/:page', component: OrdenesClienteComponent, canActivate:[UserGuard]},
+    {path: 'ordenesClienteCrear', component: OrdenesClienteCrearComponent, canActivate:[UserGuard]},
+    {path: 'ordenesCgestion/:id', component: OrdenesClienteGestionComponent, canActivate:[UserGuard]},
+    {path: 'ordenesCver/:id', component: OrdenesClienteVerComponent, canActivate:[UserGuard]},
     {path: '**', component: ErrorComponent},
     
 ];

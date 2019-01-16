@@ -1,0 +1,109 @@
+<div class="col-sm-12 fondo">
+</div>
+<div class="container espacios">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="card-tittle cabecera">
+            <h5 style="text-align:center">Detalles de la Orden</h5>
+          </div>
+            <div class="centrado">
+                <h6><strong>No Orden   <span>{{noOrden}}</span></strong></h6>
+            </div>
+            <br><br>
+            <div class="row">
+              <div class="col-md-3">
+                  <label class="negrita" for="fechaCreacion">Fecha Creacion</label>
+                  <input disabled  class="form-control" type="text" [(ngModel)]="fechaCreacion">
+              </div>
+              <div class="col-md-3">
+                  <label class="negrita" for="fechaRequerida">Fecha Requerida</label>
+                  <input disabled class="form-control" type="text" [(ngModel)]="fechaRequerida">
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">  
+                    <div class="form-group ">
+                      <label class="negrita" for="selectCargo">Ubicacion</label>
+                      <input disabled  class="form-control" type="text" [(ngModel)]="ubicacion">
+                    </div>
+                </div>  
+              </div>
+              <div class="col-md-3">
+                <div class="form-group ">
+                  <label class="negrita" for="prioridad">Prioridad</label>
+                  <input disabled  class="form-control" type="text" [(ngModel)]="prioridad">
+                </div>
+              </div>
+              <div class="col-md-3">
+                  <div class="form-group">  
+                    <div class="form-group ">
+                      <label class="negrita" for="equipoO">Tag</label>
+                      <input disabled  class="form-control" type="text" [(ngModel)]="tag">
+                    </div>
+                  </div> 
+              </div>
+              <div class="col-md-9">
+                  <div class="form-group">  
+                    <div class="form-group ">
+                      <label class="negrita" for="equipoO">Nombre del Equipo</label>
+                      <input disabled  class="form-control" type="text" [(ngModel)]="nombreEquipo">
+                    </div>
+                  </div> 
+              </div>
+              <div class="col-md-12">
+                    <div class="form-group">  
+                      <div class="form-group ">
+                        <label class="negrita" for="libreriaO">Libreria</label>
+                        <input disabled  class="form-control" type="text" [(ngModel)]="libreria">
+                      </div>
+                    </div> 
+              </div>
+              <div class="col-md-6">
+                  <div class="form-group">  
+                    <div class="form-group ">
+                      <label class="negrita" for="solicitanteO">Solicitante</label>
+                      <input disabled  type="text" class="form-control" [(ngModel)]="solicitante" >
+                    </div>
+                  </div> 
+                </div>
+              <div class="col-md-6">
+                <div class="form-group">  
+                  <div class="form-group ">
+                    <label class="negrita" for="descripcionO">Descripcion Labor</label>
+                    <input disabled  type="text" class="form-control" [(ngModel)]="descripcionLabor" >
+                  </div>
+                </div> 
+              </div>
+              <div class="col-md-6 offset-md-3">
+                <div class="card">
+                  <div class="card-body">
+                      <table class="table table-responsive table-bordered">
+                        <thead class="table-info">
+                          <tr>
+                            <th>Horas Hombre </th>
+                            <th>Nombre Cargo</th>
+                            <th>Valor Hora Hombre</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor = "let recurso of recursos">
+                            <td>{{recurso.hh}}</td>
+                            <td>{{recurso.cargo.nombre}}</td>
+                            <td>{{recurso.vhora_hombre |  currency:'USD':true:'1.0-3'}}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                  </div>
+
+                </div>
+              </div>
+              <div class="col-md-12" style="text-align:center">
+                <button type="button" [routerLink]="['/ordenesC/1']" class="margenbutton btn btn-outline-warning"><i class="fas fa-arrow-circle-left"></i>Atras</button>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -10,7 +10,9 @@ import {MatButtonModule,
         MatInputModule,
         MatAutocompleteModule,
         MatSelectModule,
-        MatGridListModule} from '@angular/material';
+        MatGridListModule,
+        MatDatepickerModule,
+        MatNativeDateModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -42,6 +44,10 @@ import { ClientesComponent } from './components/clientes/clientes.component';
 import { ClienteEditComponent } from './components/cliente-edit/cliente-edit.component';
 import { ConsecutivosComponent } from './components/consecutivos/consecutivos.component';
 import { ConsecutivoEditComponent } from './components/consecutivo-edit/consecutivo-edit.component';
+import { OrdenesClienteComponent } from './components/ordenes/ordenes-cliente/ordenes-cliente.component';
+import { OrdenesClienteCrearComponent } from './components/ordenes/ordenes-cliente-crear/ordenes-cliente-crear.component';
+import { OrdenesClienteGestionComponent } from './components/ordenes/ordenes-cliente-gestion/ordenes-cliente-gestion.component';
+import { OrdenesClienteVerComponent } from './components/ordenes/ordenes-cliente-ver/ordenes-cliente-ver.component';
 
 
 
@@ -67,6 +73,10 @@ import { ConsecutivoEditComponent } from './components/consecutivo-edit/consecut
     ClienteEditComponent,
     ConsecutivosComponent,
     ConsecutivoEditComponent,
+    OrdenesClienteComponent,
+    OrdenesClienteCrearComponent,
+    OrdenesClienteGestionComponent,
+    OrdenesClienteVerComponent,
   ],
   imports: [
     BrowserModule,
@@ -80,6 +90,8 @@ import { ConsecutivoEditComponent } from './components/consecutivo-edit/consecut
     MatAutocompleteModule,
     MatSelectModule,
     MatGridListModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     HttpClientModule,
     routing
   ],

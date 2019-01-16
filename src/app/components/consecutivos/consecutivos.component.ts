@@ -70,7 +70,7 @@ export class ConsecutivosComponent implements OnInit {
       console.log(datos);
       this.listarConsecutivo(this.page);
       if(!datos.consecutivo){
-        swal('Exito!!', 'Ya Tiene asignado un consecutivo', 'success');
+        swal('Error!!', 'Ya Tiene Asignado un Consecutivo', 'error');
       }else{
         swal('Exito!!', 'Consecutivo Creado Correctamente', 'success');
       }
