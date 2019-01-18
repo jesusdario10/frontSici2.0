@@ -9,33 +9,27 @@
     z-index: 1;
     position: absolute;
 }
-.container{
+.contenedor{
     z-index: 2;
     position: relative;
     padding: 2vh;
 }
 .centrado{
-    text-align: center !important;
-}
-.sinnada{
-    padding: 0px !important;
-    margin: 0px !important;
-}
-.sinnadaabajo{
-    padding-bottom: 0px;
+    text-align: center;
 }
 .redondo{
-    border-radius: 100px !important;
-    
+    border-radius: 100px !important;  
 }
-.largo{
-    width: 100%;
+.marginbajo{
+    margin-bottom: 3vh;
 }
-.espacio{
-    padding: 2vh;
+.margintop{
+    margin-top: 2vh;
 }
-.cursor{
+.dona{
+    max-height: 500px !important;
+    max-width:  300px !important;
+}
+.pointer{
     cursor: pointer;
 }
-
-

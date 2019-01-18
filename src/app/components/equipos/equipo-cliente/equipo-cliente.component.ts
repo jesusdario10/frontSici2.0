@@ -44,6 +44,7 @@ export class EquipoClienteComponent implements OnInit {
   }
   //Crear Equipos
   createEquipoCliente(form, EquipoFormE){
+    console.log("ya llegue aqui");
     const formModel = this.form.value;
     let saveEquipo: EquipoModel ={
       tag : formModel.tagE as string,
@@ -53,10 +54,14 @@ export class EquipoClienteComponent implements OnInit {
     };
     this._equipoServices.createEquipoCliente(saveEquipo)
         .subscribe((datos:any)=>{
-          console.log(datos);
           form.reset();
-          swal("Exito", "Cargo Creado", "success");
-          this.listarEquiposCliente(this.page);
+          if(datos.message == "Equipo ya existe"){
+            swal("No es Posible", "Equipo ya Existe", "warning");
+          }else{
+            swal("Exito", "Equipo Creado", "success");
+            this.listarEquiposCliente(this.page);
+          }
+
     });
   }
   actualPage(){
@@ -90,7 +95,6 @@ export class EquipoClienteComponent implements OnInit {
   listarEquiposCliente(page){
     this._equipoServices.listarEquiposClientes(page)
       .subscribe((datos:any)=>{
-        console.log(datos);
         this.equipos = datos.equipos;
         this.total = datos.total;
         this.pages = datos.pages;

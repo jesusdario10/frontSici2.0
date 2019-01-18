@@ -98,6 +98,7 @@ export class OrdenesClienteCrearComponent implements OnInit {
     this._OrdenService.crearOrdenCliente(saveOrden)
         .subscribe((datos:any)=>{
           console.log(datos);
+          form.reset();
           swal("Exito", "Orden Creada", "success"); 
         })
   }

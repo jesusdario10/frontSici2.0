@@ -4,7 +4,7 @@
     background-position: left;
     border: 1px solid black !important;
     background-size: cover;
-    height: 180% !important;
+    height: 160% !important;
     opacity: 0.2;
     z-index: 1;
     position: absolute;
@@ -12,30 +12,26 @@
 .container{
     z-index: 2;
     position: relative;
+}
+.espacios{
     padding: 2vh;
+}
+.cabecera{
+    background: #81d4fa;
+    height: 10vh;
+    border-radius: 10px;
+    margin-bottom: 4vh;
+}
+h5{
+    padding: 2vh;
+    color:white;
+}
+.margenbutton{
+    margin:2vh;
 }
 .centrado{
-    text-align: center !important;
+    text-align: center;
 }
-.sinnada{
-    padding: 0px !important;
-    margin: 0px !important;
+.negrita{
+    font-weight: bold;
 }
-.sinnadaabajo{
-    padding-bottom: 0px;
-}
-.redondo{
-    border-radius: 100px !important;
-    
-}
-.largo{
-    width: 100%;
-}
-.espacio{
-    padding: 2vh;
-}
-.cursor{
-    cursor: pointer;
-}
-
-

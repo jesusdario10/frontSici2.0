@@ -118,7 +118,7 @@ export class OrdenesClienteGestionComponent implements OnInit {
             if(datos.actividad){
               swal('Existoo!', "Gestion Realizada", 'success')
             }
-          })
+      })
     }
   }
   //Listar los cargos para el select de agregar recursos

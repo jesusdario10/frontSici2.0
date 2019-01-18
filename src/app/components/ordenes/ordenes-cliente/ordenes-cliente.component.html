@@ -14,7 +14,7 @@
                   </div>
                   <div class="row centrado">
                     <div class="col-md-3 centrado col-sm-12 col-lg-3 sinnada">      
-                        <button type="button" (mouseenter)="enteActivas($event)" (mouseleave)="leave($event)" (click)="listarOrdenClienteEstado(estado='ACTIVA')" class="redondo btn btn-outline-success">
+                        <button type="button" (mouseenter)="enteActivas($event)" (mouseleave)="leave($event)" (click)="clickActivas()" class="redondo btn btn-outline-success">
                           <i class="far fa-edit fa-2x fa-lg"></i>
                         </button>
                         <p>
@@ -22,7 +22,7 @@
                         </p>
                     </div>
                     <div class="col-md-3 centrado col-sm-12 col-lg-3 sinnada">      
-                      <button type="button" (mouseenter)="enteEjecucion($event)" (mouseleave)="leave($event)" class="redondo btn btn-outline-warning">
+                      <button type="button" (mouseenter)="enteEjecucion($event)" (mouseleave)="leave($event)" (click)="clickEjecucion()" class="redondo btn btn-outline-warning">
                         <i class="far fa fa-tools fa-2x fa-lg"></i>
                       </button>
                       <p>
@@ -30,7 +30,7 @@
                       </p>
                     </div>
                     <div class="col-md-3 centrado col-sm-12 col-lg-3 sinnada">      
-                      <button type="button" (mouseenter)="enteEjecutadas($event)" (mouseleave)="leave($event)" class="redondo btn btn-outline-primary">
+                      <button type="button" (mouseenter)="enteEjecutadas($event)" (mouseleave)="leave($event)" (click)="clickEjecutadas()" class="redondo btn btn-outline-primary">
                         <i class="far fa-check-circle fa-2x fa-lg"></i>
                       </button>
                       <p>
@@ -38,7 +38,7 @@
                       </p>
                     </div>
                     <div class="col-md-3 centrado col-sm-12 col-lg-3 sinnada">      
-                      <button type="button" (mouseenter)="enteRestriccion($event)" (mouseleave)="leave($event)" class="redondo btn btn-outline-danger">
+                      <button type="button" (mouseenter)="enteRestriccion($event)" (mouseleave)="leave($event)" (click)="clickDetenidas()"  class="redondo btn btn-outline-danger">
                         <i class="fas fa-ban fa-2x fa-lg"></i>
                       </button>
                       <p>
@@ -81,7 +81,7 @@
                           <p style="visibility:hidden">ddd</p>
                       </div>
                       <div class="col-md-6 centrado col-sm-12 col-lg-6 ">      
-                          <button type="button" (mouseenter)="enterRestore($event)" (mouseleave)="leaveOperaciones($event)" class=" redondo btn btn-outline-dark">
+                          <button type="button"   (mouseenter)="enterRestore($event)" (mouseleave)="leaveOperaciones($event)" (click)="clickTodo()"  class=" redondo btn btn-outline-dark">
                             <i class="fas fa-power-off fa-2x fa-lg"></i>
                           </button>
                           <p style="visibility:hidden">ddd</p>
@@ -124,9 +124,10 @@
     <div class="col-md-12 espacio">
         <div class="card">
           <div class="card-body form-control" style="text-align:center !important">
+            <h5>Resultados</h5>
             <div class="row">
               <div class="col-md-12" style="text-align:center !important">
-                <table class="table table-responsive  table-hover table-bordered">
+                <table *ngIf="ordenes.length >= 1" class="table table-responsive  table-hover table-bordered">
                   <thead class="table-primary">
                     <tr>
                       <th>#</th>
@@ -163,8 +164,8 @@
                 </table>
                 <!--PAGINACION -->
                 <div  style="text-align:center">
-                    <button type="button" *ngIf="page >= 2" [routerLink]="['/ordenesC', pre_page]" class="btn btn-outline-info">Anterior</button>
-                    <button type="button" *ngIf="pages != page" [routerLink]="['/ordenesC', next_page]" class="btn btn-outline-info ">Siguiente</button>
+                    <button type="button" *ngIf="page >= 2 " [routerLink]="['/ordenesC', pre_page]" class="btn btn-outline-info">Anterior</button> &nbsp;
+                    <button type="button" *ngIf="page != pages && pages > 1 " [routerLink]="['/ordenesC', next_page]" class="btn btn-outline-info ">Siguiente</button>
                 </div>
               </div>
             </div>

@@ -47,7 +47,13 @@
                         <div class="col-md-3">
                           <div class="form-group ">
                             <label for="prioridad">Turno</label>
-                            <select class="form-control" name="turnoO" [(ngModel)]="turno"  >
+                            <select *ngIf="estado != 'EJECUTADA' " class="form-control" name="turnoO" [(ngModel)]="turno"  >
+                                <option selected>Elija</option>
+                                <option value="TURNO 1">TURNO 1</option>
+                                <option value="TURNO 2">TURNO 2</option>
+                                <option value="TURNO 3">TURNO 3</option>
+                            </select>
+                            <select *ngIf="estado == 'EJECUTADA'" disabled  class="form-control" name="turnoO" [(ngModel)]="turno"  >
                                 <option selected>Elija</option>
                                 <option value="TURNO 1">TURNO 1</option>
                                 <option value="TURNO 2">TURNO 2</option>
@@ -59,14 +65,23 @@
                           <div class="form-group">  
                             <div class="form-group ">
                               <label for="descripcion">Descripcion de la Actividad</label>
-                              <input type="text" class="form-control" name="descripcionO" [(ngModel)]="descripcionActividad"  >
+                              <input *ngIf="estado != 'EJECUTADA' "  type="text" class="form-control" name="descripcionO" [(ngModel)]="descripcionActividad"  >
+                              <input *ngIf="estado == 'EJECUTADA'" disabled type="text" class="form-control" name="descripcionO" [(ngModel)]="descripcionActividad"  >
                             </div>
                           </div> 
                         </div>
                         <div class="col-md-2 offset-md-5">
                             <div class="form-group ">
                               <label for="prioridad">Estado</label>
-                              <select #elestado id="estadox" class="form-control" [(ngModel)]="estado">
+                              <select *ngIf="estado != 'EJECUTADA' "  id="estadox" class="form-control" [(ngModel)]="estado">
+                                  <option disabled selected>Elija</option>
+                                  <option value="ACTIVA">ACTIVA</option>
+                                  <option value="EJECUCION">EJECUCION</option>
+                                  <option value="EJECUTADA">EJECUTADA</option>
+                                  <option value="DETENIDA">DETENIDA</option>
+                                  <option value="DESCARTADA">ELIMINADA</option>
+                              </select>
+                              <select *ngIf="estado == 'EJECUTADA'" disabled  id="estadox" class="form-control" [(ngModel)]="estado">
                                   <option disabled selected>Elija</option>
                                   <option value="ACTIVA">ACTIVA</option>
                                   <option value="EJECUCION">EJECUCION</option>
@@ -83,7 +98,8 @@
                             </div>
                         </div>
                         <div class="col-md-12" style="text-align:center">
-                            <button type="button" (click)="gestionarOrden()"  class="margenbutton btn btn-outline-success"><i class="far fa-save"></i> &nbsp; Guardar</button>
+                            <button  type="button" (click)="gestionarOrden()"  class="margenbutton btn btn-outline-success"><i class="far fa-save"></i> &nbsp; Guardar</button>
+                            <!--<button *ngIf="estado == 'EJECUTADA'" disabled type="button" (click)="gestionarOrden()"  class="margenbutton btn btn-outline-success"><i class="far fa-save"></i> &nbsp; Guardar</button>-->
                         </div>
                     </div>
                 </div>
@@ -100,21 +116,27 @@
                       <div class="col-md-3">
                           <div class="form-group" style="text-align:center">
                               <label for="hhR">H:H</label>
-                              <input  min=1 type="number" class="form-control" formControlName="hhO"  >
+                              <input *ngIf="estado != 'EJECUTADA' "  min=1 type="number" class="form-control" formControlName="hhO"  >
+                              <input *ngIf="estado == 'EJECUTADA'" disabled  min=1 type="number" class="form-control" formControlName="hhO"  >
                             </div>
                       </div>
                       <div class="col-md-6">
                           <div class="form-group" style="text-align:center">
                               <label for="Cargo">Cargo</label>
-                              <select class="form-control" name="cargo"  (change)="tomarValorHora($event.target.value)">
+                              <select *ngIf="estado != 'EJECUTADA' "  class="form-control" name="cargo"  (change)="tomarValorHora($event.target.value)">
                                   <option selected>Elija</option>
                                   <option *ngFor="let cargo of cargos" [value]="cargo._id">{{cargo.nombre}}</option>
-                                </select>
+                              </select>
+                              <select *ngIf="estado == 'EJECUTADA'" disabled  class="form-control" name="cargo"  (change)="tomarValorHora($event.target.value)">
+                                  <option selected>Elija</option>
+                                  <option *ngFor="let cargo of cargos" [value]="cargo._id">{{cargo.nombre}}</option>
+                              </select>
                             </div>
                       </div>
                       <div class="col-md-3 col-sm-12 " style="text-align:center !important">
                           <label style="visibility: hidden">boton</label><br>
-                          <button type="submit" style="text-align:center !important" class="btn btn-outline-warning"><i class="fas fa-plus"></i></button>
+                          <button *ngIf="estado != 'EJECUTADA' " type="submit" style="text-align:center !important" class="btn btn-outline-warning"><i class="fas fa-plus"></i></button>
+                          <button *ngIf="estado == 'EJECUTADA'" disabled type="submit" style="text-align:center !important" class="btn btn-outline-warning"><i class="fas fa-plus"></i></button>
                       </div>
                     </div>
                   </form>
@@ -136,9 +158,9 @@
                           <td>{{recurso.vhora_hombre | currency:'USD':true:'1.0-3'}}</td>
                           <td class="centrado">
                            <a class="eliminar">
-                              <i (click)="eliminarRecurso(i)" class="far fa-trash-alt eliminar"></i>
+                              <i *ngIf="estado != 'EJECUTADA' "  (click)="eliminarRecurso(i)" class="far fa-trash-alt eliminar"></i>
+                              <i *ngIf="estado == 'EJECUTADA'"  disabled class="far fa-trash-alt eliminar"></i>
                            </a>
-                            
                           </td>
                         </tr>
                       </tbody>

@@ -26,6 +26,10 @@ import { OrdenesClienteComponent } from './components/ordenes/ordenes-cliente/or
 import { OrdenesClienteCrearComponent } from './components/ordenes/ordenes-cliente-crear/ordenes-cliente-crear.component';
 import { OrdenesClienteGestionComponent } from './components/ordenes/ordenes-cliente-gestion/ordenes-cliente-gestion.component';
 import { OrdenesClienteVerComponent } from './components/ordenes/ordenes-cliente-ver/ordenes-cliente-ver.component';
+import { AvanceClienteComponent } from './components/avance/avance-cliente/avance-cliente.component';
+import { AvanceClienteDonaComponent } from './components/avance/avance-cliente-dona/avance-cliente-dona.component';
+import { AvanceClienteLineaComponent } from './components/avance/avance-cliente-linea/avance-cliente-linea.component';
+import { AvanceClienteVerComponent } from './components/avance/avance-cliente-ver/avance-cliente-ver.component';
 
 
 
@@ -55,8 +59,11 @@ const appRoutes : Routes = [
     {path: 'ordenesClienteCrear', component: OrdenesClienteCrearComponent, canActivate:[UserGuard]},
     {path: 'ordenesCgestion/:id', component: OrdenesClienteGestionComponent, canActivate:[UserGuard]},
     {path: 'ordenesCver/:id', component: OrdenesClienteVerComponent, canActivate:[UserGuard]},
+    {path: 'avanceCliente', component: AvanceClienteComponent, canActivate:[UserGuard]},
+    {path: 'graficoClienteDona/:page', component: AvanceClienteDonaComponent, canActivate:[UserGuard]},
+    {path: 'graficoClienteDonaVer/:id', component: AvanceClienteVerComponent, canActivate:[UserGuard]},
+    {path: 'graficoClienteLinea/:id', component: AvanceClienteLineaComponent, canActivate:[UserGuard]},
     {path: '**', component: ErrorComponent},
-    
 ];
 
 

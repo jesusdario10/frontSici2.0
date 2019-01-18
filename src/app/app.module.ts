@@ -2,6 +2,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+//chart para graficas
+import { ChartsModule } from 'ng2-charts';
 
 //Angular Material Modules
 import {MatButtonModule,
@@ -48,6 +50,10 @@ import { OrdenesClienteComponent } from './components/ordenes/ordenes-cliente/or
 import { OrdenesClienteCrearComponent } from './components/ordenes/ordenes-cliente-crear/ordenes-cliente-crear.component';
 import { OrdenesClienteGestionComponent } from './components/ordenes/ordenes-cliente-gestion/ordenes-cliente-gestion.component';
 import { OrdenesClienteVerComponent } from './components/ordenes/ordenes-cliente-ver/ordenes-cliente-ver.component';
+import { AvanceClienteComponent } from './components/avance/avance-cliente/avance-cliente.component';
+import { AvanceClienteDonaComponent } from './components/avance/avance-cliente-dona/avance-cliente-dona.component';
+import { AvanceClienteLineaComponent } from './components/avance/avance-cliente-linea/avance-cliente-linea.component';
+import { AvanceClienteVerComponent } from './components/avance/avance-cliente-ver/avance-cliente-ver.component';
 
 
 
@@ -77,6 +83,10 @@ import { OrdenesClienteVerComponent } from './components/ordenes/ordenes-cliente
     OrdenesClienteCrearComponent,
     OrdenesClienteGestionComponent,
     OrdenesClienteVerComponent,
+    AvanceClienteComponent,
+    AvanceClienteDonaComponent,
+    AvanceClienteLineaComponent,
+    AvanceClienteVerComponent,
   ],
   imports: [
     BrowserModule,
@@ -93,7 +103,8 @@ import { OrdenesClienteVerComponent } from './components/ordenes/ordenes-cliente
     MatDatepickerModule,
     MatNativeDateModule,
     HttpClientModule,
-    routing
+    routing,
+    ChartsModule
   ],
   providers: [appRoutingProviders,
               UserService,
