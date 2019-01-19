@@ -12,16 +12,15 @@
                 <div class="card-body centrado">
                   <div class="row">
                       <div class="col-md-12 marginbajo">
-                        <form >
+                        <form ngNativeValidate [formGroup]="form"  #fechas="ngForm" (ngSubmit)="resultadosFechaSinPaginacion(form, fechas)">
                             <div class="row">
                                 <div class="col-md-3">
                                     <label for="fechaEjecucion">Fecha Inicial</label>
-                                    <input  class="form-control" type="date" name="fechaEjeO" >
+                                    <input  class="form-control" type="date" name="fechaini" formControlName = "fechaInicial" >
                                 </div>
                                 <div class="col-md-3">
                                     <label for="fechaEjecucion">Fecha Final</label>
-                                    <input  class="form-control" type="date" name="fechaEjeO" >
-                                    
+                                    <input  class="form-control" type="date" name="fechafin" formControlName = "fechaFinal"  >              
                                 </div>
                                 <div class="col-md-2">
                                     <label for=""  style="visibility:hidden">b</label><br>

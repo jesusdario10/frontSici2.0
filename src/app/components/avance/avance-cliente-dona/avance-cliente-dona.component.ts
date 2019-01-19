@@ -4,6 +4,7 @@ import { ActividadModel } from 'src/app/models/actividadModel';
 import { OrdenesService } from 'src/app/services/ordenes.service';
 import { UserService } from 'src/app/services/user.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
 
 declare var jQuery:any;
 declare var $:any;
@@ -35,13 +36,16 @@ export class AvanceClienteDonaComponent implements OnInit {
     pages: any;
     quitarSiguiente:any;  
   
+    //Formulario de fechas
+    form : FormGroup;
 
 
   constructor(
     private _OrdenesService : OrdenesService,
     private _UserService : UserService, 
     private _router : Router,
-    private _route:ActivatedRoute
+    private _route:ActivatedRoute,
+    private fb: FormBuilder,
   ) {
     this.estado = "TODO"
    }
@@ -50,8 +54,11 @@ export class AvanceClienteDonaComponent implements OnInit {
     //Identidad del usuario
     this.identity = this._UserService.getIdentity();
     this.listarOrdenesClientesSinPaginado();
-
-
+    //inicializando  formulario de fechas
+    this.form = this.fb.group({
+      fechaInicial : [ "", Validators.required ],
+      fechaFinal: [ "", Validators.required ]
+    });
     //Pagina Actual
     this.actualPage();
   }
@@ -59,14 +66,11 @@ export class AvanceClienteDonaComponent implements OnInit {
   listarOrdenesClientesSinPaginado(){
     this._OrdenesService.listarOrdenesSinPaginacionClientes(this.identity.tercero)
         .subscribe((datos:any)=>{
-          console.log(datos);
           this.activas = datos.activas;
           this.ejecucion = datos.ejecucion;
           this.detenidas = datos.detenidas;
           this.ejecutadas = datos.ejecutadas;
           this.eliminadas = datos.eliminadas;
-             
-    
     //grafico de dona
     var ctx = "myDona";
     var myDona = new Chart(ctx, {
@@ -206,6 +210,16 @@ export class AvanceClienteDonaComponent implements OnInit {
   }
   leave(e){
     this.estados = "Semaforo"
+  }
+  //Listar resultados por fecha sin paginacion
+  resultadosFechaSinPaginacion(){
+    const formModel = this.form.value;
+
+    let fecha_Inicial = formModel.fechaInicial as string;
+    let fecha_Final = formModel.fechaFinal as string;
+
+    
+
   }
 
       

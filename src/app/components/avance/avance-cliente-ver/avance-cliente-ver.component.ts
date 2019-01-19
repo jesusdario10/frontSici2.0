@@ -17,6 +17,7 @@ export class AvanceClienteVerComponent implements OnInit {
    idOrden : string; 
    identity : any;
    recursos : any[]=[];
+  
    //Datos de la orden
    fechaCreacion : string;
    fechaRequerida : string;
@@ -29,6 +30,8 @@ export class AvanceClienteVerComponent implements OnInit {
    descripcionLabor : string;
    noOrden: string;
    vhora_hombre: number;
+   estado: string;
+   restriccion: string;
    
 
    constructor(
@@ -64,6 +67,8 @@ export class AvanceClienteVerComponent implements OnInit {
           this.noOrden = datos.actividad.consecutivo;
           this.recursos = datos.actividad.recurso;
           this.vhora_hombre = datos.actividad.vhora_hombre;
+          this.estado = datos.actividad.estado;
+          this.restriccion = datos.actividad.restriccion;
           console.log(datos.actividad.recurso);
  
         })
