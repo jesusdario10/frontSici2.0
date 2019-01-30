@@ -16,15 +16,15 @@
                             <div class="row">
                                 <div class="col-md-3">
                                     <label for="fechaEjecucion">Fecha Inicial</label>
-                                    <input  class="form-control" type="date" name="fechaini" formControlName = "fechaInicial" >
+                                    <input  class="form-control" type="date" name="fechaini" formControlName = "fechaInicial" required>
                                 </div>
                                 <div class="col-md-3">
                                     <label for="fechaEjecucion">Fecha Final</label>
-                                    <input  class="form-control" type="date" name="fechafin" formControlName = "fechaFinal"  >              
+                                    <input  class="form-control" type="date" name="fechafin" formControlName = "fechaFinal"  required>              
                                 </div>
                                 <div class="col-md-2">
                                     <label for=""  style="visibility:hidden">b</label><br>
-                                    <button type="submit" class="btn btn-outline-info">Enviar</button>
+                                    <button type="submit" (click)="conFecha()" class="btn btn-outline-info">Enviar</button>
                                 </div>
                             </div>
                         </form>
@@ -76,8 +76,8 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-10 offset-md-1">
-                  <canvas id="myDona"></canvas>
+              <div id="donaContainer" class="col-md-10 offset-md-1">
+                  
               </div>
               <div class="col-md-12">
                 <div class="card">
@@ -124,15 +124,10 @@
                             <button type="button" *ngIf="page >= 2 " [routerLink]="['/graficoClienteDona', pre_page]" class="btn btn-outline-info">Anterior</button> &nbsp;
                             <button type="button" *ngIf="page != pages && pages > 1 " [routerLink]="['/graficoClienteDona', next_page]" class="btn btn-outline-info ">Siguiente</button>
                         </div>
-
                   </div>
                 </div>
               </div>
-
-          </div>
-        
-
-
+            </div>
         </div>
       </div>
     </div>

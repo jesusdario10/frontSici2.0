@@ -48,8 +48,6 @@ export class OrdenesService {
 
   
   //Listar Ordenes por estado para los clientes
-
-
   listarOrdenClienteEstado(tercero:string, estado:string, page=null):Observable<any>{
     let headers = new HttpHeaders().set('Content-Type', 'application/json')
                                    .set('Authorization', this.token);
@@ -66,6 +64,42 @@ export class OrdenesService {
                                    .set('Authorization', this.token );
     return this._http.get(this.URL+'activity/listarActividadCliente/'+tercero+'/'+id, {headers:headers})                                   
   }
+
+                                //***********GRAFICOS CLIENTE**********/
+
+  //Listar ordenes por fecha para clientes en grafico de donas sin paginado
+  listarporFechaDonaCliente(tercero:string, fechaInicial:string, fechaFinal:string):Observable<any>{
+    let headers = new HttpHeaders().set('Content-Type', 'application/json')
+                                   .set('Authorization', this.token );
+
+    return this._http.get(this.URL+'activity/listarActividadesClientesFechasSinPaginado/'+tercero+'/'+fechaInicial+'/'+fechaFinal, {headers:headers})   
+  }
+  //Listar Ordenes por fecha para clientes en grafico de donas con paginado
+  listarporFechaDonaClientePaginado(tercero:string, fechaInicial:string, fechaFinal:string, page:number):Observable<any>{
+    let headers = new HttpHeaders().set('Content-Type', 'application/json')
+                                   .set('Authorization', this.token );
+
+    return this._http.get(this.URL+'activity/listarActividadesClientesFechasSinPaginado/'+tercero+'/'+fechaInicial+'/'+fechaFinal+'/'+page, {headers:headers})   
+  }
+  //Listar Ordenes por fecha para clientes en grafico de linea sin paginacion
+  listarporFechaLineaClienteNopaginado(tercero:string, fechaInicial:string, fechaFinal:string, ubicacion:string):Observable<any>{
+    let headers = new HttpHeaders().set('Content-Type', 'application/json')
+                                   .set('Authorization', this.token );
+    return this._http.get(this.URL+'activity/listarActividadesClientesFechasSinPaginadoLinea/'+tercero+'/'+fechaInicial+'/'+fechaFinal+'/'+ubicacion, {headers:headers})  
+  }
+  //Listar Ordenes por fecha para clientes en grafico de linea con paginacion
+  listarporFechaLineaClienteSipaginado(tercero:string, fechaInicial:string, fechaFinal:string, ubicacion:string, estado:string, page=null):Observable<any>{
+    let headers = new HttpHeaders().set('Content-Type', 'application/json')
+                                   .set('Authorization', this.token );
+
+    return this._http.get(this.URL+'activity/listarActividadesClientesFechasConPaginadoLinea/'+tercero+'/'+fechaInicial+'/'+fechaFinal+'/'+ubicacion+'/'+estado+'/'+page, {headers:headers})  
+  }
+
+
+  
+                                        /*TERMINAN LOS GFRAFICO CLIENTE*/
+
+
   //Gestionar Orden Cliente
   gestionOrdenCliente(orden:ActividadModel, idOrden){
     let params = JSON.stringify(orden);

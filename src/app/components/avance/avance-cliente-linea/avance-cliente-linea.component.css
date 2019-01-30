@@ -1,0 +1,45 @@
+
+.contenedor{
+    background-image: url(../../../../assets/img/logo/bgctransparente.png);
+    background-size: cover;
+    padding: 2vh;
+}
+.centrado{
+    text-align: center;
+}
+.redondo{
+    border-radius: 100px !important;  
+}
+.marginbajo{
+    margin-bottom: 3vh;
+}
+.margintop{
+    margin-top: 2vh;
+}
+.dona{
+    max-height: 500px !important;
+    max-width:  300px !important;
+}
+.pointer{
+    cursor: pointer;
+}
+.nadadepadding{
+    padding: 0px !important;
+}
+.total{
+    font-size: 2.5rem;
+    color: #2BBBAD;
+}
+.relojContainer{
+    border : 2px solid #ff4444;
+    background-color: black;
+    color: #00C851;
+    font-size: 1.5rem;
+}
+.reloj{
+    background-color: black;
+    color: #00C851;
+    font-size: 2.5rem;
+    font-family: 'Orbitron', sans-serif;
+}
+

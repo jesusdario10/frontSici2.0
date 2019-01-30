@@ -50,6 +50,7 @@ export class OrdenesClienteCrearComponent implements OnInit {
    
     //inicializando el formulario
     this.form = this.fb.group({
+      fechaCreacionO : [ "", Validators.required ],
       fechaRequeridaO : [ "", Validators.required ],
       UbicacionO: [ "", Validators.required ],
       equipoO: [ "", Validators.required ],
@@ -86,6 +87,7 @@ export class OrdenesClienteCrearComponent implements OnInit {
     const formModel = this.form.value;
 
     let saveOrden : ActividadModel = {
+      fecha_creacion: formModel.fechaCreacionO as string,
       fecha_requerida: formModel.fechaRequeridaO as string,
       ubicacion: formModel.UbicacionO as string,
       equipo: formModel.equipoO as string,
@@ -95,12 +97,18 @@ export class OrdenesClienteCrearComponent implements OnInit {
       descripcion: formModel.descripcionO as string,
       tercero : this.identity.tercero
     }
+    console.log(saveOrden);
     this._OrdenService.crearOrdenCliente(saveOrden)
         .subscribe((datos:any)=>{
-          console.log(datos);
-          form.reset();
-          swal("Exito", "Orden Creada", "success"); 
-        })
+          if(datos.message == "Fecha de creacion no puede ser menor a la fecha requerida"){
+            swal("Cuidado", datos.message, "warning");
+            return false;
+          }else{
+            form.reset();
+            swal("Exito", "Orden Creada", "success"); 
+          }
+
+    })
   }
 
 

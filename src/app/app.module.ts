@@ -54,6 +54,10 @@ import { AvanceClienteComponent } from './components/avance/avance-cliente/avanc
 import { AvanceClienteDonaComponent } from './components/avance/avance-cliente-dona/avance-cliente-dona.component';
 import { AvanceClienteLineaComponent } from './components/avance/avance-cliente-linea/avance-cliente-linea.component';
 import { AvanceClienteVerComponent } from './components/avance/avance-cliente-ver/avance-cliente-ver.component';
+import { AvanceClienteLineaVerComponent } from './components/avance/avance-cliente-linea-ver/avance-cliente-linea-ver.component';
+import { ExcelExportComponent } from './components/excel-export/excel-export.component';
+import { ExportExcelService } from './services/export-excel.service';
+
 
 
 
@@ -87,6 +91,9 @@ import { AvanceClienteVerComponent } from './components/avance/avance-cliente-ve
     AvanceClienteDonaComponent,
     AvanceClienteLineaComponent,
     AvanceClienteVerComponent,
+    AvanceClienteLineaVerComponent,
+    ExcelExportComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -108,7 +115,8 @@ import { AvanceClienteVerComponent } from './components/avance/avance-cliente-ve
   ],
   providers: [appRoutingProviders,
               UserService,
-              UserGuard
+              UserGuard,
+              ExportExcelService
              ],
   bootstrap: [AppComponent]
 })

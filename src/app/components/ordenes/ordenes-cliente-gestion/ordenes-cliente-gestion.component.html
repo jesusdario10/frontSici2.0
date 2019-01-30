@@ -64,26 +64,26 @@
                         <div class="col-md-6">
                           <div class="form-group">  
                             <div class="form-group ">
-                              <label for="descripcion">Descripcion de la Actividad</label>
+                              <label for="descripcion">Manual de la Actividad</label>
                               <input *ngIf="estado != 'EJECUTADA' "  type="text" class="form-control" name="descripcionO" [(ngModel)]="descripcionActividad"  >
                               <input *ngIf="estado == 'EJECUTADA'" disabled type="text" class="form-control" name="descripcionO" [(ngModel)]="descripcionActividad"  >
+                            </div>
+                          </div> 
+                        </div>
+                        <div class="col-md-12">
+                          <div class="form-group">  
+                            <div class="form-group ">
+                              <label for="descripcion">Historico de comentarios</label>
+                              <textarea rows="3" *ngIf="estado != 'EJECUTADA' "  type="text" class="form-control" name="historicoO" [(ngModel)]="historico"  ></textarea>
+                              <textarea rows="3" *ngIf="estado == 'EJECUTADA'" disabled class="form-control" name="historicoO" [(ngModel)]="historico"  ></textarea>
                             </div>
                           </div> 
                         </div>
                         <div class="col-md-2 offset-md-5">
                             <div class="form-group ">
                               <label for="prioridad">Estado</label>
-                              <select *ngIf="estado != 'EJECUTADA' "  id="estadox" class="form-control" [(ngModel)]="estado">
+                              <select id="estadox" class="form-control" [(ngModel)]="estado">
                                   <option disabled selected>Elija</option>
-                                  <option value="ACTIVA">ACTIVA</option>
-                                  <option value="EJECUCION">EJECUCION</option>
-                                  <option value="EJECUTADA">EJECUTADA</option>
-                                  <option value="DETENIDA">DETENIDA</option>
-                                  <option value="DESCARTADA">ELIMINADA</option>
-                              </select>
-                              <select *ngIf="estado == 'EJECUTADA'" disabled  id="estadox" class="form-control" [(ngModel)]="estado">
-                                  <option disabled selected>Elija</option>
-                                  <option value="ACTIVA">ACTIVA</option>
                                   <option value="EJECUCION">EJECUCION</option>
                                   <option value="EJECUTADA">EJECUTADA</option>
                                   <option value="DETENIDA">DETENIDA</option>
@@ -108,7 +108,7 @@
         </div>
       </div>
       <div class="col-md-12 espacios">
-          <div class="col-md-8 offset-md-2">
+          <div class="col-md-6 offset-md-3">
             <div class="card">
               <div class="card-body">
                   <form ngNativeValidate [formGroup]="form"  #recursosR="ngForm" (ngSubmit)="agregarRecursos(form, recursosR)">
@@ -147,7 +147,6 @@
                         <tr>
                           <th>Horas Hombre </th>
                           <th>Nombre Cargo</th>
-                          <th>Valor Hora Hombre</th>
                           <th>Gestion</th>
                         </tr>
                       </thead>
@@ -155,7 +154,6 @@
                         <tr *ngFor="let recurso of recursos; let i = index">
                           <td>{{recurso.hh}}</td>
                           <td>{{recurso.cargo.nombre}}</td>
-                          <td>{{recurso.vhora_hombre | currency:'USD':true:'1.0-3'}}</td>
                           <td class="centrado">
                            <a class="eliminar">
                               <i *ngIf="estado != 'EJECUTADA' "  (click)="eliminarRecurso(i)" class="far fa-trash-alt eliminar"></i>

@@ -3,6 +3,7 @@ import { OrdenesService } from 'src/app/services/ordenes.service';
 import { ActividadModel } from 'src/app/models/actividadModel';
 import { UserService } from 'src/app/services/user.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ExportExcelService } from 'src/app/services/export-excel.service';
 
 @Component({
   selector: 'app-ordenes-cliente',
@@ -14,6 +15,8 @@ export class OrdenesClienteComponent implements OnInit {
   public estado;
   public operaciones = "Operaciones";
   public ordenes : ActividadModel[]=[];
+  public ordenes2 : ActividadModel[]=[];
+  public excel:any[]=[];
   identity: any;
 
   //estados de las ordenes
@@ -36,6 +39,7 @@ export class OrdenesClienteComponent implements OnInit {
     private _UserService : UserService, 
     private _router : Router,
     private _route:ActivatedRoute,
+    private excelService : ExportExcelService
   ) {
     this.estado =  "TODO";
    }
@@ -101,6 +105,9 @@ export class OrdenesClienteComponent implements OnInit {
   listarOrdenesClientesSinPaginado(){
     this._OrdenesService.listarOrdenesSinPaginacionClientes(this.identity.tercero)
         .subscribe((datos:any)=>{
+          console.log(datos);
+          this.excel = datos.tablaresultado;
+          this.ordenes2 = datos.actividades;
           this.activas = datos.activas;
           this.ejecucion = datos.ejecucion;
           this.detenidas = datos.detenidas;
@@ -178,5 +185,12 @@ export class OrdenesClienteComponent implements OnInit {
         this.listarOrdenClienteEstado(this.estado, page) 
       })
     }
+  //Exportar a excel  
+  exportToExcel(event) {
+      this.excelService.exportAsExcelFile(this.ordenes2, 'ordenes');
+  }
+  exportAsXLSX():void {
+    this.excelService.exportAsExcelFile(this.excel, 'ordenes');
+  }
     
 }

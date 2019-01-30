@@ -1,3 +1,196 @@
-<p>
-  avance-cliente-linea works!
-</p>
+<div class="contenedor">
+  <div class="row">
+    <div class="col-md-10 offset-md-1">
+      <div class="card">
+        <div class="card-body centrado">
+          <h5>Grafico de Lineal</h5>
+          <div class="row">
+            <div class="col-md-12 marginbajo">
+              <div class="card marginbajo">
+                <div class="card-body centrado">
+                  <div class="row">
+                      <div class="col-md-12 marginbajo">
+                        <form ngNativeValidate [formGroup]="form"  #fechas="ngForm" (ngSubmit)="actualPage()">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label for="fechaEjecucion">Fecha Inicial</label>
+                                    <input  class="form-control" type="date" name="fechaini" formControlName = "fechaInicial" required>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="fechaEjecucion">Fecha Final</label>
+                                    <input  class="form-control" type="date" name="fechafin" formControlName = "fechaFinal"  required>              
+                                </div>
+                                <div class="col-md-3 form-group">
+                                  <label for="selectCargo">Ubicacion</label>
+                                  <select class="form-control" name="Ubicacion"  formControlName="Ubicacion" required>
+                                    <option value="TODO">TODO</option>
+                                    <option *ngFor="let ubicacion of ubicaciones" [value]="ubicacion._id">{{ubicacion.nombre}}</option>
+                                  </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <label for=""  style="visibility:hidden">b</label><br>
+                                    <button type="submit" (click)="conFecha()" class="btn btn-outline-info">Enviar</button>
+                                </div>
+                            </div>
+                        </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="row">
+                       <div class="col-md-12">
+                          <h5>{{estados}}</h5>
+                         <div class="row">
+                           <div class="col-md-12">
+                              <div class="row" style="text-align:center !important">
+                                  <div class="col-md-2 centrado col-sm-12 col-lg-2 sinnada">      
+                                      <button (click)="clickActivas()"  type="button" class="redondo btn btn-outline-success">
+                                        <i class="far fa-edit fa-2x fa-lg"></i>
+                                      </button>
+                                      <p>
+                                        {{activas}}
+                                      </p>
+                                  </div>
+                                  <div class="col-md-2 centrado col-sm-12 col-lg-2 sinnada">      
+                                      <button (click)="clickEjecucion()"  type="button"  class="redondo btn btn-outline-warning">
+                                        <i class="far fa fa-tools fa-2x fa-lg"></i>
+                                      </button>
+                                      <p>
+                                        {{ejecucion}}
+                                      </p>
+                                  </div>
+                                  <div  class="col-md-2 centrado col-sm-12 col-lg-2 sinnada">      
+                                      <button type="button" (click)="clickEjecutadas()"   class="redondo btn btn-outline-primary">
+                                        <i class="far fa-check-circle fa-2x fa-lg"></i>
+                                      </button>
+                                      <p>
+                                        {{ejecutadas}}
+                                      </p>
+                                  </div>
+                                  <div   class="col-md-2 centrado col-sm-12 col-lg-2 sinnada">      
+                                      <button (click)="clickDetenidas()"  type="button"  class="redondo btn btn-outline-danger">
+                                        <i class="fas fa-ban fa-2x fa-lg"></i>
+                                      </button>
+                                      <p>
+                                        {{detenidas}}
+                                      </p>
+                                  </div>
+                                  <div  class="col-md-2 centrado col-sm-12 col-lg-2 sinnada">      
+                                      <button (click)="clickRestaurar()"  type="button"  class="redondo btn btn-outline-dark">
+                                        <i class="fas fa-power-off fa-2x fa-lg"></i>
+                                      </button>
+                                      <p>
+                                        Todo
+                                      </p>
+                                  </div>
+                                  <div  class="col-md-2  col-sm-12 col-lg-2 total"> 
+                                    {{total}}
+                                  </div>
+                              </div>
+                           </div>
+                         </div>
+                       </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div id="lineaContainer" class="col-md-10 offset-md-1">
+                  <canvas id="line-chart"></canvas>
+              </div>
+              <div class="col-md-12">
+                <div class="card">
+                  <div class="card-tittle margintop">
+                    <h5>Resultados</h5>
+                  </div>
+                  <div class="card-body margintop">
+                      <table *ngIf="ordenes.length >= 1" class="table table-responsive  table-hover table-bordered">
+                          <thead class="table-primary">
+                            <tr>
+                              <th>#</th>
+                              <th>Fecha</th>
+                              <th>Ejecucion</th>
+                              <th>Ubicacion</th>
+                              <th>Equipo</th>
+                              <th>Libreria</th>
+                              <th>Solicitante</th>
+                              <th>Estado</th>
+                              <th>Ver</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor = "let orden of ordenes ; let i = index">
+                              <td>{{orden.consecutivo}}</td>
+                              <td>{{orden.fecha_creacion | date}}</td>
+                              <td>{{orden.fecha_ejecucion | date}}</td>
+                              <td>{{orden.ubicacion.nombre}}</td>
+                              <td>{{orden.equipo.tag}}</td>
+                              <td>{{orden.libreria.nombre}}</td>
+                              <td>{{orden.solicitante}}</td>
+                              <td>{{orden.estado}}</td>
+                              <td>
+                                <p >
+                                  <i class="far fa-eye cursor pointer" (click)="listarUnaOrdenCliente(orden._id)" style="color:chartreuse" data-toggle="modal" data-target="#exampleModalLong"   title="Ver Orden"></i>
+                                </p>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <!--PAGINACION -->
+                        <div  style="text-align:center">
+                            <button type="button" *ngIf="page >= 2 " [routerLink]="['/graficoClienteLinea', pre_page]"  class="btn btn-outline-info">Anterior</button> &nbsp;
+                            <button type="button" *ngIf="page != pages && pages > 1 " [routerLink]="['/graficoClienteLinea', next_page]"  class="btn btn-outline-info ">Siguiente</button>
+                        </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal -->
+</div>
+<!--[routerLink]="['/graficoClienteLineaVer', orden._id]"-->
+<div class="modal fade elmodal" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header centrado">
+        <h5 class="modal-title" id="exampleModalLongTitle">Orden No : &nbsp; {{noOrden}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><strong>Tag:</strong></span>&nbsp;{{tag}}<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><strong>Ubicacion:</strong></span>&nbsp;{{ubicacion2}}<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><strong>Fecha Creacion:</strong></span>&nbsp;{{fechaCreacion}}<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><strong>Fecha Requerida:</strong></span>&nbsp;{{fechaRequerida}}<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><strong>Nombre Equipo:</strong></span>&nbsp;{{nombreEquipo}}<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><strong>Estado:</strong></span>&nbsp;{{estadouna}}<br>
+        <br>
+        <div *ngIf="estadouna =='DETENIDA'" >
+            <div class="relojContainer centrado">
+                Meses: {{mesesdif}} - Dias: {{diasdif}} - Horas: {{hoursdif}}
+                <div class="reloj">
+                  {{hora}}
+                </div>
+            </div>
+            <div class="form-group centrado">
+                <label><strong>Motivo de la Restriccion</strong></label>
+                <textarea disabled class="form-control" rows="3" [(ngModel)]="restriccion"></textarea>
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+

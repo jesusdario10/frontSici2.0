@@ -11,14 +11,18 @@
           <form ngNativeValidate [formGroup]="form"  #OrdenForm="ngForm" (ngSubmit)="crearOrdenCliente(form, OrdenForm)">
             <div class="row">
               <div class="col-md-3">
-                  <label for="fechaRequerida">Fecha Requerida</label>
-                  <input class="form-control" type="date"  formControlName="fechaRequeridaO">
+                  <label for="fechaCreacion">Fecha Creacion</label>
+                  <input class="form-control" type="date"  formControlName="fechaCreacionO" required>
               </div>
+              <div class="col-md-3">
+                <label for="fechaRequerida">Fecha Requerida</label>
+                <input class="form-control" type="date"  formControlName="fechaRequeridaO" required>
+            </div>
               <div class="col-md-3">
                 <div class="form-group">  
                     <div class="form-group ">
                       <label for="selectCargo">Ubicacion</label>
-                      <select class="form-control" name="ubicacionO"  formControlName="UbicacionO">
+                      <select class="form-control" name="ubicacionO"  formControlName="UbicacionO" required>
                         <option *ngFor="let ubicacion of ubicaciones" [value]="ubicacion._id">{{ubicacion.nombre}}</option>
                       </select>
                     </div>
@@ -28,7 +32,7 @@
                 <div class="form-group">  
                   <div class="form-group ">
                     <label for="equipoO">Equipo</label>
-                    <select class="form-control" name="equipoO" formControlName="equipoO">
+                    <select class="form-control" name="equipoO" formControlName="equipoO" required>
                       <option *ngFor="let equipo of equipos" [value]="equipo._id">{{equipo.tag}} | {{equipo.nombre_equipo}}</option>
                     </select>
                   </div>
@@ -38,7 +42,7 @@
                   <div class="form-group">  
                     <div class="form-group ">
                       <label for="libreriaO">Libreria</label>
-                      <select class="form-control" name="libreriaO" formControlName="libreriaO">
+                      <select class="form-control" name="libreriaO" formControlName="libreriaO" required>
                         <option *ngFor="let libreria of librerias" [value]="libreria._id">{{libreria.nombre}}</option>
                       </select>
                     </div>
@@ -47,8 +51,7 @@
               <div class="col-md-3">
                     <div class="form-group ">
                       <label for="prioridad">Prioridad</label>
-                      <select class="form-control" name="prioridadO" formControlName="prioridadO">
-                        <option selected>Elija</option>
+                      <select class="form-control" name="prioridadO" formControlName="prioridadO" required>
                         <option value="BAJA">BAJA</option>
                         <option value="NORMAL">NORMAL</option>
                         <option value="MEDIA">MEDIA</option>
@@ -56,19 +59,19 @@
                       </select>
                     </div>
               </div>
-              <div class="col-md-3">
+              <div class="col-md-6">
                   <div class="form-group">  
                     <div class="form-group ">
                       <label for="solicitanteO">Solicitante</label>
-                      <input type="text" class="form-control" name="solicitanteO" formControlName="solicitanteO">
+                      <input type="text" class="form-control" name="solicitanteO" formControlName="solicitanteO" required>
                     </div>
                   </div> 
                 </div>
-              <div class="col-md-6">
+              <div class="col-md-12">
                 <div class="form-group">  
                   <div class="form-group ">
                     <label for="descripcionO">Descripcion Labor</label>
-                    <input type="text" class="form-control" name="descripcionO" formControlName="descripcionO">
+                    <input type="text" class="form-control" name="descripcionO" formControlName="descripcionO" required>
                   </div>
                 </div> 
               </div>

@@ -1,0 +1,26 @@
+<div class="container" style="margin-top: 20px;">
+  <div class="panel panel-default">
+    <div class="panel-heading">All persons data</div>
+    <table id="default-table" class="table" *ngIf="persons">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Name</th>
+          <th>Surname</th>
+          <th>Age</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let person of persons">
+          <td>{{person.id}}</td>
+          <td>{{person.name}}</td>
+          <td>{{person.surname}}</td>
+          <td>{{person.age}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <script>
+    
+  </script>
+</div>

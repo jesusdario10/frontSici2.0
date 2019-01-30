@@ -30,6 +30,8 @@ import { AvanceClienteComponent } from './components/avance/avance-cliente/avanc
 import { AvanceClienteDonaComponent } from './components/avance/avance-cliente-dona/avance-cliente-dona.component';
 import { AvanceClienteLineaComponent } from './components/avance/avance-cliente-linea/avance-cliente-linea.component';
 import { AvanceClienteVerComponent } from './components/avance/avance-cliente-ver/avance-cliente-ver.component';
+import { AvanceClienteLineaVerComponent } from './components/avance/avance-cliente-linea-ver/avance-cliente-linea-ver.component';
+import { ExcelExportComponent } from './components/excel-export/excel-export.component';
 
 
 
@@ -62,10 +64,13 @@ const appRoutes : Routes = [
     {path: 'avanceCliente', component: AvanceClienteComponent, canActivate:[UserGuard]},
     {path: 'graficoClienteDona/:page', component: AvanceClienteDonaComponent, canActivate:[UserGuard]},
     {path: 'graficoClienteDonaVer/:id', component: AvanceClienteVerComponent, canActivate:[UserGuard]},
-    {path: 'graficoClienteLinea/:id', component: AvanceClienteLineaComponent, canActivate:[UserGuard]},
+    {path: 'graficoClienteLinea/:page', component: AvanceClienteLineaComponent, canActivate:[UserGuard]},
+    {path: 'graficoClienteLineaVer/:id', component: AvanceClienteLineaVerComponent, canActivate:[UserGuard]},
+    {path: 'export', component: ExcelExportComponent, canActivate:[UserGuard]},
     {path: '**', component: ErrorComponent},
 ];
 
 
 export const appRoutingProviders : any[]=[];
 export const routing : ModuleWithProviders = RouterModule.forRoot(appRoutes)
+

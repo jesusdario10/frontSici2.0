@@ -18,6 +18,7 @@ export class OrdenesClienteGestionComponent implements OnInit {
   cargos : CargoModel[]=[];
   idOrden : string;
 
+
   //Datos de la orden
   tag : string;
   solicitante : string;
@@ -30,6 +31,7 @@ export class OrdenesClienteGestionComponent implements OnInit {
   descripcionActividad: string;
   estado : string;
   restriccion : string;
+  historico: string;
   identity: any;
 
   //Captura de datos para insertar recurso
@@ -92,7 +94,8 @@ export class OrdenesClienteGestionComponent implements OnInit {
           this.restriccion  = datos.actividad.restriccion;
           this.estado  = datos.actividad.estado;
           this.recursos = datos.actividad.recurso;
-          console.log(this.estado);
+          this.historico = datos.actividad.historico;
+          
         })
   }
   //Gestionar la Orden
@@ -103,17 +106,20 @@ export class OrdenesClienteGestionComponent implements OnInit {
       descripcion : this.descripcionActividad as string,
       restriccion : this.restriccion as string,
       tercero : this.identity.tercero as string,
-      estado : this.estado as string
+      estado : this.estado as string,
+      historico : this.historico as string
     }
-    if(gestionOrdenCliente.turno == 'Elija' || gestionOrdenCliente.fecha_ejecucion == ""){
-      console.log(gestionOrdenCliente);
+    
+    if(gestionOrdenCliente.turno == undefined || gestionOrdenCliente.fecha_ejecucion == "" || gestionOrdenCliente.turno == 'Elija' ){
         swal('Error', "Seleccione el turno y fecha de ejecucion", 'warning')
         return false;
     }else{
       this._ordenServices.gestionOrdenCliente(gestionOrdenCliente, this.idOrden)
           .subscribe((datos:any)=>{
+            console.log(datos);
             if(datos.message){
               swal('Error', datos.message, 'warning')
+              return false;
             }
             if(datos.actividad){
               swal('Existoo!', "Gestion Realizada", 'success')

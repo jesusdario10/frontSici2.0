@@ -19,6 +19,7 @@ export class ActividadModel{
         public recurso? : Recurso,
         public horas_hombre? :string,
         public valor? :number,
+        public historico?:string,
         public _id?: string,
     ){}
 }
