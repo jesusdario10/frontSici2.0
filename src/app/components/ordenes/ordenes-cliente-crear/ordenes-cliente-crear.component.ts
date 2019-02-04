@@ -43,6 +43,7 @@ export class OrdenesClienteCrearComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+  
     this.identity = this._UserService.getIdentity();
     this.listarUbicacionesCliente();
     this.listarEquiposClienteporTag();

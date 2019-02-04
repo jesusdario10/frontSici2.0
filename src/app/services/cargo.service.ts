@@ -7,6 +7,7 @@ import { throwError } from "rxjs/internal/observable/throwError";
 import swal from 'sweetalert';
 import { CargoModel } from '../models/cargoModel';
 import { UserService } from './user.service';
+import { SubirArchivosService } from './subir-archivos.service';
 
 
 
@@ -17,13 +18,17 @@ export class CargoService {
   public cargo : CargoModel;
   public URL : string;
   public token;
+  public datosAsubir;
+
 
   constructor(
     private _http : HttpClient,
-    private _userServices : UserService
+    private _userServices : UserService,
+    private _subirArchivos : SubirArchivosService
   ) {
     this.URL = GLOBAL.url;
     this.token = this._userServices.getToken();
+    
    }
 
    /************************************************** */
@@ -94,6 +99,25 @@ export class CargoService {
     ))
 
   }
+  //subir Cargos desde un archivo xlsx
+
+  subirCargosxlsx(archivo:File,  tercero){
+    this._subirArchivos.subirArchivo(archivo, 'cargo', tercero)
+      .then(resp=>{
+        this.datosAsubir = resp
+        console.log(this.datosAsubir);
+        return this.datosAsubir
+        
+      })
+      .catch(resp=>{
+        console.log(resp);
+      })
+  }
+
+
+
+
+
 
 
 

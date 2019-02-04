@@ -67,7 +67,7 @@ export class OrdenesClienteComponent implements OnInit {
     this.estados = "Detenida";
   }
   enterExcel(e){
-    this.operaciones = "Descargar";
+    this.operaciones = "Importat/Exportar";
   }
   leaveOperaciones(e){
     this.operaciones = "Operaciones";

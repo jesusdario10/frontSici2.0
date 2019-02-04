@@ -32,6 +32,12 @@ import { AvanceClienteLineaComponent } from './components/avance/avance-cliente-
 import { AvanceClienteVerComponent } from './components/avance/avance-cliente-ver/avance-cliente-ver.component';
 import { AvanceClienteLineaVerComponent } from './components/avance/avance-cliente-linea-ver/avance-cliente-linea-ver.component';
 import { ExcelExportComponent } from './components/excel-export/excel-export.component';
+import { ImportExportComponent } from './components/import-export/import-export.component';
+import { CargoInExComponent } from './components/import-export/cargo-in-ex/cargo-in-ex.component';
+import { UbicacionInExComponent } from './components/import-export/ubicacion-in-ex/ubicacion-in-ex.component';
+import { LibreriaInExtComponent } from './components/import-export/libreria-in-ext/libreria-in-ext.component';
+import { EquipoInExtComponent } from './components/import-export/equipo-in-ext/equipo-in-ext.component';
+
 
 
 
@@ -67,6 +73,11 @@ const appRoutes : Routes = [
     {path: 'graficoClienteLinea/:page', component: AvanceClienteLineaComponent, canActivate:[UserGuard]},
     {path: 'graficoClienteLineaVer/:id', component: AvanceClienteLineaVerComponent, canActivate:[UserGuard]},
     {path: 'export', component: ExcelExportComponent, canActivate:[UserGuard]},
+    {path: 'import-export', component: ImportExportComponent, canActivate:[UserGuard]},
+    {path: 'import-export/cargos', component: CargoInExComponent, canActivate:[UserGuard]},
+    {path: 'import-export/ubicacion', component: UbicacionInExComponent, canActivate:[UserGuard]},
+    {path: 'import-export/librerias', component: LibreriaInExtComponent, canActivate:[UserGuard]},
+    {path: 'import-export/equipo', component: EquipoInExtComponent, canActivate:[UserGuard]},
     {path: '**', component: ErrorComponent},
 ];
 

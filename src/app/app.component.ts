@@ -4,6 +4,8 @@ import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import { UserService } from './services/user.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+declare var jQuery:any;
+declare var $:any;
 
 
 @Component({
@@ -19,6 +21,7 @@ export class AppComponent implements OnInit, DoCheck  {
   ) { }
   ngOnInit() {
     this.identity = this._userServices.getIdentity();
+  
   }
   ngDoCheck(){
     let URLactual = window.location.href;

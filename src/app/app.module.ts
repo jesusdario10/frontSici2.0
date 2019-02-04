@@ -57,6 +57,14 @@ import { AvanceClienteVerComponent } from './components/avance/avance-cliente-ve
 import { AvanceClienteLineaVerComponent } from './components/avance/avance-cliente-linea-ver/avance-cliente-linea-ver.component';
 import { ExcelExportComponent } from './components/excel-export/excel-export.component';
 import { ExportExcelService } from './services/export-excel.service';
+import { ImportExportComponent } from './components/import-export/import-export.component';
+import { CargoInExComponent } from './components/import-export/cargo-in-ex/cargo-in-ex.component';
+import { UbicacionInExComponent } from './components/import-export/ubicacion-in-ex/ubicacion-in-ex.component';
+import { LibreriaInExtComponent } from './components/import-export/libreria-in-ext/libreria-in-ext.component';
+import { EquipoInExtComponent } from './components/import-export/equipo-in-ext/equipo-in-ext.component';
+import { SubirArchivosService } from './services/subir-archivos.service';
+
+
 
 
 
@@ -93,6 +101,13 @@ import { ExportExcelService } from './services/export-excel.service';
     AvanceClienteVerComponent,
     AvanceClienteLineaVerComponent,
     ExcelExportComponent,
+    ImportExportComponent,
+    CargoInExComponent,
+    UbicacionInExComponent,
+    LibreriaInExtComponent,
+    EquipoInExtComponent,
+
+
     
   ],
   imports: [
@@ -116,7 +131,8 @@ import { ExportExcelService } from './services/export-excel.service';
   providers: [appRoutingProviders,
               UserService,
               UserGuard,
-              ExportExcelService
+              ExportExcelService,
+              SubirArchivosService
              ],
   bootstrap: [AppComponent]
 })
