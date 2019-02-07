@@ -7,6 +7,7 @@ import { throwError } from "rxjs/internal/observable/throwError";
 import swal from 'sweetalert';
 import { UserService } from './user.service';
 import { EquipoModel } from '../models/equipoModel';
+import { SubirArchivosService } from './subir-archivos.service';
 
 
 
@@ -18,10 +19,12 @@ export class EquipoService {
   public equipo : EquipoModel;
   public URL : string;
   public token;
+  public datosAsubir;
 
   constructor(
     private _http : HttpClient,
-    private _userServices : UserService
+    private _userServices : UserService,
+    private _subirArchivos : SubirArchivosService
   ){
     this.URL = GLOBAL.url;
     this.token = this._userServices.getToken(); 
@@ -77,8 +80,42 @@ export class EquipoService {
         return resp;
       })
     )
-               
-                                   
-
   }
+  //subir el archivo excel al backend
+  subirEquiposxlsx(archivo:File,  tercero){
+    this._subirArchivos.subirArchivo(archivo, 'equipo', tercero)
+      .then(resp=>{
+        let mensaje:any = resp;
+       this.leerDatosCargosJson(resp)
+       if(mensaje.message == "Archivo errado"){
+        swal('Error', mensaje.message, 'error')
+       }else{
+        swal('Exito', "Archivo Recibido", 'success')
+       }
+       
+      })
+      .catch(resp=>{
+        console.log(resp);
+      })
+  }
+  //agregar los datos obtenidos a una variable
+  leerDatosCargosJson(datos){
+    this.datosAsubir = datos;
+  }  
+  //de esta forma los puedo leer en el componente
+  RevisarDatos(){
+    return this.datosAsubir;
+  }  
+  //de esta manera envio el json al backend para crear los equipos en la db
+  importarEquipos(equipos:any[], tercero:string){
+    let params = JSON.stringify(equipos);
+    let headers = new HttpHeaders().set('Content-Type', 'application/json')
+                                   .set('Authorization', this.token);
+     return this._http.post(this.URL+'import/importar/equipos/'+tercero, params, {headers:headers}).pipe(
+      map((resp:any)=>{
+        return resp;
+      })
+    );                               
+  }  
+
 }

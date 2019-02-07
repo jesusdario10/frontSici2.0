@@ -1,3 +1,42 @@
-<p>
-  ubicacion-in-ex works!
-</p>
+
+<div class="fondo espacios">
+  <div class="container espaciosp">
+    <div class="card centrado espaciosp" style="margin:3vh !important;">
+        <h4 style="padding:5px !important;">Importacion masiva de ubicaciones</h4>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12">
+              <input (change)="seleccionXlsx($event.target.files[0])" type="file" id="input-file-now" class="dropify">
+          </div>
+          <div class="col-md-12 centrado espaciosp">
+              <button *ngIf="carga == 1" type="button" (click)="cambiarArchivo()" class="btn btn-outline-primary">Subir Archivo</button>
+              <button *ngIf="validar == 1" type="button" (click)="revisarDatos()" class="btn btn-outline-primary">Validar Archivo</button>
+              <button *ngIf="importar == 1" type="button" (click)="importarArchivo()" class="btn btn-outline-primary">Importar Archivo</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card centrado espaciosp" style="margin:3vh !important;">
+        <h4 style="padding:5px !important;">Validacion de Datos</h4>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12">
+              <table class="table table-hover table-bordered">
+                <thead class="table-primary">
+                  <tr>
+                    <th>Nombre de la ubicacion</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let ubicacion of ubicaciones">
+                    <td>{{ubicacion.nombre}}</td>
+                  </tr>
+                </tbody>
+              </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

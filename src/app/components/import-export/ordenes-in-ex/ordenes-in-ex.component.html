@@ -1,8 +1,8 @@
 
-<div class="fondo espacios">
+<div class="fondo espacios minAltura">
     <div class="container espaciosp">
       <div class="card centrado espaciosp" style="margin:3vh !important;">
-          <h4 style="padding:5px !important;">Importacion masiva de equipos</h4>
+          <h4 style="padding:5px !important;">Importacion masiva de ordenes</h4>
         <div class="card-body">
           <div class="row">
             <div class="col-md-12">
@@ -17,24 +17,32 @@
           </div>
         </div>
       </div>
-      <div class="card centrado espaciosp" style="margin:3vh !important;">
+      <div *ngIf="ordenes.length > 0" class="card centrado espaciosp" style="margin:3vh !important;">
           <h4 style="padding:5px !important;">Validacion de Datos</h4>
         <div class="card-body">
           <div class="row">
-            <div class="col-md-12">
-                <table class="table table-hover table-bordered">
+            <div class="col-md-12" style="text-align:center">
+                <table class="table table-hover table-bordered table-responsive">
                   <thead style="background:#aa66cc !important; color:white">
                     <tr>
-                      <th>Serial</th>
-                      <th>Tag</th>
-                      <th>Nombre del Equipo</th>
+                      <th>Equipo</th>
+                      <th>ubicacion</th>
+                      <th>solicitante</th>
+                      <th>prioridad</th>
+                      <th>libreria</th>
+                      <th>fecha_creacion</th>
+                      <th>fecha_requerida</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr *ngFor="let equipo of equipos">
-                      <td [class.existe]="equipo.tag =='Equipo ya Existe'">{{equipo.serial}}</td>
-                      <td [class.existe]="equipo.tag =='Equipo ya Existe'">{{equipo.tag}}</td>
-                      <td [class.existe]="equipo.tag =='Equipo ya Existe'">{{equipo.nombre_equipo}}</td>
+                    <tr *ngFor="let orden of ordenes">
+                      <td [class.noexiste]="orden.comEquipos == 0">{{orden.equipo}}</td>
+                      <td [class.noexiste]="orden.conUbicaciones == 0">{{orden.ubicacion}}</td>
+                      <td>{{orden.solicitante}}</td>
+                      <td>{{orden.prioridad}}</td>
+                      <td [class.noexiste]="orden.conLibrerias == 0">{{orden.libreria}}</td>
+                      <td>{{orden.fecha_creacion}}</td>
+                      <td>{{orden.fecha_requerida}}</td>
                     </tr>
                   </tbody>
                 </table>

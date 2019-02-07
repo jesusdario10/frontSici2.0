@@ -1,0 +1,15 @@
+/*fondo del componente principal*/
+.fondo{
+    background-image: url(../../../../assets/img/logo/bgctransparente.png);
+    background-size: cover;
+    
+}
+.espaciosp{
+    padding: 1vh;
+}
+.centrado{
+    text-align: center;
+}
+.margin-card{
+    margin:2vh !important;
+}

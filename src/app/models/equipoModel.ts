@@ -1,5 +1,6 @@
 export class EquipoModel{
     constructor(
+        public serial? : string,
         public tag? :string,
         public nombre_equipo? : string,
         public fecha_creacion? : string,

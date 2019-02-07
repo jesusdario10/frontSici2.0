@@ -31,3 +31,9 @@ button{
 .centroiconos i{
     color:#ffc107
 }
+.sinmargenbutton{
+    margin-bottom: 0px !important;
+}
+.sinpaddintop{
+    padding-top: 0px !important;
+}

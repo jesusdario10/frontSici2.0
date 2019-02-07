@@ -13,13 +13,11 @@
 .margin-card{
     margin:2vh !important;
 }
-.existe{
+.noexiste{
     background: #ffbb33 !important;
     color: white !important;
     font-weight: bold;
 }
-.noexiste{
-    background: #00C851 !important;
-    /*color: white !important;*/
-
+.minAltura{
+    min-height: 90.50vh !important;
 }

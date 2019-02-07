@@ -11,6 +11,8 @@ import { SubirArchivosService } from './subir-archivos.service';
 
 
 
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -99,19 +101,42 @@ export class CargoService {
     ))
 
   }
-  //subir Cargos desde un archivo xlsx
-
+  //subir archivo de Cargos desde un archivo xlsx
   subirCargosxlsx(archivo:File,  tercero){
     this._subirArchivos.subirArchivo(archivo, 'cargo', tercero)
       .then(resp=>{
-        this.datosAsubir = resp
-        console.log(this.datosAsubir);
-        return this.datosAsubir
-        
+        let mensaje:any = resp;
+       this.leerDatosCargosJson(resp)
+       if(mensaje.message == "Archivo errado"){
+        swal('Error', mensaje.message, 'error')
+       }else{
+        swal('Exito', "Archivo Recibido", 'success')
+       }
+       
       })
       .catch(resp=>{
         console.log(resp);
       })
+
+  }
+  //agregar los datos obtenidos a una variable
+  leerDatosCargosJson(datos){
+    this.datosAsubir = datos;
+  }
+  //de esta forma los puedo leer en el componente
+  RevisarDatos(){
+    return this.datosAsubir;
+  }
+  //de esta manera envio el json al backend para crear los cargos en la db
+  importarCargos(cargos:any[], tercero:string){
+    let params = JSON.stringify(cargos);
+    let headers = new HttpHeaders().set('Content-Type', 'application/json')
+                                   .set('Authorization', this.token);
+     return this._http.post(this.URL+'import/importar/'+tercero, params, {headers:headers}).pipe(
+      map((resp:any)=>{
+        return resp;
+      })
+    );                               
   }
 
 

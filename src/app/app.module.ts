@@ -63,6 +63,7 @@ import { UbicacionInExComponent } from './components/import-export/ubicacion-in-
 import { LibreriaInExtComponent } from './components/import-export/libreria-in-ext/libreria-in-ext.component';
 import { EquipoInExtComponent } from './components/import-export/equipo-in-ext/equipo-in-ext.component';
 import { SubirArchivosService } from './services/subir-archivos.service';
+import { OrdenesInExComponent } from './components/import-export/ordenes-in-ex/ordenes-in-ex.component';
 
 
 
@@ -106,6 +107,7 @@ import { SubirArchivosService } from './services/subir-archivos.service';
     UbicacionInExComponent,
     LibreriaInExtComponent,
     EquipoInExtComponent,
+    OrdenesInExComponent,
 
 
     

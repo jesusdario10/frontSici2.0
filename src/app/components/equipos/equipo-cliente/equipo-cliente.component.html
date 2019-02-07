@@ -12,13 +12,19 @@
               <div class="card-body">
                   <form ngNativeValidate [formGroup]="form"  #EquipoFormE="ngForm" (ngSubmit)="createEquipoCliente(form, EquipoFormE)">
                       <div class="col-md-12 col-sm-12">
-                          <div class="form-group">
-                            <label for="tagE" class="negrita">Tag o Codigo del Equipo</label>
+                          <div class="form-group sinmargenbutton">
+                            <label for="serialE" class="negrita">Serial</label>
+                            <input type="text"  formControlName="serialE" class="form-control" required>
+                          </div>
+                      </div>
+                      <div class="col-md-12 col-sm-12">
+                          <div class="form-group sinmargenbutton sinpaddintop">
+                            <label for="tagE" class="negrita">Tag</label>
                             <input type="text"  formControlName="tagE" class="form-control" required>
                           </div>
                       </div>
                       <div class="col-md-12 col-sm-12">
-                        <div class="form-group">
+                        <div class="form-group sinpaddintop">
                           <label for="nombreE" class="negrita">Descripcion del Equipo</label>
                           <input type="text"  formControlName="nombreE"  class="form-control"  required>
                         </div>
@@ -47,7 +53,8 @@
                           <thead class="table-warning">
                             <tr>
                               <th>#</th>
-                              <th>Tag o Codigo </th>
+                              <th>Serie</th>
+                              <th>Tag</th>
                               <th>descripcion del Equipo</th>
                               <th>Estado</th>
                               <th>Editar</th>
@@ -56,6 +63,7 @@
                           <tbody>
                             <tr *ngFor="let equipo of equipos; let i = index">
                               <td>{{i}}</td>
+                              <td>{{equipo.serial}}</td>
                               <td>{{equipo.tag}}</td>
                               <td>{{equipo.nombre_equipo}}</td>
                               <td>{{equipo.estado}}</td>

@@ -34,7 +34,6 @@ export class SubirArchivosService {
           if(xhr.status ===200){
             console.log("archivo subido");
             resolve(JSON.parse(xhr.response));
-            console.log(resolve);
           }else{
             console.log('fallo la subida');
             reject(JSON.parse(xhr.response));

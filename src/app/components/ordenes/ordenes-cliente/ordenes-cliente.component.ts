@@ -47,7 +47,6 @@ export class OrdenesClienteComponent implements OnInit {
   ngOnInit() {
     this.identity = this._UserService.getIdentity();
     this.actualPage();
-    
   }
   //Efectos
   leave(e){

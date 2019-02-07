@@ -13,12 +13,20 @@ declare var swal:any;
 export class CargoInExComponent implements OnInit {
   public archivoSubir :File;
   public identity;
+  public cargos:any=[];
+  public subir;
+  public validar;
+  public importar;
+  public carga;
   
   constructor(
     private _cargoService : CargoService,
     private _userServices : UserService,
   ) { 
-    
+    this.subir = 1;
+    this.validar = 0;
+    this.importar = 0;
+    this.carga = 0;
   }
 
   ngOnInit() {
@@ -77,10 +85,49 @@ export class CargoInExComponent implements OnInit {
       return;
     }
     this.archivoSubir = archivo;
+    this.carga = 1;
+    this.validar = 0;
+    this.importar = 0;
   }
+  //subimos el archivo al backend
   cambiarArchivo()  {
-    //subimos el archivo al backend
+    this.validar = 1;
+    this.carga = 0;
     this._cargoService.subirCargosxlsx(this.archivoSubir, this.identity.tercero);       
+  }
+  //Capturamos el json que nos devuelve el backend y lo traemso al componente
+  revisarDatos(){
+    let cargosJson = this._cargoService.RevisarDatos();
+    var contador = 0;
+    if(cargosJson.message){
+      
+      swal('error', "Archivo con estructura errada", "error")
+    }else{
+      for(var i = 0; i<cargosJson.length; i++){
+        if(!cargosJson[i].nombre && !cargosJson[i].vhora_hombre || cargosJson[i].nombre == null || cargosJson[i].vhora_hombre == null){
+          swal("Inconsistencias", `En la Linea ${i+1}`, "error");
+          break;
+        }else{
+          contador = contador + 1;
+          this.cargos = cargosJson;
+          if(contador == cargosJson.length -1){
+            swal("Exito", "Archivo validado", "success");
+            this.importar = 1
+            this.validar = 0;
+            this.carga = 0;
+          }
+          
+        }
+      }
+    }
+  }
+  //Importamos los datos del archivo a la base de datos
+  importarArchivo(){
+    this._cargoService.importarCargos(this.cargos, this.identity.tercero)
+        .subscribe((datos:any)=>{
+          this.importar = 0;
+          swal("Exitoo","Cargos creados masivamente", "success" );
+        })
   }
 
 }

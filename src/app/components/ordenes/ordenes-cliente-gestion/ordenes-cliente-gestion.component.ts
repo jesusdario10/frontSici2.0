@@ -63,7 +63,7 @@ export class OrdenesClienteGestionComponent implements OnInit {
   
   ngOnInit() {
     this.identity = this._userServices.getIdentity();
-    this.listarCargosdelClienter();
+    this.listarCargosdelClientes();
     //extraer id Orden
     let urlActual =  window.location.href;
     let extraer = urlActual.split('/');
@@ -128,7 +128,7 @@ export class OrdenesClienteGestionComponent implements OnInit {
     }
   }
   //Listar los cargos para el select de agregar recursos
-  listarCargosdelClienter(){
+  listarCargosdelClientes(){
     this._cargosService.listarCargoClienteSinpaginacion(this.identity.tercero)
     .subscribe((datos:any)=>{
       this.cargos = datos.cargos;

@@ -35,6 +35,7 @@ export class EquipoClienteComponent implements OnInit {
     this.identity = this._userServices.getIdentity();
     //inicializando el formulario
     this.form = this.fb.group({
+      serialE : ["", Validators.required],
       tagE : [ "", Validators.required ],
       nombreE: [ "", Validators.required ]
     });
@@ -47,6 +48,7 @@ export class EquipoClienteComponent implements OnInit {
     console.log("ya llegue aqui");
     const formModel = this.form.value;
     let saveEquipo: EquipoModel ={
+      serial : formModel.serialE as string,
       tag : formModel.tagE as string,
       nombre_equipo :formModel.nombreE as string,
       usuario_creador : this.identity._id,
@@ -101,7 +103,7 @@ export class EquipoClienteComponent implements OnInit {
   
       })
   }
-  //Buscar Equiposdesde el campo input dinamicamente
+  //Buscar Equipos dede el campo input dinamicamente
   buscarEquipos(termino:string){
     if(termino.length<=0){
       this.listarEquiposCliente(this.page)
