@@ -14,10 +14,15 @@ export class UbicacionInExComponent implements OnInit {
   public archivoSubir :File;
   public identity;
   public ubicaciones:any=[];
+  public ubicaciones2:any=[];
   public subir;
   public validar;
   public importar;
   public carga;
+  public hayUbicacion;
+  public repetidas;
+  public validados;
+
 
     
   constructor(
@@ -28,6 +33,10 @@ export class UbicacionInExComponent implements OnInit {
     this.validar = 0;
     this.importar = 0;
     this.carga = 0;
+    this.hayUbicacion = 0;
+    this.repetidas = 0;
+    this.validados = 0;
+ 
   }
 
 
@@ -75,6 +84,7 @@ export class UbicacionInExComponent implements OnInit {
     });
   }
   seleccionXlsx(archivo:File){
+    this.listarUbicaciones();
     if(!archivo){
         this.archivoSubir= null;
       return
@@ -90,34 +100,65 @@ export class UbicacionInExComponent implements OnInit {
     this.carga = 1;
     this.validar = 0;
     this.importar = 0;
+    this.ubicaciones.length = 0;
   }
   //subimos el archivo al backend
   cambiarArchivo()  {
     this.validar = 1;
     this.carga = 0;
     this._ubicacionService.subirUbicacionesxlsx(this.archivoSubir, this.identity.tercero);   
-  } 
+  }
   revisarDatos(){
     let ubicacionJson = this._ubicacionService.RevisarDatos();
     var contador = 0;
+    if(this.repetidas == 1){
+      this.ubicaciones = ubicacionJson;
+      swal("Inconsistencias en el archivo", "uno o varias ubicaciones existentes", "info");
+      return;
+    }
     if(ubicacionJson.message){
       swal('error', "Archivo con estructura errada", "error")
     }else{
-      for(var i = 0; i<ubicacionJson.length; i++){
-        if(!ubicacionJson[i].nombre){
-          swal("Inconsistencias", `En la Linea ${i+1}`, "error");
-          break;
-        }else{
-          contador = contador + 1;
-          this.ubicaciones = ubicacionJson;
-          if(contador == ubicacionJson.length -1){
-            swal("Exito", "Archivo validado", "success");
-            this.importar = 1
-            this.validar = 0;
-            this.carga = 0;
-          }
+      //Si es la primera vez que voy a ingresar ubicaciones 
+      if(this.ubicaciones2.length == 0){
+        this.ubicaciones = ubicacionJson;
+        this.hayUbicacion = 1;
+        this.importar = 1
+        this.validar = 0;
+        this.carga = 0;
+        swal("Exito", "Archivo validado", "success");
+      }else{
+        var contadorDeIguales = 0;
+        for(var i = 0; i<ubicacionJson.length; i++){
+          for(var j = 0; j < this.ubicaciones2.length; j++){
+            if(ubicacionJson[i].nombre == this.ubicaciones2[j].nombre){
+              ubicacionJson[i].nombre = ubicacionJson[i].nombre + ' - '+ 'Ubicacion Existe';
+              this.repetidas = 1;
+              contadorDeIguales = contadorDeIguales + 1;
+            }
+            if(!ubicacionJson[i].nombre){
+              swal("Inconsistencias", `En la Linea ${i+1}`, "error");
+              break;
+            }else{
+              if(contador == ubicacionJson.length){
+                this.validados = 1;
+              }
+            }  
+          } 
         }
-      }
+        this.ubicaciones = ubicacionJson;
+        if(this.repetidas == 1){
+          this.hayUbicacion = 1;
+          swal("Inconsistencias en el archivo", "uno o varias ubicaciones existentes", "info")
+          return;
+        }else{
+          this.importar = 1
+          this.validar = 0;
+          this.carga = 0;
+          this.hayUbicacion = 0;
+          this.repetidas = 0;
+        }
+      }  
     }
   } 
   //Importamos los datos del archivo a la base de datos
@@ -125,8 +166,18 @@ export class UbicacionInExComponent implements OnInit {
     this._ubicacionService.importarUbicacion(this.ubicaciones, this.identity.tercero)
         .subscribe((datos:any)=>{
           this.importar = 0;
-          swal("Exitoo","Ubicaciones creadas masivamente", "success" );
+          this.ubicaciones.length = 0;
+          this.repetidas = 0;
+          swal("Exito","Ubicaciones creadas masivamente", "success" );
         })
   }  
+
+  //Listar las ubicaciones para compara si existen
+  listarUbicaciones(){
+    this._ubicacionService.listarUbicacionesClienteSinPaginado(this.identity.tercero)
+        .subscribe((datos:any)=>{
+          this.ubicaciones2 = datos.ubicaciones;
+        })
+  }
 
 }

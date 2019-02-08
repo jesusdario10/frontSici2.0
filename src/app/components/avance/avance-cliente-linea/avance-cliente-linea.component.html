@@ -132,7 +132,8 @@
                               <td>{{orden.estado}}</td>
                               <td>
                                 <p >
-                                  <i class="far fa-eye cursor pointer" (click)="listarUnaOrdenCliente(orden._id)" style="color:chartreuse" data-toggle="modal" data-target="#exampleModalLong"   title="Ver Orden"></i>
+                                  <i  *ngIf="orden.estado == 'EJECUTADA' || orden.estado == 'DETENIDA'" class="far fa-eye cursor pointer" (click)="listarUnaOrdenCliente(orden._id)" style="color:chartreuse" data-toggle="modal" data-target="#exampleModalLong"   title="Ver Orden"></i>
+                                  <i  *ngIf="orden.estado == 'ACTIVA' || orden.estado == 'EJECUCION' " class="far fa-eye cursor pointer"  style="color:chartreuse"  title="Ver Orden"></i>
                                 </p>
                               </td>
                             </tr>

@@ -81,27 +81,7 @@
                       <textarea disabled class="form-control" rows="3" [(ngModel)]="restriccion"></textarea>
                   </div>
               </div>
-                <div class="col-md-6 offset-md-3">
-                  <div class="card">
-                    <div class="card-body">
-                        <table class="table table-responsive table-bordered">
-                          <thead class="table-info">
-                            <tr>
-                              <th>Horas Hombre </th>
-                              <th>Nombre Cargo</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr *ngFor = "let recurso of recursos">
-                              <td>{{recurso.hh}}</td>
-                              <td>{{recurso.cargo.nombre}}</td>
-                            </tr>
-                          </tbody>
-                        </table>
-                    </div>
-  
-                  </div>
-                </div>
+
                 <div class="col-md-12" style="text-align:center">
                   <button type="button" [routerLink]="['/graficoClienteDona/1']" class="margenbutton btn btn-outline-warning"><i class="fas fa-arrow-circle-left"></i>Atras</button>
                 </div>

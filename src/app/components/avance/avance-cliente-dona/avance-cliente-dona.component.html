@@ -113,7 +113,8 @@
                               <td>{{orden.estado}}</td>
                               <td>
                                 <p >
-                                  <i class="far fa-eye cursor pointer" style="color:chartreuse" [routerLink]="['/graficoClienteDonaVer', orden._id]"   title="Ver Orden"></i>
+                                  <i *ngIf="orden.estado == 'EJECUTADA' || orden.estado == 'DETENIDA'" class="far fa-eye cursor pointer" style="color:chartreuse" [routerLink]="['/graficoClienteDonaVer', orden._id]"   title="Ver Orden"></i>
+                                  <i *ngIf="orden.estado == 'ACTIVA' || orden.estado == 'EJECUCION' " class="far fa-eye cursor pointer" style="color:chartreuse"   title="Ver Orden"></i>
                                 </p>
                               </td>
                             </tr>

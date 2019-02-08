@@ -75,7 +75,7 @@
                     <div class="row centrado">
                       
                       <div class="col-md-6 centrado col-sm-12 col-lg-6 ">      
-                          <button type="button" (mouseenter)="enterExcel($event)"  (mouseleave)="leaveOperaciones($event)" [routerLink]="['/import-export']" class=" redondo btn btn-outline-success">
+                          <button type="button" (mouseenter)="enterExcel($event)"  (mouseleave)="leaveOperaciones($event)" (click)="exportAsXLSX()" class=" redondo btn btn-outline-success">
                             <i class="far fa-file-excel fa-2x fa-lg"></i>
                           </button>
                           <p style="visibility:hidden">ddd</p>
@@ -155,8 +155,10 @@
                       <td>{{orden.estado}}</td>
                       <td>
                         <p >
-                          <i class="far fa-eye cursor" style="color:chartreuse" [routerLink]="['/ordenesCver', orden._id]"   title="Ver Orden"></i>
-                          <i class="fas fa-pencil-alt cursor" style="color:chocolate" [routerLink]="['/ordenesCgestion', orden._id]"   title="Gestionar Orden"></i>
+                          <i *ngIf="orden.estado == 'ACTIVA' || orden.estado == 'EJECUCION'" class="far fa-eye cursor" style="color:chartreuse"    title="Ver Orden"></i>
+                          <i *ngIf="orden.estado == 'EJECUTADA' || orden.estado == 'DETENIDA'"class="far fa-eye cursor" style="color:chartreuse" [routerLink]="['/ordenesCver', orden._id]"   title="Ver Orden"></i>
+                          <i *ngIf="orden.estado == 'ACTIVA' || orden.estado == 'EJECUCION'" class="fas fa-pencil-alt cursor" style="color:chocolate" [routerLink]="['/ordenesCgestion', orden._id]"   title="Gestionar Orden"></i>
+                          <i *ngIf="orden.estado == 'EJECUTADA' || orden.estado == 'DETENIDA'" class="fas fa-pencil-alt cursor" style="color:chocolate"   title="Gestionar Orden"></i>
                         </p>
                       </td>
                     </tr>

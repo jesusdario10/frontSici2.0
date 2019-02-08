@@ -46,6 +46,7 @@ export class OrdenesInExComponent implements OnInit {
   public validar;
   public importar;
   public carga;
+  public hayOrden;
   public ordenImport: OrdenImport2[]=[];
 
   public equipos: any=[];
@@ -72,13 +73,11 @@ export class OrdenesInExComponent implements OnInit {
     this.ExisteLibreria = 0;
     this.ExisteUbicacion = 0;
     this.prioridadBien = 0;
+    this.hayOrden = 0;
    }
 
   ngOnInit() {
     this.identity = this._userServices.getIdentity();
-    this.traerEquipos();
-    this.traerLibrerias();
-    this.traerUbicaciones();
           //Este jquery activa la funcionalidad del input file para que se vea bien
           $(document).ready(function() {
             // Basic
@@ -122,13 +121,15 @@ export class OrdenesInExComponent implements OnInit {
   }
 //Seleccionar el archivo
   seleccionXlsx(archivo:File){
+    this.traerEquipos();
+    this.traerLibrerias();
+    this.traerUbicaciones();
     if(!archivo){
         this.archivoSubir= null;
       return
     }
  
-    if(archivo.type != "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"){
-      
+    if(archivo.type != "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"){ 
       this.archivoSubir = null;
       swal('Error', "esto no es un archivo de excel", "error")
       return;
@@ -147,7 +148,9 @@ export class OrdenesInExComponent implements OnInit {
   //Capturamos el json que nos devuelve el backend y lo traemos al componente
   revisarDatos(){
     let ordenJson = this._ordenService.RevisarDatos();
+    this.hayOrden = 1;
     this.ordenes = ordenJson;
+    
     console.log(ordenJson);
 
     if(ordenJson.message){
@@ -159,7 +162,7 @@ export class OrdenesInExComponent implements OnInit {
           if(ordenJson[i].equipo == this.equipos[j].serial){
             ordenJson[i].comEquipos = 1;
             ordenJson[i].idEquipo = this.equipos[j]._id;
-            this.ExisteEquipo = 1;
+            this.ExisteEquipo = this.ExisteEquipo + 1;
           }
         }
         for(var k = 0; k < this.librerias.length; k++){
@@ -178,8 +181,6 @@ export class OrdenesInExComponent implements OnInit {
         }
         if(ordenJson[i].prioridad == 'ALTA' || ordenJson[i].prioridad == 'NORMAL' || ordenJson[i].prioridad == 'MEDIA' || ordenJson[i].prioridad == 'BAJA'){
           this.prioridadBien = 1;
-          console.log(ordenJson[i].prioridad);
-          console.log("QUIERO SABER CUAL ES LA DIFERENTE");
         }
  
       }
@@ -187,17 +188,24 @@ export class OrdenesInExComponent implements OnInit {
         swal('Error', 'Prioridades deben ser en mayusculas', 'info');
         return;
       }
-      console.log("en la linea 158 ", ordenJson);
       if(this.ExisteEquipo == 0 || this.ExisteLibreria == 0 || this.ExisteUbicacion == 0){
         swal('Error', 'Verifique los datos', 'info');
         return;
       }else{
-       this.ordenImport = ordenJson;
+        //aqui hare un o(||) c omprobando tambien si existeubicacion y existe libreria son correctos(este es el resultado esperado)
+        if(this.ExisteEquipo == ordenJson.length){
+          
+          this.importar = 1
+          this.validar = 0;
+          this.carga = 0;
+          this.ordenImport = ordenJson;
+          swal("Exito", "Archivo validado", "success");
+        }else{
+         //aqui un si para comprobar si el faltante es el equipo o si es la libreria o si es la ubicacion(esta es la validacion para que no pueda enviar ordenes si hay problemas)
+        }
        
-        swal("Exito", "Archivo validado", "success");
-        this.importar = 1
-        this.validar = 0;
-        this.carga = 0;
+       
+
       }
     }
   }

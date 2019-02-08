@@ -14,10 +14,14 @@ export class CargoInExComponent implements OnInit {
   public archivoSubir :File;
   public identity;
   public cargos:any=[];
+  public cargos2:any=[];
   public subir;
   public validar;
   public importar;
   public carga;
+  public repetidas;
+  public hayCargo;
+  public validados;
   
   constructor(
     private _cargoService : CargoService,
@@ -27,6 +31,9 @@ export class CargoInExComponent implements OnInit {
     this.validar = 0;
     this.importar = 0;
     this.carga = 0;
+    this.hayCargo = 0;
+    this.repetidas = 0;
+    this.validados = 0;
   }
 
   ngOnInit() {
@@ -73,6 +80,7 @@ export class CargoInExComponent implements OnInit {
     });
   }
   seleccionXlsx(archivo:File){
+    this.listarCargosCliente();
     if(!archivo){
         this.archivoSubir= null;
       return
@@ -98,27 +106,57 @@ export class CargoInExComponent implements OnInit {
   //Capturamos el json que nos devuelve el backend y lo traemso al componente
   revisarDatos(){
     let cargosJson = this._cargoService.RevisarDatos();
+    
     var contador = 0;
+    if(this.repetidas == 1){
+      this.cargos = cargosJson;
+      swal("Inconsistencias en el archivo", "uno o varios cargos existentes", "info");
+      return;
+    }
     if(cargosJson.message){
-      
       swal('error', "Archivo con estructura errada", "error")
     }else{
-      for(var i = 0; i<cargosJson.length; i++){
-        if(!cargosJson[i].nombre && !cargosJson[i].vhora_hombre || cargosJson[i].nombre == null || cargosJson[i].vhora_hombre == null){
-          swal("Inconsistencias", `En la Linea ${i+1}`, "error");
-          break;
-        }else{
-          contador = contador + 1;
-          this.cargos = cargosJson;
-          if(contador == cargosJson.length -1){
-            swal("Exito", "Archivo validado", "success");
-            this.importar = 1
-            this.validar = 0;
-            this.carga = 0;
-          }
-          
+      //Si es la primera vez que voy a ingresar ubicaciones 
+      if(this.cargos2.length == 0){
+        this.hayCargo = 1;
+        this.importar = 1
+        this.validar = 0;
+        this.carga = 0;
+        this.cargos = cargosJson;
+      
+        swal("Exito", "Archivo validado", "success");
+      }else{
+        var contadorDeIguales = 0;
+        for(var i = 0; i < cargosJson.length; i++){
+          for(var j = 0; j < this.cargos2.length; j++){
+            if(cargosJson[i].nombre == this.cargos2[j].nombre){
+              cargosJson[i].nombre = cargosJson[i].nombre + ' - '+ 'Cargo Existe';
+              this.repetidas = 1;
+              contadorDeIguales = contadorDeIguales + 1;
+            }
+            if(!cargosJson[i].nombre){
+              swal("Inconsistencias", `En la Linea ${i+1}`, "error");
+              break;
+            }else{
+              if(contador == cargosJson.length){
+                this.validados = 1;
+              }
+            }  
+          } 
         }
-      }
+        this.cargos = cargosJson;
+        if(this.repetidas == 1){
+          this.hayCargo = 1;
+          swal("Inconsistencias en el archivo", "uno o varios cargos existentes", "info")
+          return;
+        }else{
+          this.importar = 1
+          this.validar = 0;
+          this.carga = 0;
+          this.hayCargo = 0;
+          this.repetidas = 0;
+        }       
+      }        
     }
   }
   //Importamos los datos del archivo a la base de datos
@@ -126,7 +164,19 @@ export class CargoInExComponent implements OnInit {
     this._cargoService.importarCargos(this.cargos, this.identity.tercero)
         .subscribe((datos:any)=>{
           this.importar = 0;
-          swal("Exitoo","Cargos creados masivamente", "success" );
+          this.repetidas = 0;
+          this.hayCargo = 0;
+          
+          swal("Exito","Cargos creados masivamente", "success" );
+        })
+  }
+
+  //Listar el cargo del cliente para compararlo
+  listarCargosCliente(){
+    this._cargoService.listarCargoClienteSinpaginacion(this.identity.tercero)
+        .subscribe((datos:any)=>{
+          this.cargos2 = datos.cargos;
+
         })
   }
 

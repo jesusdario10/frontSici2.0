@@ -24,17 +24,20 @@ export class EquipoInExtComponent implements OnInit {
   public importar;
   public carga;
   public existentes;//esta variable me dice si en el listado hay equipos existentes o no si es 0 no hay si es 1 si hay;
+  public validados;
+  public hayEquipos;
 
   constructor(
     private _userServices : UserService,
     private _equipoService : EquipoService
   ) {
     this.existentes = 0;
+    this.validados = 0;
+    this.hayEquipos = 0;
    }
 
   ngOnInit() {
     this.identity = this._userServices.getIdentity();
-    this.equiposClientes();
     //Este jquery activa la funcionalidad del input file para que se vea bien
     $(document).ready(function() {
         // Basic
@@ -80,6 +83,7 @@ export class EquipoInExtComponent implements OnInit {
   seleccionXlsx(archivo:File){
     if(!archivo){
         this.archivoSubir= null;
+        this.carga = 0;
       return
     }
     console.log(archivo.type);
@@ -93,6 +97,7 @@ export class EquipoInExtComponent implements OnInit {
     this.validar = 0;
     this.importar = 0;
     this.existentes = 0;
+    this.hayEquipos = 0;
     this.equipos = null;
   }
   //subimos el archivo al backend
@@ -100,39 +105,88 @@ export class EquipoInExtComponent implements OnInit {
     this.validar = 1;
     this.carga = 0;
     this._equipoService.subirEquiposxlsx(this.archivoSubir, this.identity.tercero);       
+    this.equiposClientes();
   }  
   //Capturamos el json que nos devuelve el backend y lo traemso al componente
   revisarDatos(){
-    console.log("entrando aqui");
+    
     let equiposJson = this._equipoService.RevisarDatos();
     console.log(equiposJson);
     var contador = 0;
     if(equiposJson.message){
       swal('error', "Archivo con estructura errada", "error")
     }else{
-      for(var h = 0; h < this.equipos2.length; h++){
-          for(var i = 0; i < equiposJson.length; i++){
-            if(this.equipos2[h].serial == equiposJson[i].serial){
-              equiposJson[i].tag = "Equipo ya Existe"
-              equiposJson[i].nombre_equipo = "Eliminelo del archivo"
-              this.existentes = 1;
-            }
-            if(!equiposJson[i].serial && !equiposJson[i].tag || equiposJson[i].nombre_equipo == null){
-              swal("Inconsistencias", `En la Linea ${i+1}`, "error");
-              break;
-            }else{
-              contador = contador + 1;
-              this.equipos = equiposJson;
-              if(contador == equiposJson.length -1){
-                swal("Exito", "Archivo validado", "success");
-                this.importar = 1
-                this.validar = 0;
-                this.carga = 0;
+      //si es la primera vez que voy a ingresar equipos entro por aqui
+      if(this.equipos2.length == 0){
+        this.equipos = equiposJson;
+        this.hayEquipos = 1;
+        //this.existentes == 1; OJO SI NO FUNCIONA ES PORQUE ESTA COMENTADA ESTA LINEA
+          swal("Exito", "Archivo validado", "success");
+          this.importar = 1
+          this.validar = 0;
+          this.carga = 0;
+      }else{
+         var contadorDeIguales = 0;
+         for(var i = 0; i< equiposJson.length; i++){
+            for(var j = 0; j < this.equipos2.length; j++){
+              if(equiposJson[i].serial== this.equipos2[j].serial){
+                equiposJson[i].tag = "Equipo ya Existe"
+                equiposJson[i].nombre_equipo = "Eliminelo del archivo"
+                this.existentes = 1;
+                this.hayEquipos = 1;
+                contadorDeIguales = contadorDeIguales + 1;   
               }
+              if(!equiposJson[i].serial && !equiposJson[i].tag || equiposJson[i].nombre_equipo == null){
+                swal("Inconsistencias", `En la Linea ${i+1}`, "error");
+                break;
+              }else{
+                     
+                if(contador == equiposJson.length){
+                  console.log(contador, equiposJson.length);
+                  this.validados = 1;
+                }
+              }  
             }
           }
+          this.equipos = equiposJson;
+          if(contadorDeIguales > 0){
+            swal("Inconsistencias en el archivo", "uno o varios equipos ya existen", "info")
+          }
+          if(contadorDeIguales == 0){
+            this.importar = 1
+            this.validar = 0;
+            this.carga = 0;
+            this.hayEquipos = 0;
+          }
+          
+          console.log(this.equipos);
+          console.log(this.validados);
+          /*if(this.validados == 1){
+            swal("Exito", "Archivo validado", "success");
+            this.importar = 1
+            this.validar = 0;
+            this.carga = 0;
+          }*/
+                /*for(var h = 0; h < this.equipos2.length; h++){
+                    for(var i = 0; i < equiposJson.length; i++){
+                      if(this.equipos2[h].serial == equiposJson[i].serial){
+                        equiposJson[i].tag = "Equipo ya Existe"
+                        equiposJson[i].nombre_equipo = "Eliminelo del archivo"
+                        this.existentes = 1;
+                      }
+                      if(!equiposJson[i].serial && !equiposJson[i].tag || equiposJson[i].nombre_equipo == null){
+                        swal("Inconsistencias", `En la Linea ${i+1}`, "error");
+                        break;
+                      }else{
+                        contador = contador + 1;
+                        this.equipos = equiposJson;
+                        if(contador == equiposJson.length -1){
+                          this.validados = 1;
+                        }
+                      }
+                    }
+                }*/
       }
-
     }
   } 
   //Importamos los datos del archivo a la base de datos
@@ -150,6 +204,7 @@ export class EquipoInExtComponent implements OnInit {
       this._equipoService.importarEquipos(this.equipos, this.identity.tercero)
       .subscribe((datos:any)=>{
         this.importar = 0;
+        this.hayEquipos = 0;
         swal("Exitoo","Equipos creados masivamente", "success" );
       })
     }

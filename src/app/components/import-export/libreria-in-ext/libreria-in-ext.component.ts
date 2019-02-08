@@ -14,15 +14,27 @@ export class LibreriaInExtComponent implements OnInit {
   public archivoSubir :File;
   public identity;
   public librerias:any=[];
+  public librerias2:any=[];
   public subir;
   public validar;
   public importar;
   public carga;
+  public hayLibreria;
+  public repetidas;
+  public validados;
 
   constructor(
     private _userServices : UserService,
     private _libreriaService : LibreriaService
-  ) { }
+  ) {
+    this.hayLibreria = 0;
+    this.subir = 1;
+    this.validar = 0;
+    this.importar = 0;
+    this.carga = 0;
+    this.repetidas = 0;
+    this.validados = 0;
+   }
 
   ngOnInit() {
     this.identity = this._userServices.getIdentity();
@@ -68,13 +80,14 @@ export class LibreriaInExtComponent implements OnInit {
     });
   }
   seleccionXlsx(archivo:File){
+    this.listarLibreriasCliente();
+    
     if(!archivo){
         this.archivoSubir= null;
       return
     }
     console.log(archivo.type);
     if(archivo.type != "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"){
-      
       this.archivoSubir = null;
       swal('Error', "esto no es un archivo de excel", "error")
       return;
@@ -83,6 +96,7 @@ export class LibreriaInExtComponent implements OnInit {
     this.carga = 1;
     this.validar = 0;
     this.importar = 0;
+    this.hayLibreria = 0;
   }
   //subimos el archivo al backend
   cambiarArchivo()  {
@@ -95,24 +109,55 @@ export class LibreriaInExtComponent implements OnInit {
     let libreriaJson = this._libreriaService.RevisarDatos();
     console.log(libreriaJson);
     var contador = 0;
+
+    if(this.repetidas == 1){
+      this.librerias = libreriaJson;
+      swal("Inconsistencias en el archivo", "uno o mas librerias existentes", "info");
+      return;
+    }
     if(libreriaJson.message){
       swal('error', "Archivo con estructura errada", "error")
     }else{
-      for(var i = 0; i<libreriaJson.length; i++){
-        if(!libreriaJson[i].nombre && !libreriaJson[i].descripcion || libreriaJson[i].nombre == null || libreriaJson[i].descripcion == null){
-          swal("Inconsistencias", `En la Linea ${i+1}`, "error");
-          break;
-        }else{
-          contador = contador + 1;
-          this.librerias = libreriaJson;
-          if(contador == libreriaJson.length -1){
-            swal("Exito", "Archivo validado", "success");
-            this.importar = 1
-            this.validar = 0;
-            this.carga = 0;
-          }
-          
+      //Si es la primera vez que voy a ingresar librerias
+      if(this.librerias2.length == 0){
+        this.librerias = libreriaJson;
+        this.hayLibreria = 1;
+        this.importar = 1
+        this.validar = 0;
+        this.carga = 0;
+        swal("Exito", "Archivo validado", "success");
+      
+      }else{
+        var contadorDeIguales = 0;
+        for(var i = 0; i<libreriaJson.length; i++){
+          for(var j = 0; j < this.librerias2.length; j++){
+            if(libreriaJson[i].nombre == this.librerias2[j].nombre){
+              libreriaJson[i].nombre = libreriaJson[i].nombre + ' - '+ 'Libreria Existe';
+              this.repetidas = 1;
+              contadorDeIguales = contadorDeIguales + 1;
+            }
+            if(!libreriaJson[i].nombre){
+              swal("Inconsistencias", `En la Linea ${i+1}`, "error");
+              break;
+            }else{
+              if(contador == libreriaJson.length){
+                this.validados = 1;
+              }
+            }  
+          } 
         }
+        this.librerias = libreriaJson;
+        if(this.repetidas == 1){
+          this.hayLibreria = 1;
+          swal("Inconsistencias en el archivo", "una o varias librerias existentes", "info")
+          return;
+        }else{
+          this.importar = 1
+          this.validar = 0;
+          this.carga = 0;
+          this.hayLibreria = 0;
+          this.repetidas = 0;
+        }        
       }
     }
   } 
@@ -121,9 +166,18 @@ export class LibreriaInExtComponent implements OnInit {
     this._libreriaService.importarLibrerias(this.librerias, this.identity.tercero)
         .subscribe((datos:any)=>{
           this.importar = 0;
-          swal("Exitoo","Librerias creadas masivamente", "success" );
+          this.hayLibreria = 0;
+          this.repetidas = 0;
+          swal("Exito","Librerias creadas masivamente", "success" );
         })
-  }     
+  }
+  //Listar las librerias del cliente
+  listarLibreriasCliente(){
+    this._libreriaService.listarLibreriasSinPaginacionCliente(this.identity.tercero)
+        .subscribe((datos:any)=>{
+          this.librerias2 = datos.librerias;
+        })
+  }
 
 
 }
