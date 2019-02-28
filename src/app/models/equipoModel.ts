@@ -9,6 +9,7 @@ export class EquipoModel{
         public estado? : string,
         public usuario_modificador? :string,
         public ubicacion? :string,
+        public fichaTecnica? : string,
         public _id?: string,
     ){}
 }

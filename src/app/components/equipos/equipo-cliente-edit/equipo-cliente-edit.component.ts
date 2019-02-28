@@ -24,8 +24,7 @@ export class EquipoClienteEditComponent implements OnInit {
   public nombre : any;
   public estado: any;
   public idEquipo : any;
-  public ubicacion2 : any;
-
+  public fichaTecnica : any;
   public form : FormGroup;
   public formSubmit: boolean;
 
@@ -74,11 +73,12 @@ export class EquipoClienteEditComponent implements OnInit {
     this.idEquipo = id;
     this._equipoServices.listarUnSoloEquipoCliente(this.idEquipo)
         .subscribe((datos:any)=>{
+          console.log(datos);
           this.tag = datos.equipo.tag;
           this.nombre = datos.equipo.nombre_equipo;
           this.estado = datos.equipo.estado;
-          this.ubicacion2 = datos.equipo.ubicacion.nombre;
           this.equipo = datos.equipo;
+          this.fichaTecnica = datos.equipo.fichaTecnica;
           
         })
   }

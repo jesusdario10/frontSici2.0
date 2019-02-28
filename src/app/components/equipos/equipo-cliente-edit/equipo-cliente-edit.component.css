@@ -4,7 +4,7 @@
     background-position: left;
     border: 1px solid black !important;
     background-size: cover;
-    height: 90% !important;
+    height: 160% !important;
     opacity: 0.2;
     z-index: 1;
     position: absolute;
@@ -23,4 +23,7 @@
 }
 .estado{
     color: red;
+}
+.borde{
+    border: 0.5px dashed black;
 }

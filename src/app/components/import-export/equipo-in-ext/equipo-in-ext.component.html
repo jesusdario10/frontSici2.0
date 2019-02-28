@@ -28,6 +28,7 @@
                       <th>Serial</th>
                       <th>Tag</th>
                       <th>Nombre del Equipo</th>
+                      <td>Caracteristicas</td>
                     </tr>
                   </thead>
                   <tbody>
@@ -35,6 +36,7 @@
                       <td [class.existe]="equipo.tag =='Equipo ya Existe'">{{equipo.serial}}</td>
                       <td [class.existe]="equipo.tag =='Equipo ya Existe'">{{equipo.tag}}</td>
                       <td [class.existe]="equipo.tag =='Equipo ya Existe'">{{equipo.nombre_equipo}}</td>
+                      <td [class.existe]="equipo.tag =='Equipo ya Existe'">{{equipo.fichaTecnica}}</td>
                     </tr>
                   </tbody>
                 </table>

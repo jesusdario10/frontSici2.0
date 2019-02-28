@@ -128,7 +128,6 @@ export class OrdenesInExComponent implements OnInit {
         this.archivoSubir= null;
       return
     }
- 
     if(archivo.type != "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"){ 
       this.archivoSubir = null;
       swal('Error', "esto no es un archivo de excel", "error")
@@ -138,21 +137,23 @@ export class OrdenesInExComponent implements OnInit {
     this.carga = 1;
     this.validar = 0;
     this.importar = 0;
+    this.hayOrden = 0;
   }  
   //subimos el archivo al backend
   cambiarArchivo()  {
+    this._ordenService.subirOrdenesxlsx(this.archivoSubir, this.identity.tercero); 
     this.validar = 1;
-    this.carga = 0;
-    this._ordenService.subirOrdenesxlsx(this.archivoSubir, this.identity.tercero);       
+    this.carga = 0;      
   }  
   //Capturamos el json que nos devuelve el backend y lo traemos al componente
   revisarDatos(){
     let ordenJson = this._ordenService.RevisarDatos();
+    console.log(ordenJson);
     this.hayOrden = 1;
     this.ordenes = ordenJson;
-    
-    console.log(ordenJson);
-
+    this.ExisteEquipo = 0;
+    this.ExisteLibreria = 0;
+    this.ExisteUbicacion = 0;
     if(ordenJson.message){
       swal('error', "Archivo con estructura errada", "error")
     }else{
@@ -169,18 +170,18 @@ export class OrdenesInExComponent implements OnInit {
           if(ordenJson[i].libreria == this.librerias[k].nombre){
             ordenJson[i].conLibrerias = 1;
             ordenJson[i].idLibreria = this.librerias[k]._id;
-            this.ExisteLibreria = 1;
+            this.ExisteLibreria = this.ExisteLibreria + 1;
           }
         }
         for(var l = 0; l < this.ubicaciones.length; l++){
           if(ordenJson[i].ubicacion == this.ubicaciones[l].nombre){
             ordenJson[i].conUbicaciones = 1;
             ordenJson[i].idUbicacion = this.ubicaciones[l]._id;
-            this.ExisteUbicacion = 1;
+            this.ExisteUbicacion = this.ExisteUbicacion + 1;
           }
         }
         if(ordenJson[i].prioridad == 'ALTA' || ordenJson[i].prioridad == 'NORMAL' || ordenJson[i].prioridad == 'MEDIA' || ordenJson[i].prioridad == 'BAJA'){
-          this.prioridadBien = 1;
+          this.prioridadBien = this.prioridadBien + 1;
         }
  
       }
@@ -192,20 +193,20 @@ export class OrdenesInExComponent implements OnInit {
         swal('Error', 'Verifique los datos', 'info');
         return;
       }else{
-        //aqui hare un o(||) c omprobando tambien si existeubicacion y existe libreria son correctos(este es el resultado esperado)
-        if(this.ExisteEquipo == ordenJson.length){
-          
+        console.log(this.ExisteEquipo, this.ExisteLibreria, this.ExisteUbicacion  )
+        //aqui hare un (&&) comprobando tambien si existe ubicacion y existe libreria son correctos(este es el resultado esperado)
+        if(this.ExisteEquipo == ordenJson.length && this.ExisteLibreria == ordenJson.length && this.ExisteUbicacion == ordenJson.length ){
+          swal("Exito", "Archivo validado", "success");
           this.importar = 1
           this.validar = 0;
           this.carga = 0;
           this.ordenImport = ordenJson;
-          swal("Exito", "Archivo validado", "success");
         }else{
-         //aqui un si para comprobar si el faltante es el equipo o si es la libreria o si es la ubicacion(esta es la validacion para que no pueda enviar ordenes si hay problemas)
+         //aqui un si para comprobar si el faltante es el equipo o si es la libreria o si es la
+         //ubicacion(esta es la validacion para que no pueda enviar ordenes si hay problemas)
+         swal("Error", "Archivo no validado", "error");
+         return;
         }
-       
-       
-
       }
     }
   }
@@ -222,8 +223,10 @@ export class OrdenesInExComponent implements OnInit {
     this._ordenService.importarOrden(this.ordenImport, this.identity.tercero)
         .subscribe((datos:any)=>{
           console.log(datos);
-          //this.importar = 0;
-          swal("Exitoo","Ordenes creadas masivamente", "success" );
+          swal("Exito","Ordenes creadas masivamente", "success" );
+          this.importar = 0;
+          this.hayOrden = 0;
+          this.carga = 1;
         })
   }
   

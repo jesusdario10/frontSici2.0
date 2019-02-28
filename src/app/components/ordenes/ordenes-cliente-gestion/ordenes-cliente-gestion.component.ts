@@ -84,13 +84,14 @@ export class OrdenesClienteGestionComponent implements OnInit {
   listarUnaOrdenCliente(){
     this._ordenServices.listarUnaOrdenParaelCliente(this.identity.tercero, this.idOrden)
         .subscribe((datos:any)=>{
+          console.log(datos);
           this.tag = datos.actividad.equipo.tag;
           this.solicitante = datos.actividad.solicitante;
           this.noOrden = datos.actividad.consecutivo;
           this.prioridad = datos.actividad.prioridad;
           this.fechaEjecucion  = datos.fechas.fecha_ejecucion;
           this.turno  = datos.actividad.turno;
-          this.descripcionActividad  = datos.actividad.descripcion;
+          this.descripcionActividad  = datos.actividad.libreria.descripcion;
           this.restriccion  = datos.actividad.restriccion;
           this.estado  = datos.actividad.estado;
           this.recursos = datos.actividad.recurso;

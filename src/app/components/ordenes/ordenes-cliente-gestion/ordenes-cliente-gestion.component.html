@@ -61,12 +61,11 @@
                             </select>
                           </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                           <div class="form-group">  
                             <div class="form-group ">
                               <label for="descripcion">Manual de la Actividad</label>
-                              <input *ngIf="estado != 'EJECUTADA' "  type="text" class="form-control" name="descripcionO" [(ngModel)]="descripcionActividad"  >
-                              <input *ngIf="estado == 'EJECUTADA'" disabled type="text" class="form-control" name="descripcionO" [(ngModel)]="descripcionActividad"  >
+                              <textarea rows="3" disabled  type="text" class="form-control" name="descripcionActividad" [(ngModel)]="descripcionActividad"  ></textarea> 
                             </div>
                           </div> 
                         </div>

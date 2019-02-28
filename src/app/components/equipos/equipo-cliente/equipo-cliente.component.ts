@@ -37,7 +37,8 @@ export class EquipoClienteComponent implements OnInit {
     this.form = this.fb.group({
       serialE : ["", Validators.required],
       tagE : [ "", Validators.required ],
-      nombreE: [ "", Validators.required ]
+      nombreE: [ "", Validators.required ],
+      fichaT: [ "", Validators.required ]
     });
     //listarEquipos
     this.actualPage();
@@ -53,6 +54,7 @@ export class EquipoClienteComponent implements OnInit {
       nombre_equipo :formModel.nombreE as string,
       usuario_creador : this.identity._id,
       tercero : this.identity.tercero,
+      fichaTecnica : formModel.fichaT
     };
     this._equipoServices.createEquipoCliente(saveEquipo)
         .subscribe((datos:any)=>{
