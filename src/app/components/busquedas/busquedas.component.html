@@ -1,0 +1,92 @@
+<div class="contenedor">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-tittle" style="text-align:center">
+            <h3>Busqueda de Equipos</h3>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-6 offset-md-3">
+                <div class="row">
+                  <div class="col-md-6" style="text-align:center">
+                      <button type="button" (click)="activarSimple()" class="btn btn-outline-success">Busqueda Simple</button>
+                  </div>
+                  <div class="col-md-6" style="text-align:center">
+                      <button type="button" (click)="activarAvanzada()"  class="btn btn-outline-warning">Busqueda Avanzada</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <br>
+            
+          <div *ngIf="simple =='activada'" class="row">
+              <div class="col-md-12" style="text-align:center">
+                <div class="card">
+                  <div class="card-body">
+                      <h4>Serial</h4>
+                      <input type="text" class="form-control" #input (keyup)="buscarEquipos(input.value)">
+                  </div>
+                </div>
+                <br><br>
+              </div>
+
+            <div class="col-md-12" style="text-align:center">
+              <div class="card">
+                <div class="card-body">
+                    <br>
+                    <h5>Resultados</h5>
+                    <br>
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th class="centrado">Tipo</th>
+                          <th class="centrado">Subtipo</th>
+                          <th class="centrado">Serial</th>
+                          <th class="centrado">Marca</th>
+                          <th class="centrado">Descripcion</th>
+                          <th class="centrado">Edit</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let equipo of equipos">
+                          <td>{{equipo.tipo}}</td>
+                          <td>{{equipo.subtipoFuncionEquipo}}</td>
+                          <td>{{equipo.serial}}</td>
+                          <td>{{equipo.marca}}</td>
+                          <td style="text-align:justify">
+                            (<strong>Modelo:</strong> {{equipo.modelo}}) (<strong>Nomenclatura:</strong> {{equipo.nomenclatura}} )
+                            (<strong>Funcionamiento:</strong>{{equipo.funcionamiento}}) (<strong>Dial:</strong>{{equipo.tamano_dial}})
+                            (<strong>Dimension conexion:</strong> {{equipo.dimension_conexion}}) (<strong>Tipo de conexion:</strong>{{equipo.tipo_conexion}})
+                            (<strong>Material carcaza:</strong>) {{equipo.material_carcaza}} (<strong>Unidad de rango:</strong > {{equipo.unidades_rango}})
+                            (<strong>Rango min:</strong>  {{equipo.rango_min}}) (<strong>Rango max:</strong >{{equipo.rango_max}})  
+                            (<strong>P.Funcionamiento:</strong> {{equipo.p_funcionamiento}}) (<strong>Tipo de elemento:</strong> {{equipo.tipo_elemento}} )
+                            (<strong>Indicador auxiliar:</strong>  {{equipo.indicador_auxiliar}}) (<strong>Requerimiento especial:</strong >{{equipo.req_especial}})  
+                          </td>
+                          <td style="text-align:center">
+                              <i class="fas fa-edit pointer" [routerLink]="['/equiposClienteEdit', equipo._id]"></i>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <!--PAGINACION -->
+                    <div class="antsig" style="text-align:center">
+                        <button type="button" *ngIf="page >= 2" [routerLink]="['/busquedas', pre_page]" class="btn btn-outline-info">Anterior</button> &nbsp;
+                        <button type="button" *ngIf="pages != page" [routerLink]="['/busquedas', next_page]" class="btn btn-outline-info ">Siguiente</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="avanzada =='activada'" class="row">
+              <div class="col-md-12">
+                ddddddddddddddddddddddddd
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

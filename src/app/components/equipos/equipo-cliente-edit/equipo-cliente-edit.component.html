@@ -1,51 +1,201 @@
-<div class="col-sm-12 fondo">
-</div>
-<div class="container">
-  <div class="row">
-    <div class="col-md-6 offset-md-3 ">
-      <div class="card">
-        <h5 style="text-align:center; padding: 1vh;">Editar Cargos</h5>
-        <div class="card-body">
-          <div class="row">
-            <div class="col-md-12">
-              <form ngNativeValidate [formGroup]="form"  #EquipoEditE="ngForm" (ngSubmit)="editEquipoCliente(form, EquipoEditE)">
-                <div class="col-md-12 col-sm-12" style="text-align:center">
-                    <div class="form-group">
-                      <h5 for="tagEdit" class="negrita">Tag</h5>
-                      <h6><strong><p class="estado">[{{tag}}]</p></strong></h6>
+<div class="col-sm-12 contenedor">
+
+  <div class="container">
+    <div class="row espacios">
+      <div class="col-md-12">
+          <div class="card">
+            <div class="card-body centroiconos" style="text-align:center">
+                <h5 >Edicion de Equipos</h5>
+                <i class="fas fa-toolbox fa-2x fa-lg"></i>
+                <br>
+              <div class="card sinpaddintop">
+                <div class="card-body sinpaddintop">
+                    <div class="col-md-6 offset-md-3 col-sm-12 sinpaddintop ">      
+                      <div class="row">
+                        <div class="col-md-6">
+                            <label >Equipo</label>
+                            <select class="form-control" name='tipoEquipo' [(ngModel)]='tipoEquipo'  (change)="capturaTipoPrincipal($event)" >
+                               <option disabled>Elija</option>
+                               <option>INSTRUMENTACION</option>
+                               <option>OTRO</option>
+                            </select>
+                        </div>
+                        <div *ngIf="tipoEquipo == 'INSTRUMENTACION'" class="col-md-6">
+                            <label >Sub</label>
+                            <select class="form-control" name='tipoEquipo' [(ngModel)]='sub_tipo'   (change)="capturasubtipo($event)" >
+                               <option disabled>Elija</option>
+                               <option>TRANSMISORES</option>
+                               <option>INDICADORES</option>
+                            </select>
+                        </div>                    
+                      </div>
+                    </div>
+                    <div *ngIf="sub_tipo == 'INDICADORES' && tipoEquipo == 'INSTRUMENTACION' " class="col-md-12 sinpaddintop">
+                      <hr>
+                        <div class="row sinpaddintop">
+                          <div class="col-md-2 sinpaddintop">
+                                <label >Tipo</label>
+                                <select class="form-control" name='subtipoFuncionEquipo' [(ngModel)]='subtipoFuncionEquipo'  >
+                                   <option disabled>Elija</option>
+                                   <option>PRESION</option>
+                                   <option>TEMPERATURA</option>
+                                   <option>PRESION DIFERENCIAL</option>
+                                   <option>FLUJO</option>
+                                </select>
+                          </div>
+                          <div class="col-md-2 sinpaddintop">
+                              <label >Nomen</label>
+                              <select class="form-control" name='nomenclatura' [(ngModel)]='nomenclatura' >
+                                 <option disabled>Elija</option>
+                                 <option>TI</option>
+                                 <option>PI</option>
+                                 <option>DPI</option>
+                                 <option>FI</option>
+                              </select>
+                          </div>
+                          <div class="col-md-2 sinpaddintop">
+                            <div class="form-group sinpaddintop">
+                              <label for="marca">Marca</label>
+                              <input type="text" class="form-control" name='marca' [(ngModel)]='marca'>
+                            </div>
+                          </div>
+                          <div class="col-md-2 sinpaddintop">
+                            <div class="form-group sinpaddintop">
+                              <label for="serial">Serial</label>
+                              <input type="text" class="form-control" name='serial' [(ngModel)]='serial'>
+                            </div>
+                          </div>
+                          <div class="col-md-2 sinpaddintop">
+                            <div class="form-group sinpaddintop">
+                              <label for="tag">Tag</label>
+                              <input type="text" class="form-control" name='tag' [(ngModel)]='tag' >
+                            </div>
+                          </div>
+                          <div class="col-md-2 sinpaddintop">
+                            <div class="form-group sinpaddintop">
+                              <label for="modelo">Modelo</label>
+                              <input type="text" class="form-control" name='modelo' [(ngModel)]='modelo' >
+                            </div>
+                          </div>
+                          <div class="col-md-2 sinpaddintop">
+                            <label>Funcionamiento</label>
+                            <select class="form-control"  name='funcionamiento' [(ngModel)]='funcionamiento'>
+                               <option disabled>Elija</option>
+                               <option>DIGITAL</option>
+                               <option>ANALOGO</option>
+                            </select>
+                          </div>
+                          <div class="col-md-2 sinpaddintop">
+                              <label>Dial</label>
+                              <select class="form-control"  name='tamano_dial'  [(ngModel)]='tamano_dial'  >
+                                 <option disabled>Elija</option>
+                                 <option>0.5</option>
+                                 <option>1</option>
+                                 <option>1.5</option>
+                                 <option>2</option>
+                                 <option>2.5</option>
+                                 <option>3</option>
+                                 <option>3.5</option>
+                                 <option>4</option>
+                                 <option>4.5</option>
+                                 <option>5</option>
+                              </select>
+                            </div>
+                            <div class="col-md-2 sinpaddintop">
+                                <label>DConexion</label>
+                                <select class="form-control"  name='dimension_conexion' [(ngModel)]='dimension_conexion'  >
+                                   <option disabled>Elija</option>
+                                   <option>1/2"</option>
+                                   <option>3/4"</option>
+                                   <option>1"</option>
+                                   <option>1-1/4"</option>
+                                </select>
+                          </div>
+                          <div class="col-md-2 sinpaddintop">
+                            <label>Conexion</label>
+                            <select class="form-control"  name='conexion' [(ngModel)]='conexion' >
+                               <option disabled>Elija</option>
+                               <option>NPT</option>
+                               <option>NPT-F</option>
+                            </select>
+                          </div>
+                          <div class="col-md-2 sinpaddintop">
+                            <label>Carcaza</label>
+                            <select class="form-control"   name='carcaza' [(ngModel)]='carcaza'   >
+                               <option disabled>Elija</option>
+                               <option>ACERO</option>
+                               <option>HIERRO</option>
+                               <option>PLASTICO</option>
+                            </select>
+                          </div>
+                          <div class="col-md-2 sinpaddintop">
+                            <label>Uni_Rango</label>
+                            <select class="form-control"  name='unidades_rango'   [(ngModel)]='unidades_rango'  >
+                               <option disabled>Elija</option>
+                               <option>PSI</option>
+                               <option>INH2O</option>
+                               <option>KG/CM2</option>
+                            </select>
+                          </div>
+                          <div class="col-md-2 sinpaddintop">
+                            <div class="form-group sinpaddintop">
+                              <label >Rango Min</label>
+                              <input type="number" class="form-control" min='0'  [(ngModel)]='rango_min'  name='rango_min' >
+                            </div>
+                          </div>
+                          <div class="col-md-2 sinpaddintop">
+                            <div class="form-group sinpaddintop">
+                              <label >Rango Max</label>
+                              <input type="number" class="form-control" min='0' [(ngModel)]='rango_max' name='rango_max' >
+                            </div>
+                          </div>
+                          <div class="col-md-2 sinpaddintop">
+                            <label>PFuncion</label>
+                            <select class="form-control" name='p_funcionamiento' [(ngModel)]='p_funcionamiento' >
+                               <option disabled>Elija</option>
+                               <option>BOURDON</option>
+                               <option>DIAFRAGNA</option>
+                               <option>DIGITAL</option>
+                               <option>PRESION</option>
+                            </select>
+                          </div>
+                          <div class="col-md-2 sinpaddintop">
+                            <label>Tipo Elemento</label>
+                            <select class="form-control"  name='tipo_elemento' [(ngModel)]='tipo_elemento' >
+                              <option disabled>Elija</option>
+                              <option>E</option>
+                              <option>N</option>
+                              <option>K</option>
+                              <option>J</option>
+                            </select>
+                          </div>
+                          <div class="col-md-2 sinpaddintop">
+                              <label>Auxiliar</label>
+                              <select class="form-control"  name='indicador_auxiliar' [(ngModel)]='indicador_auxiliar'  >
+                                <option disabled>Elija</option>
+                                <option>SI</option>
+                                <option>NO</option>
+                                <option>N/A</option>
+                              </select>
+                          </div>
+                          <div class="col-md-2 sinpaddintop">
+                              <div class="form-group sinpaddintop">
+                                <label>Req Especial</label>
+                                <input type="text" class="form-control" name='req_especial'  [(ngModel)]='req_especial' >
+                              </div>
+                          </div> 
+                        </div>
+                        <div style="text-align:center">
+                          <input type="button" (click)="editEquipoCliente()" class="btn btn-outline-success" value="Agregar">
+                        </div>
+  
+                      
                     </div>
                 </div>
-                <div class="col-md-12 col-sm-12">
-                  <div class="form-group">
-                    <label for="vhora" class="negrita">Descripcion o Nombre</label>
-                    <input type="text"   formControlName="nombreEdit" [(ngModel)]="nombre"  class="form-control"  required>
-                  </div>
-                </div>
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <label for="selectCargo">Estado <span class="estado">({{estado}})</span></label>
-                    <select class="form-control" name="ubiEdit" formControlName="estadoE" >
-                      <option>ACTIVO</option>
-                      <option>INACTIVO</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div class="col-md-12 borde" style="text-align:justify">
-                  {{fichaTecnica}}
-                </div>
-                <br>
-                <br>
-
-                 
-                <div style="text-align:center">
-                  <input type="submit" class="btn btn-outline-success" value="Editar">
-                </div>
-              </form>
+              </div>
             </div>
           </div>
-        </div>
       </div>
     </div>
   </div>
-</div> 
+</div>

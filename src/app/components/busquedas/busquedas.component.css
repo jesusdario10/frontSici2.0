@@ -1,0 +1,10 @@
+
+.contenedor{
+    background-image: url(../../../assets/img/logo/bgctransparente.png);
+    background-size: cover;
+    padding: 2vh;
+}
+
+.centrado{
+    text-align: center !important;
+}

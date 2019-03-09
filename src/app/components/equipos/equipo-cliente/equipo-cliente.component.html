@@ -1,48 +1,205 @@
 <div class="col-sm-12 fondo">
 </div>
-<div class="container">
+<div class="container contenedor">
   <div class="row espacios">
-    <div class="col-md-4">
+    <div class="col-md-12">
         <div class="card">
           <div class="card-body centroiconos">
               <h5 style="text-align:center">Creacion de Equipos</h5>
               <i class="fas fa-toolbox fa-2x fa-lg"></i>
               <br>
-            <div class="card">
-              <div class="card-body">
-                  <form ngNativeValidate [formGroup]="form"  #EquipoFormE="ngForm" (ngSubmit)="createEquipoCliente(form, EquipoFormE)">
-                      <div class="col-md-12 col-sm-12">
-                          <div class="form-group sinmargenbutton">
-                            <label for="serialE" class="negrita">Serial</label>
-                            <input type="text"  formControlName="serialE" class="form-control" required>
-                          </div>
+            <div class="card sinpaddintop">
+              <div class="card-body sinpaddintop">
+                  <div class="col-md-6 offset-md-3 col-sm-12 sinpaddintop ">      
+                    <div class="row">
+                      <div class="col-md-6">
+                          <label >Equipo</label>
+                          <select class="form-control" name='tipoEquipo' (change)="capturaTipoPrincipal($event)" >
+                             <option disabled>Elija</option>
+                             <option>INSTRUMENTACION</option>
+                             <option>OTRO</option>
+                          </select>
                       </div>
-                      <div class="col-md-12 col-sm-12">
-                          <div class="form-group sinmargenbutton sinpaddintop">
-                            <label for="tagE" class="negrita">Tag</label>
-                            <input type="text"  formControlName="tagE" class="form-control" required>
-                          </div>
-                      </div>
-                      <div class="col-md-12 col-sm-12">
-                        <div class="form-group sinpaddintop">
-                          <label for="nombreE" class="negrita">Descripcion del Equipo</label>
-                          <input type="text"  formControlName="nombreE"  class="form-control"  required>
-                        </div>
-                        <div class="form-group sinpaddintop">
-                          <label for="fichaT" class="negrita">Caracteristicas del Equipo</label>
-                          <textarea name="fichaT" formControlName="fichaT" id="" cols="30" rows="4"></textarea>
-                        </div>
-                      </div>  
-                    <div style="text-align:center">
-                      <input type="submit" class="btn btn-outline-success" value="Agregar">
+                      <div *ngIf="tipoEquipo == 'INSTRUMENTACION'" class="col-md-6">
+                          <label >Sub</label>
+                          <select class="form-control" name='tipoEquipo' (change)="capturasubtipo($event)" >
+                             <option disabled>Elija</option>
+                             <option>TRANSMISORES</option>
+                             <option>INDICADORES</option>
+                          </select>
+                      </div>                    
+                    </div>
                   </div>
-                </form>
+                  <div class="col-md-12 sinpaddintop">
+                    <hr>
+                    <form  ngNativeValidate [formGroup]="form1"  #equipoForm1="ngForm" (ngSubmit)="createEquipoCliente(form1, equipoForm1)" *ngIf="sub_tipo == 'INDICADORES' && tipoEquipo == 'INSTRUMENTACION' ">
+                      <div class="row sinpaddintop">
+                        <div class="col-md-2 sinpaddintop">
+                              <label >Tipo</label>
+                              <select class="form-control" name='subtipoFuncionEquipo'  formControlName="subtipoFuncionEquipo" >
+                                 <option disabled>Elija</option>
+                                 <option>PRESION</option>
+                                 <option>TEMPERATURA</option>
+                                 <option>PRESION DIFERENCIAL</option>
+                                 <option>FLUJO</option>
+                              </select>
+                        </div>
+                        <div class="col-md-2 sinpaddintop">
+                            <label >Nomen</label>
+                            <select class="form-control" name='nomenclatura'  formControlName="nomenclatura" >
+                               <option disabled>Elija</option>
+                               <option>TI</option>
+                               <option>PI</option>
+                               <option>DPI</option>
+                               <option>FI</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2 sinpaddintop">
+                          <div class="form-group sinpaddintop">
+                            <label for="marca">Marca</label>
+                            <input type="text" class="form-control" name='marca' formControlName="marca">
+                          </div>
+                        </div>
+                        <div class="col-md-2 sinpaddintop">
+                          <div class="form-group sinpaddintop">
+                            <label for="serial">Serial</label>
+                            <input type="text" class="form-control" name='serial' formControlName="serial">
+                          </div>
+                        </div>
+                        <div class="col-md-2 sinpaddintop">
+                          <div class="form-group sinpaddintop">
+                            <label for="tag">Tag</label>
+                            <input type="text" class="form-control" name='tag' formControlName="tag">
+                          </div>
+                        </div>
+                        <div class="col-md-2 sinpaddintop">
+                          <div class="form-group sinpaddintop">
+                            <label for="modelo">Modelo</label>
+                            <input type="text" class="form-control" name='modelo' formControlName="modelo">
+                          </div>
+                        </div>
+                        <div class="col-md-2 sinpaddintop">
+                          <label>Funcionamiento</label>
+                          <select class="form-control"  name='funcionamiento' formControlName="funcionamiento">
+                             <option disabled>Elija</option>
+                             <option>DIGITAL</option>
+                             <option>ANALOGO</option>
+                          </select>
+                        </div>
+                        <div class="col-md-2 sinpaddintop">
+                            <label>Dial</label>
+                            <select class="form-control"  name='tamano_dial' formControlName="tamano_dial" >
+                               <option disabled>Elija</option>
+                               <option>0.5</option>
+                               <option>1</option>
+                               <option>1.5</option>
+                               <option>2</option>
+                               <option>2.5</option>
+                               <option>3</option>
+                               <option>3.5</option>
+                               <option>4</option>
+                               <option>4.5</option>
+                               <option>5</option>
+                            </select>
+                          </div>
+                          <div class="col-md-2 sinpaddintop">
+                              <label>Dimen Conexion</label>
+                              <select class="form-control"  name='dimension_conexion' formControlName="dimension_conexion">
+                                 <option disabled>Elija</option>
+                                 <option>1/2"</option>
+                                 <option>3/4"</option>
+                                 <option>1"</option>
+                                 <option>1-1/4"</option>
+                              </select>
+                        </div>
+                        <div class="col-md-2 sinpaddintop">
+                          <label>Conexion</label>
+                          <select class="form-control"  name='conexion' formControlName="conexion">
+                             <option disabled>Elija</option>
+                             <option>NPT</option>
+                             <option>NPT-F</option>
+                          </select>
+                        </div>
+                        <div class="col-md-2 sinpaddintop">
+                          <label>Carcaza</label>
+                          <select class="form-control"   name='carcaza' formControlName="carcaza" >
+                             <option disabled>Elija</option>
+                             <option>ACERO</option>
+                             <option>HIERRO</option>
+                             <option>PLASTICO</option>
+                          </select>
+                        </div>
+                        <div class="col-md-2 sinpaddintop">
+                          <label>Uni_Rango</label>
+                          <select class="form-control"  name='unidades_rango' formControlName="unidades_rango" >
+                             <option disabled>Elija</option>
+                             <option>PSI</option>
+                             <option>INH2O</option>
+                             <option>KG/CM2</option>
+                          </select>
+                        </div>
+                        <div class="col-md-2 sinpaddintop">
+                          <div class="form-group sinpaddintop">
+                            <label >Rango Min</label>
+                            <input type="number" class="form-control" min='0' name='rango_min' formControlName="rango_min">
+                          </div>
+                        </div>
+                        <div class="col-md-2 sinpaddintop">
+                          <div class="form-group sinpaddintop">
+                            <label >Rango Max</label>
+                            <input type="number" class="form-control" min='0' name='rango_max' formControlName="rango_max">
+                          </div>
+                        </div>
+                        <div class="col-md-2 sinpaddintop">
+                          <label>PFuncion</label>
+                          <select class="form-control" name='p_funcionamiento' formControlName="p_funcionamiento" >
+                             <option disabled>Elija</option>
+                             <option>BOURDON</option>
+                             <option>DIAFRAGNA</option>
+                             <option>DIGITAL</option>
+                             <option>PRESION</option>
+                          </select>
+                        </div>
+                        <div class="col-md-2 sinpaddintop">
+                          <label>Tipo Elemento</label>
+                          <select class="form-control"  name='tipo_elemento' formControlName="tipo_elemento">
+                            <option disabled>Elija</option>
+                            <option>E</option>
+                            <option>N</option>
+                            <option>K</option>
+                            <option>J</option>
+                          </select>
+                        </div>
+                        <div class="col-md-2 sinpaddintop">
+                            <label>Auxiliar</label>
+                            <select class="form-control"  name='indicador_auxiliar' formControlName="indicador_auxiliar" >
+                              <option disabled>Elija</option>
+                              <option>SI</option>
+                              <option>NO</option>
+                              <option>N/A</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2 sinpaddintop">
+                            <div class="form-group sinpaddintop">
+                              <label>Req Especial</label>
+                              <input type="text" class="form-control" name='req_especial' formControlName="req_especial">
+                            </div>
+                        </div> 
+                      </div>
+                      <div style="text-align:center">
+                        <input type="submit" class="btn btn-outline-success" value="Agregar">
+                      </div>
+
+                    </form>
+                  </div>
               </div>
             </div>
           </div>
         </div>
     </div>
-    <div class="col-md-7 col-sm-12">
+  </div>
+  <!--
+        <div class="col-md-7 col-sm-12">
         <div class="card">
           <div class="card-body">
             <h5 style="text-align:center">Buscar Equipos</h5>
@@ -77,19 +234,20 @@
                             </tr>
                           </tbody>
                         </table>
-                      <!--PAGINACION -->
-                        <div class="antsig" style="text-align:center">
-                            <button type="button" *ngIf="page >= 2" [routerLink]="['/equipoCliente', pre_page]" class="btn btn-outline-info">Anterior</button>
-                            <button type="button" *ngIf="pages != page" [routerLink]="['/equipoCliente', next_page]" class="btn btn-outline-info ">Siguiente</button>
-                        </div>
-                  </div>
-                </div>
+                      
+                      <div class="antsig" style="text-align:center">
+                        <button type="button" *ngIf="page >= 2" [routerLink]="['/equipoCliente', pre_page]" class="btn btn-outline-info">Anterior</button>
+                        <button type="button" *ngIf="pages != page" [routerLink]="['/equipoCliente', next_page]" class="btn btn-outline-info ">Siguiente</button>
+                    </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
   </div>
+
+  -->
   
 
 

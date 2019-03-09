@@ -38,6 +38,7 @@ import { UbicacionInExComponent } from './components/import-export/ubicacion-in-
 import { LibreriaInExtComponent } from './components/import-export/libreria-in-ext/libreria-in-ext.component';
 import { EquipoInExtComponent } from './components/import-export/equipo-in-ext/equipo-in-ext.component';
 import { OrdenesInExComponent } from './components/import-export/ordenes-in-ex/ordenes-in-ex.component';
+import { BusquedasComponent } from './components/busquedas/busquedas.component';
 
 
 
@@ -80,6 +81,7 @@ const appRoutes : Routes = [
     {path: 'import-export/librerias', component: LibreriaInExtComponent, canActivate:[UserGuard]},
     {path: 'import-export/equipo', component: EquipoInExtComponent, canActivate:[UserGuard]},
     {path: 'import-export/orden', component: OrdenesInExComponent, canActivate:[UserGuard]},
+    {path: 'busquedas/:page', component: BusquedasComponent, canActivate:[UserGuard]},
     {path: '**', component: ErrorComponent},
 ];
 
