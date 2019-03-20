@@ -33,7 +33,7 @@
                   <div class="form-group ">
                     <label for="equipoO">Equipo</label>
                     <select class="form-control" name="equipoO" formControlName="equipoO" required>
-                      <option *ngFor="let equipo of equipos" [value]="equipo._id">{{equipo.tag}} | {{equipo.nombre_equipo}}</option>
+                      <option *ngFor="let equipo of equipos" [value]="equipo._id">{{equipo.serial}} | {{equipo.subtipo}}</option>
                     </select>
                   </div>
                 </div> 

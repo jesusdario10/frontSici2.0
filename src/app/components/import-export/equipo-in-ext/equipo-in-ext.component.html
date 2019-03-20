@@ -17,26 +17,58 @@
           </div>
         </div>
       </div>
-      <div *ngIf="hayEquipos == 1"  class="card centrado espaciosp" style="margin:3vh !important;">
-          <h4 style="padding:5px !important;">Validacion de Datos</h4>
+      <div *ngIf="hayEquipos == 1 && tipoEquipo == 'Indicadores'"  class="card centrado espaciosp" style="margin:3vh !important;">
+          <h4 style="padding:5px !important;">Validacion de Datos Indicadores</h4>
         <div class="card-body">
           <div class="row">
             <div class="col-md-12">
-                <table class="table table-hover table-bordered">
+                <table class="table table-responsive table-hover table-bordered ">
                   <thead style="background:#aa66cc !important; color:white">
                     <tr>
+                      <th>Tipo</th>
+                      <th>Subtipo</th>
                       <th>Serial</th>
+                      <th>T funcionamiento</th>
+                      <th>Nomenclatura</th>
+                      <th>Marca</th>
                       <th>Tag</th>
-                      <th>Nombre del Equipo</th>
-                      <td>Caracteristicas</td>
+                      <th>Modelo</th>
+                      <th>Funcionamiento</th>
+                      <th>Dial</th>
+                      <th>D_conexion</th>
+                      <th>Conexion</th>
+                      <th>Carcaza</th>
+                      <th>Uni_rango</th>
+                      <th>Rango_min</th>
+                      <th>Rango_max</th>
+                      <th>P_funcion</th>
+                      <th>Tipo_elemento</th>
+                      <th>Auxiliar</th>
+                      <th>Req_especial</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr *ngFor="let equipo of equipos">
-                      <td [class.existe]="equipo.tag =='Equipo ya Existe'">{{equipo.serial}}</td>
-                      <td [class.existe]="equipo.tag =='Equipo ya Existe'">{{equipo.tag}}</td>
-                      <td [class.existe]="equipo.tag =='Equipo ya Existe'">{{equipo.nombre_equipo}}</td>
-                      <td [class.existe]="equipo.tag =='Equipo ya Existe'">{{equipo.fichaTecnica}}</td>
+                      <td>{{equipo.tipo}}</td>
+                      <td [class.existe]="equipo.subtipo =='Eliminelo del archivo'">{{equipo.subtipo}}</td>
+                      <td [class.existe]="equipo.subtipo_funcionamiento_equipo =='Equipo ya Existe'">{{equipo.serial}}</td>
+                      <td>{{equipo.subtipo_funcionamiento_equipo}}</td>
+                      <td>{{equipo.nomenclatura}}</td>
+                      <td>{{equipo.marca}}</td>
+                      <td>{{equipo.tag}}</td>
+                      <td>{{equipo.modelo}}</td>
+                      <td>{{equipo.funcionamiento}}</td>
+                      <td>{{equipo.dial}}</td>
+                      <td>{{equipo.d_conexion}}</td>
+                      <td>{{equipo.conexion}}</td>
+                      <td>{{equipo.carcaza}}</td>
+                      <td>{{equipo.uni_rango}}</td>
+                      <td>{{equipo.rango_min}}</td>
+                      <td>{{equipo.rango_max}}</td>
+                      <td>{{equipo.p_funcion}}</td>
+                      <td>{{equipo.tipo_elemento}}</td>
+                      <td>{{equipo.auxiliar}}</td>
+                      <td>{{equipo.req_especial}}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -45,6 +77,66 @@
           </div>
         </div>
       </div>
+      <div *ngIf="hayEquipos == 1 && tipoEquipo == 'Transmisores'"  class="card centrado espaciosp" style="margin:3vh !important;">
+        <h4 style="padding:5px !important;">Validacion de Datos Transmisores</h4>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12">
+              <table class="table table-responsive table-hover table-bordered ">
+                <thead style="background:#aa66cc !important; color:white">
+                  <tr>
+                    <th>Tipo</th>
+                    <th>Subtipo</th>
+                    <th>Serial</th>
+                    <th>T funcionamiento</th>
+                    <th>Nomenclatura</th>
+                    <th>Marca</th>
+                    <th>Tag</th>
+                    <th>Modelo</th>
+                    <th>Funcionamiento</th>
+                    <th>Dial</th>
+                    <th>D_conexion</th>
+                    <th>Conexion</th>
+                    <th>Carcaza</th>
+                    <th>Uni_rango</th>
+                    <th>Rango_min</th>
+                    <th>Rango_max</th>
+                    <th>P_funcion</th>
+                    <th>Tipo_elemento</th>
+                    <th>Auxiliar</th>
+                    <th>Req_especial</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let equipo of equipos">
+                    <td>{{equipo.tipo}}</td>
+                    <td [class.existe]="equipo.subtipo =='Eliminelo del archivo'">{{equipo.subtipo}}</td>
+                    <td [class.existe]="equipo.subtipo_funcionamiento_equipo =='Equipo ya Existe'">{{equipo.serial}}</td>
+                    <td>{{equipo.subtipo_funcionamiento_equipo}}</td>
+                    <td>{{equipo.nomenclatura}}</td>
+                    <td>{{equipo.marca}}</td>
+                    <td>{{equipo.tag}}</td>
+                    <td>{{equipo.modelo}}</td>
+                    <td>{{equipo.funcionamiento}}</td>
+                    <td>{{equipo.dial}}</td>
+                    <td>{{equipo.d_conexion}}</td>
+                    <td>{{equipo.conexion}}</td>
+                    <td>{{equipo.carcaza}}</td>
+                    <td>{{equipo.uni_rango}}</td>
+                    <td>{{equipo.rango_min}}</td>
+                    <td>{{equipo.rango_max}}</td>
+                    <td>{{equipo.p_funcion}}</td>
+                    <td>{{equipo.tipo_elemento}}</td>
+                    <td>{{equipo.auxiliar}}</td>
+                    <td>{{equipo.req_especial}}</td>
+                  </tr>
+                </tbody>
+              </table>
+          </div>
+
+        </div>
+      </div>
+    </div>
   
     </div>
   </div>

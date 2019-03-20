@@ -32,11 +32,11 @@
                   </div>
                   <div class="col-md-12 sinpaddintop">
                     <hr>
-                    <form  ngNativeValidate [formGroup]="form1"  #equipoForm1="ngForm" (ngSubmit)="createEquipoCliente(form1, equipoForm1)" *ngIf="sub_tipo == 'INDICADORES' && tipoEquipo == 'INSTRUMENTACION' ">
+                    <form  ngNativeValidate [formGroup]="form1"  #equipoForm1="ngForm" (ngSubmit)="createEquipoClienteIndicadores(form1, equipoForm1)" *ngIf="sub_tipo == 'INDICADORES' && tipoEquipo == 'INSTRUMENTACION' ">
                       <div class="row sinpaddintop">
                         <div class="col-md-2 sinpaddintop">
                               <label >Tipo</label>
-                              <select class="form-control" name='subtipoFuncionEquipo'  formControlName="subtipoFuncionEquipo" >
+                              <select class="form-control" name='subtipoFuncionEquipo' (change)="subtipoFuncionEquipo($event)"  formControlName="subtipoFuncionEquipo" >
                                  <option disabled>Elija</option>
                                  <option>PRESION</option>
                                  <option>TEMPERATURA</option>
@@ -191,6 +191,147 @@
                       </div>
 
                     </form>
+                    <form  ngNativeValidate [formGroup]="form2"  #equipoForm2="ngForm" (ngSubmit)="createEquipoClienteTransmisores(form2, equipoForm2)" *ngIf="sub_tipo == 'TRANSMISORES' && tipoEquipo == 'INSTRUMENTACION'">
+                        <div class="row sinpaddintop">
+                          <div class="col-md-2 sinpaddintop">
+                                <label >Tipo</label>
+                                <select class="form-control" name='subtipoFuncionEquipo' (change)="subtipoFuncionEquipo($event)" formControlName="subtipoFuncionEquipo" >
+                                   <option disabled>Elija</option>
+                                   <option>PRESION</option>
+                                   <option>TEMPERATURA</option>
+                                   <option>FLUJO</option>
+                                   <option>NIVEL</option>
+                                </select>
+                          </div>
+                          <div class="col-md-2 sinpaddintop">
+                              <label >Nomen</label>
+                              <select class="form-control" name='nomenclatura'  formControlName="nomenclatura" >
+                                 <option disabled>Elija</option>
+                                 <option>TT</option>
+                                 <option>PT</option>
+                                 <option>FT</option>
+                                 <option>LT</option>
+                              </select>
+                          </div>
+                          <div class="col-md-2 sinpaddintop">
+                            <div class="form-group sinpaddintop">
+                              <label for="marca">Marca</label>
+                              <input type="text" class="form-control" name='marca' formControlName="marca">
+                            </div>
+                          </div>
+                          <div class="col-md-2 sinpaddintop">
+                            <div class="form-group sinpaddintop">
+                              <label for="serial">Serial</label>
+                              <input type="text" class="form-control" name='serial' formControlName="serial">
+                            </div>
+                          </div>
+                          <div class="col-md-2 sinpaddintop">
+                            <div class="form-group sinpaddintop">
+                              <label for="tag">Tag</label>
+                              <input type="text" class="form-control" name='tag' formControlName="tag">
+                            </div>
+                          </div>
+                          <div class="col-md-2 sinpaddintop">
+                            <div class="form-group sinpaddintop">
+                              <label for="modelo">Modelo</label>
+                              <input type="text" class="form-control" name='modelo' formControlName="modelo">
+                            </div>
+                          </div>
+                          <div class="col-md-2 sinpaddintop">
+                              <label>Carcaza</label>
+                              <select class="form-control"   name='carcaza' formControlName="carcaza" >
+                                 <option disabled>Elija</option>
+                                 <option>ACERO</option>
+                                 <option>HIERRO</option>
+                                 <option>PLASTICO</option>
+                              </select>
+                            </div>
+                          <div class="col-md-2 sinpaddintop">
+                              <div class="form-group sinpaddintop">
+                                <label for="modelo">Al/electrica</label>
+                                <input type="text" class="form-control" name='al_electrica' formControlName="al_electrica">
+                              </div>
+                          </div>
+                          <div class="col-md-2 sinpaddintop">
+                              <div class="form-group sinpaddintop">
+                                <label for="modelo">Exactitud</label>
+                                <input type="text" class="form-control" name='exactitud' formControlName="exactitud">
+                              </div>
+                          </div>
+                          <div class="col-md-2 sinpaddintop">
+                              <label>El/medicion</label>
+                              <select class="form-control"   name='ele_medicion' formControlName="ele_medicion" >
+                                 <option disabled>Elija</option>
+                                 <option>DIAFRAGMA</option>
+                                 <option>PRESION DIFERENCIAL</option>
+                                 <option>TERMOCUPLA</option>
+                              </select>
+                          </div>
+                          <div class="col-md-2 sinpaddintop">
+                              <label>Tipo/Element</label>
+                              <select class="form-control"   name='tipo_elemento' formControlName="tipo_elemento" >
+                                 <option disabled>Elija</option>
+                                 <option>E</option>
+                                 <option>N</option>
+                                 <option>K</option>
+                                 <option>J</option>
+                              </select>
+                          </div>
+
+                          <div class="col-md-2 sinpaddintop">
+                            <div class="form-group sinpaddintop">
+                              <label >Rango Min</label>
+                              <input type="number" class="form-control" min='0' name='rango_min' formControlName="rango_min">
+                            </div>
+                          </div>
+                          <div class="col-md-2 sinpaddintop">
+                            <div class="form-group sinpaddintop">
+                              <label >Rango Max</label>
+                              <input type="number" class="form-control" min='0' name='rango_max' formControlName="rango_max">
+                            </div>
+                          </div>
+                          <div class="col-md-2 sinpaddintop">
+                              <div class="form-group sinpaddintop">
+                                <label for="modelo">Comunicacion</label>
+                                <input type="text" class="form-control" name='comunicacion' formControlName="comunicacion">
+                              </div>
+                          </div>
+                          <div class="col-md-2 sinpaddintop" *ngIf="tipodeltipo != 'TEMPERATURA'">
+                              <div class="form-group sinpaddintop">
+                                <label for="modelo">M/diafragma</label>
+                                <input type="text" class="form-control" name='m_diafragma' formControlName="m_diafragma">
+                              </div>
+                          </div>
+                          <div class="col-md-2 sinpaddintop">
+                              <div class="form-group sinpaddintop">
+                                <label for="modelo">M/Cuerpo</label>
+                                <input type="text" class="form-control" name='m_cuerpo' formControlName="m_cuerpo">
+                              </div>
+                          </div>
+                          <div class="col-md-2 sinpaddintop">
+                              <div class="form-group sinpaddintop">
+                                <label for="modelo">Manifold</label>
+                                <input type="text" class="form-control" name='manifold' formControlName="manifold">
+                              </div>
+                          </div>
+                          <div class="col-md-2 sinpaddintop">
+                              <div class="form-group sinpaddintop">
+                                <label for="modelo">F/manifold</label>
+                                <input type="text" class="form-control" name='f_manifold' formControlName="f_manifold">
+                              </div>
+                          </div>
+                          <div *ngIf="tipodeltipo != 'TEMPERATURA'" class="col-md-2 sinpaddintop">
+                              <div class="form-group sinpaddintop">
+                                <label for="modelo">R especial</label>
+                                <input type="text" class="form-control" name='req_especial' formControlName="req_especial">
+                              </div>
+                          </div>
+                          <div style="text-align:center !important; width: 100% !important;">
+                              <input type="submit" class="btn btn-outline-success" value="Agregar">
+                          </div>
+                      </div>
+                    </form>
+
                   </div>
               </div>
             </div>

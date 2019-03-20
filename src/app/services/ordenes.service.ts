@@ -140,8 +140,8 @@ export class OrdenesService {
   /*************************************GESTIONAR LA SUBIDA DE ARCHIVOS***********************************/
   /*******************************************************************************************************/
   //subir archivo de Cargos desde un archivo xlsx
-  subirOrdenesxlsx(archivo:File,  tercero){
-    this._subirArchivos.subirArchivo(archivo, 'orden', tercero)
+  subirOrdenesxlsx(archivo:File,  tercero, tipoEquipo){
+    this._subirArchivos.subirArchivo(archivo, 'orden', tercero, tipoEquipo)
       .then(resp=>{
         let mensaje:any = resp;
        this.leerDatosCargosJson(resp)

@@ -22,7 +22,7 @@ export class SubirArchivosService {
     this.token = this._userServices.getToken();
    }
 
-  subirArchivo(archivo : File, tipo, tercero){
+  subirArchivo(archivo : File, tipo, tercero, tipoEquipo){
     return new Promise ((resolve, reject)=>{
       let formData = new FormData();
       let xhr = new XMLHttpRequest();
@@ -40,7 +40,9 @@ export class SubirArchivosService {
           }
         }
       }
-      let url = this.URL+'import/csv/'+tercero+'/'+tipo;
+      let url = this.URL+'import/csv/'+tercero+'/'+tipo +'/'+tipoEquipo;
+      console.log("la urllllllllllllllllllllllllll");
+      console.log(url);
 
       xhr.open('POST', url, true);
       xhr.setRequestHeader('Authorization', this.token);

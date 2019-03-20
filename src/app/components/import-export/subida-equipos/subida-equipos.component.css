@@ -1,0 +1,25 @@
+.contenedor{
+    background-image: url(../../../../assets/img/logo/bgctransparente.png);
+    background-size: cover;
+    padding: 2vh;
+    min-height: 90vh !important;
+}
+.centrado{
+    text-align: center !important;
+}
+.margenInferior{
+    margin-bottom: 5vh;
+}
+.bordes{
+ border : 2px solid #2BBBAD;
+}
+.imagenes{
+    max-width: 100px !important;
+    max-height: 90px !important;
+}
+.paddingbuttonBotton{
+    padding-bottom: 2vh;
+}
+.margindivBoton{
+    margin-bottom: 0.5vh;
+}

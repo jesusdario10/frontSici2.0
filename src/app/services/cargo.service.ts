@@ -102,8 +102,8 @@ export class CargoService {
 
   }
   //subir archivo de Cargos desde un archivo xlsx
-  subirCargosxlsx(archivo:File,  tercero){
-    this._subirArchivos.subirArchivo(archivo, 'cargo', tercero)
+  subirCargosxlsx(archivo:File,  tercero, tipoCargo){
+    this._subirArchivos.subirArchivo(archivo, 'cargo', tercero, tipoCargo)
       .then(resp=>{
         let mensaje:any = resp;
        this.leerDatosCargosJson(resp)

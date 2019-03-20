@@ -38,11 +38,12 @@
                     <br>
                     <h5>Resultados</h5>
                     <br>
-                    <table class="table">
+                    <table class="table table-responsive">
                       <thead>
                         <tr>
                           <th class="centrado">Tipo</th>
                           <th class="centrado">Subtipo</th>
+                          <th class="centrado">Funcion</th>
                           <th class="centrado">Serial</th>
                           <th class="centrado">Marca</th>
                           <th class="centrado">Descripcion</th>
@@ -52,6 +53,7 @@
                       <tbody>
                         <tr *ngFor="let equipo of equipos">
                           <td>{{equipo.tipo}}</td>
+                          <td>{{equipo.subtipo}}</td>
                           <td>{{equipo.subtipoFuncionEquipo}}</td>
                           <td>{{equipo.serial}}</td>
                           <td>{{equipo.marca}}</td>

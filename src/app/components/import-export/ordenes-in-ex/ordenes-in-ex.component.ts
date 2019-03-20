@@ -13,7 +13,7 @@ declare var $:any;
 declare var swal:any;
 
 class OrdenImport2{
-  constructor(
+    constructor(
       public idEquipo? :string,
       public idLibreria? : string,
       public idUbicacion? : string,
@@ -57,6 +57,8 @@ export class OrdenesInExComponent implements OnInit {
   public ExisteLibreria;
   public ExisteUbicacion;
   public prioridadBien;
+
+  public tipoEquipo;
 
   constructor(
     private _userServices : UserService,
@@ -141,7 +143,7 @@ export class OrdenesInExComponent implements OnInit {
   }  
   //subimos el archivo al backend
   cambiarArchivo()  {
-    this._ordenService.subirOrdenesxlsx(this.archivoSubir, this.identity.tercero); 
+    this._ordenService.subirOrdenesxlsx(this.archivoSubir, this.identity.tercero, this.tipoEquipo); 
     this.validar = 1;
     this.carga = 0;      
   }  
@@ -251,6 +253,12 @@ export class OrdenesInExComponent implements OnInit {
         .subscribe((datos:any)=>{
           this.ubicaciones = datos.ubicaciones;
         })
+  }
+  tipoEquipoFunction(){
+    let urlActual =  window.location.href;
+    let extraer = urlActual.split('/');
+    let tipo = extraer[5];
+    this.tipoEquipo = tipo;
   }
 
 }

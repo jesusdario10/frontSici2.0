@@ -22,6 +22,8 @@ export class LibreriaInExtComponent implements OnInit {
   public hayLibreria;
   public repetidas;
   public validados;
+  public tipoEquipo;
+  
 
   constructor(
     private _userServices : UserService,
@@ -102,7 +104,7 @@ export class LibreriaInExtComponent implements OnInit {
   cambiarArchivo()  {
     this.validar = 1;
     this.carga = 0;
-    this._libreriaService.subirLibreriasxlsx(this.archivoSubir, this.identity.tercero);       
+    this._libreriaService.subirLibreriasxlsx(this.archivoSubir, this.identity.tercero, this.tipoEquipo);       
   }
   //Capturamos el json que nos devuelve el backend y lo traemos al componente
   revisarDatos(){
@@ -177,6 +179,12 @@ export class LibreriaInExtComponent implements OnInit {
         .subscribe((datos:any)=>{
           this.librerias2 = datos.librerias;
         })
+  }
+  tipoEquipoFunction(){
+    let urlActual =  window.location.href;
+    let extraer = urlActual.split('/');
+    let tipo = extraer[5];
+    this.tipoEquipo = tipo;
   }
 
 

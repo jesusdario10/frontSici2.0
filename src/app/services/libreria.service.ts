@@ -87,8 +87,8 @@ export class LibreriaService {
     )                               
   }
   //subir archivo de Librerisas desde un archivo xlsx
-  subirLibreriasxlsx(archivo:File,  tercero){
-    this._subirArchivos.subirArchivo(archivo, 'libreria', tercero)
+  subirLibreriasxlsx(archivo:File,  tercero, tipoEquipo){
+    this._subirArchivos.subirArchivo(archivo, 'libreria', tercero, tipoEquipo)
       .then(resp=>{
         let mensaje:any = resp;
        this.leerDatosCargosJson(resp)

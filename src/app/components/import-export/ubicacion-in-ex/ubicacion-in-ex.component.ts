@@ -23,6 +23,7 @@ export class UbicacionInExComponent implements OnInit {
   public repetidas;
   public validados;
 
+  public tipoEquipo;
 
     
   constructor(
@@ -42,6 +43,7 @@ export class UbicacionInExComponent implements OnInit {
 
   ngOnInit() {
     this.identity = this._userServices.getIdentity();
+    this.tipoEquipoFunction();
     //Este jquery activa la funcionalidad del input file para que se vea bien
     $(document).ready(function() {
         // Basic
@@ -106,7 +108,7 @@ export class UbicacionInExComponent implements OnInit {
   cambiarArchivo()  {
     this.validar = 1;
     this.carga = 0;
-    this._ubicacionService.subirUbicacionesxlsx(this.archivoSubir, this.identity.tercero);   
+    this._ubicacionService.subirUbicacionesxlsx(this.archivoSubir, this.identity.tercero, this.tipoEquipo);   
   }
   revisarDatos(){
     let ubicacionJson = this._ubicacionService.RevisarDatos();
@@ -178,6 +180,13 @@ export class UbicacionInExComponent implements OnInit {
         .subscribe((datos:any)=>{
           this.ubicaciones2 = datos.ubicaciones;
         })
+  }
+
+  tipoEquipoFunction(){
+    let urlActual =  window.location.href;
+    let extraer = urlActual.split('/');
+    let tipo = extraer[5];
+    this.tipoEquipo = tipo;
   }
 
 }

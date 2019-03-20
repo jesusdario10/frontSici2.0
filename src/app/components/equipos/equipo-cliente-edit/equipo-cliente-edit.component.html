@@ -191,6 +191,147 @@
   
                       
                     </div>
+                    <div  *ngIf="sub_tipo == 'TRANSMISORES' && tipoEquipo == 'INSTRUMENTACION' ">
+                      <hr>
+                      <div class="row sinpaddintop">
+                          <div class="col-md-2 sinpaddintop">
+                              <label >Tipo</label>
+                              <select class="form-control" name='subtipoFuncionEquipo' [(ngModel)]="subtipoFuncionEquipo" (change)="subtipoFuncionEquipo1($event)"  >
+                                 <option disabled>Elija</option>
+                                 <option>PRESION</option>
+                                 <option>TEMPERATURA</option>
+                                 <option>FLUJO</option>
+                                 <option>NIVEL</option>
+                              </select>
+                        </div>
+                        <div class="col-md-2 sinpaddintop">
+                            <label >Nomen</label>
+                            <select class="form-control" name='nomenclatura' [(ngModel)]="nomenclatura" >
+                               <option disabled>Elija</option>
+                               <option>TT</option>
+                               <option>PT</option>
+                               <option>FT</option>
+                               <option>LT</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2 sinpaddintop">
+                          <div class="form-group sinpaddintop">
+                            <label for="marca">Marca</label>
+                            <input type="text" class="form-control" name='marca' [(ngModel)]="marca" >
+                          </div>
+                        </div>
+                        <div class="col-md-2 sinpaddintop">
+                          <div class="form-group sinpaddintop">
+                            <label for="serial">Serial</label>
+                            <input type="text" class="form-control" name='serial' [(ngModel)]="serial" >
+                          </div>
+                        </div>
+                        <div class="col-md-2 sinpaddintop">
+                            <div class="form-group sinpaddintop">
+                              <label for="tag">Tag</label>
+                              <input type="text" class="form-control" name='tag' [(ngModel)]="tag" >
+                            </div>
+                          </div>
+                          <div class="col-md-2 sinpaddintop">
+                            <div class="form-group sinpaddintop">
+                              <label for="modelo">Modelo</label>
+                              <input type="text" class="form-control" name='modelo' [(ngModel)]="modelo" >
+                            </div>
+                          </div>
+                          <div class="col-md-2 sinpaddintop">
+                              <label>Carcaza</label>
+                              <select class="form-control"   name='carcaza' [(ngModel)]="carcaza"  >
+                                 <option disabled>Elija</option>
+                                 <option>ACERO</option>
+                                 <option>HIERRO</option>
+                                 <option>PLASTICO</option>
+                              </select>
+                            </div>
+                          <div class="col-md-2 sinpaddintop">
+                              <div class="form-group sinpaddintop">
+                                <label for="modelo">Al/electrica</label>
+                                <input type="text" class="form-control" name='al_electrica' [(ngModel)]="alimientacion_electrica" >
+                              </div>
+                          </div>
+                          <div class="col-md-2 sinpaddintop">
+                              <div class="form-group sinpaddintop">
+                                <label for="modelo">Exactitud</label>
+                                <input type="text" class="form-control" name='exactitud' [(ngModel)]="exactitud" >
+                              </div>
+                          </div>
+                          <div class="col-md-2 sinpaddintop">
+                              <label>El/medicion</label>
+                              <select class="form-control"   name='ele_medicion' [(ngModel)]="elemento_medicion"  >
+                                 <option disabled>Elija</option>
+                                 <option>DIAFRAGMA</option>
+                                 <option>PRESION DIFERENCIAL</option>
+                                 <option>TERMOCUPLA</option>
+                              </select>
+                          </div>
+                          <div class="col-md-2 sinpaddintop">
+                              <label>Tipo/Element</label>
+                              <select class="form-control"   name='tipo_elemento' [(ngModel)]="tipo_elemento" >
+                                 <option disabled>Elija</option>
+                                 <option>E</option>
+                                 <option>N</option>
+                                 <option>K</option>
+                                 <option>J</option>
+                              </select>
+                          </div>
+
+                          <div class="col-md-2 sinpaddintop">
+                            <div class="form-group sinpaddintop">
+                              <label >Rango Min</label>
+                              <input type="number" class="form-control" min='0' name='rango_min' [(ngModel)]="rango_min" >
+                            </div>
+                          </div>
+                          <div class="col-md-2 sinpaddintop">
+                            <div class="form-group sinpaddintop">
+                              <label >Rango Max</label>
+                              <input type="number" class="form-control" min='0' name='rango_max' [(ngModel)]="rango_max" >
+                            </div>
+                          </div>
+                          <div class="col-md-2 sinpaddintop">
+                              <div class="form-group sinpaddintop">
+                                <label for="modelo">Comunicacion</label>
+                                <input type="text" class="form-control" name='comunicacion' [(ngModel)]="comunicacion" >
+                              </div>
+                          </div>
+                          <div class="col-md-2 sinpaddintop" *ngIf="subtipoFuncionEquipo != 'TEMPERATURA'" >
+                              <div class="form-group sinpaddintop">
+                                <label for="modelo">M/diafragma</label>
+                                <input type="text" class="form-control" name='m_diafragma' [(ngModel)]="material_diafragma">
+                              </div>
+                          </div>
+                          <div class="col-md-2 sinpaddintop">
+                              <div class="form-group sinpaddintop">
+                                <label for="modelo">M/Cuerpo</label>
+                                <input type="text" class="form-control" name='m_cuerpo' [(ngModel)]="material_cuerpo" >
+                              </div>
+                          </div>
+                          <div class="col-md-2 sinpaddintop">
+                              <div class="form-group sinpaddintop">
+                                <label for="modelo">Manifold</label>
+                                <input type="text" class="form-control" name='manifold' [(ngModel)]="tipo_manifold" >
+                              </div>
+                          </div>
+                          <div class="col-md-2 sinpaddintop">
+                              <div class="form-group sinpaddintop">
+                                <label for="modelo">F/manifold</label>
+                                <input type="text" class="form-control" name='f_manifold' [(ngModel)]="fabricante_manifold" >
+                              </div>
+                          </div>
+                          <div *ngIf="subtipoFuncionEquipo != 'TEMPERATURA'" class="col-md-2 sinpaddintop">
+                              <div class="form-group sinpaddintop">
+                                <label for="modelo">R especial</label>
+                                <input type="text" class="form-control" name='req_especial' [(ngModel)]="req_especial" >
+                              </div>
+                          </div>
+                      </div>
+                      <div style="text-align:center">
+                          <input type="button" (click)="editEquipoCliente()" class="btn btn-outline-success" value="Agregar">
+                      </div>
+                    </div>
                 </div>
               </div>
             </div>

@@ -82,16 +82,16 @@ export class EquipoService {
     )
   }
   //subir el archivo excel al backend
-  subirEquiposxlsx(archivo:File,  tercero){
-    this._subirArchivos.subirArchivo(archivo, 'equipo', tercero)
+  subirEquiposxlsx(archivo:File,  tercero, tipoEquipo){
+    this._subirArchivos.subirArchivo(archivo, 'equipo', tercero, tipoEquipo)
       .then(resp=>{
         let mensaje:any = resp;
-       this.leerDatosCargosJson(resp)
-       if(mensaje.message == "Archivo errado"){
-        swal('Error', mensaje.message, 'error')
-       }else{
-        swal('Exito', "Archivo Recibido", 'success')
-       }
+        this.leerDatosCargosJson(resp)
+        if(mensaje.message == "Archivo errado"){
+          swal('Error', mensaje.message, 'error')
+        }else{
+          swal('Exito', "Archivo Recibido", 'success')
+        }
        
       })
       .catch(resp=>{
@@ -107,11 +107,11 @@ export class EquipoService {
     return this.datosAsubir;
   }  
   //de esta manera envio el json al backend para crear los equipos en la db
-  importarEquipos(equipos:any[], tercero:string){
+  importarEquipos(equipos:any[], tercero:string, tipoEquipo){
     let params = JSON.stringify(equipos);
     let headers = new HttpHeaders().set('Content-Type', 'application/json')
                                    .set('Authorization', this.token);
-     return this._http.post(this.URL+'import/importar/equipos/'+tercero, params, {headers:headers}).pipe(
+     return this._http.post(this.URL+'import/importar/equipos/'+tercero+'/'+tipoEquipo, params, {headers:headers}).pipe(
       map((resp:any)=>{
         return resp;
       })

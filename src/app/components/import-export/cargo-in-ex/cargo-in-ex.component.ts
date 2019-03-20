@@ -22,6 +22,7 @@ export class CargoInExComponent implements OnInit {
   public repetidas;
   public hayCargo;
   public validados;
+  public tipoEquipo;
   
   constructor(
     private _cargoService : CargoService,
@@ -38,6 +39,7 @@ export class CargoInExComponent implements OnInit {
 
   ngOnInit() {
     this.identity = this._userServices.getIdentity();
+    this.tipoEquipoFunction();
       //Este jquery activa la funcionalidad del input file para que se vea bien
       $(document).ready(function() {
         // Basic
@@ -101,7 +103,7 @@ export class CargoInExComponent implements OnInit {
   cambiarArchivo()  {
     this.validar = 1;
     this.carga = 0;
-    this._cargoService.subirCargosxlsx(this.archivoSubir, this.identity.tercero);       
+    this._cargoService.subirCargosxlsx(this.archivoSubir, this.identity.tercero, this.tipoEquipo);       
   }
   //Capturamos el json que nos devuelve el backend y lo traemso al componente
   revisarDatos(){
@@ -178,6 +180,12 @@ export class CargoInExComponent implements OnInit {
           this.cargos2 = datos.cargos;
 
         })
+  }
+  tipoEquipoFunction(){
+    let urlActual =  window.location.href;
+    let extraer = urlActual.split('/');
+    let tipo = extraer[5];
+    this.tipoEquipo = tipo;
   }
 
 }

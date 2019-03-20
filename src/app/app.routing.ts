@@ -39,6 +39,8 @@ import { LibreriaInExtComponent } from './components/import-export/libreria-in-e
 import { EquipoInExtComponent } from './components/import-export/equipo-in-ext/equipo-in-ext.component';
 import { OrdenesInExComponent } from './components/import-export/ordenes-in-ex/ordenes-in-ex.component';
 import { BusquedasComponent } from './components/busquedas/busquedas.component';
+import { SubidaEquiposComponent } from './components/import-export/subida-equipos/subida-equipos.component';
+
 
 
 
@@ -79,9 +81,10 @@ const appRoutes : Routes = [
     {path: 'import-export/cargos', component: CargoInExComponent, canActivate:[UserGuard]},
     {path: 'import-export/ubicacion', component: UbicacionInExComponent, canActivate:[UserGuard]},
     {path: 'import-export/librerias', component: LibreriaInExtComponent, canActivate:[UserGuard]},
-    {path: 'import-export/equipo', component: EquipoInExtComponent, canActivate:[UserGuard]},
+    {path: 'import-export/equipo/:tipo', component: EquipoInExtComponent, canActivate:[UserGuard]},
     {path: 'import-export/orden', component: OrdenesInExComponent, canActivate:[UserGuard]},
     {path: 'busquedas/:page', component: BusquedasComponent, canActivate:[UserGuard]},
+    {path: 'import-export/subirequipo', component: SubidaEquiposComponent, canActivate:[UserGuard]},
     {path: '**', component: ErrorComponent},
 ];
 

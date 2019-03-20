@@ -65,6 +65,7 @@ import { EquipoInExtComponent } from './components/import-export/equipo-in-ext/e
 import { SubirArchivosService } from './services/subir-archivos.service';
 import { OrdenesInExComponent } from './components/import-export/ordenes-in-ex/ordenes-in-ex.component';
 import { BusquedasComponent } from './components/busquedas/busquedas.component';
+import { SubidaEquiposComponent } from './components/import-export/subida-equipos/subida-equipos.component';
 
 
 
@@ -111,6 +112,7 @@ import { BusquedasComponent } from './components/busquedas/busquedas.component';
     EquipoInExtComponent,
     OrdenesInExComponent,
     BusquedasComponent,
+    SubidaEquiposComponent,
     
 
 

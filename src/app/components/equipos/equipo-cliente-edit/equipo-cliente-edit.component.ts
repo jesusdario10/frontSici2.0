@@ -41,6 +41,15 @@ export class EquipoClienteEditComponent implements OnInit {
   tipo_elemento;
   indicador_auxiliar;
   req_especial;
+  //Transmisores
+  alimientacion_electrica;
+  exactitud;
+  elemento_medicion;
+  comunicacion;
+  material_diafragma;
+  material_cuerpo;
+  tipo_manifold;
+  fabricante_manifold;
 
  
   constructor(
@@ -66,6 +75,15 @@ export class EquipoClienteEditComponent implements OnInit {
   capturasubtipo(event){
     this.sub_tipo = event.path[0].value;
     this.equipo.subtipo = this.sub_tipo;
+  }
+  subtipoFuncionEquipo1(event){
+    this.subtipoFuncionEquipo = event.path[0].value;
+    if(this.subtipoFuncionEquipo=='TEMPERATURA'){
+      this.material_diafragma == '';
+      this.req_especial == '';
+    }
+    this.equipo.subtipoFuncionEquipo = this.subtipoFuncionEquipo;
+    console.log(this.subtipoFuncionEquipo);
   }
   //Listar un solo Equipo del cliente
   listarUnsoloEquipoCliente(){
@@ -97,6 +115,15 @@ export class EquipoClienteEditComponent implements OnInit {
           this.tipo_elemento = this.equipo.tipo_elemento;
           this.indicador_auxiliar = this.equipo.indicador_auxiliar;
           this.req_especial = this.equipo.req_especial;
+          //transmisores
+          this.alimientacion_electrica = this.equipo.alimientacion_electrica;
+          this.exactitud = this.equipo.exactitud;
+          this.elemento_medicion = this.equipo.elemento_medicion;
+          this.comunicacion = this.equipo.comunicacion;
+          this.material_diafragma = this.equipo.material_diafragma;
+          this.material_cuerpo = this.equipo.material_cuerpo;
+          this.tipo_manifold = this.equipo.tipo_manifold;
+          this.fabricante_manifold = this.equipo.fabricante_manifold;
           console.log(this.equipo);
         })        
   }
@@ -124,6 +151,13 @@ export class EquipoClienteEditComponent implements OnInit {
       tipo_elemento: this.tipo_elemento,
       indicador_auxiliar: this.indicador_auxiliar,
       req_especial: this.req_especial,
+      alimientacion_electrica : this.alimientacion_electrica,
+      exactitud : this.exactitud,
+      elemento_medicion : this.elemento_medicion,
+      comunicacion : this.comunicacion,
+      material_diafragma : this.material_diafragma,
+      material_cuerpo : this.material_cuerpo,
+      tipo_manifold : this.tipo_manifold,
       usuario_creador : this.identity._id,
       tercero : this.identity.tercero
     };
