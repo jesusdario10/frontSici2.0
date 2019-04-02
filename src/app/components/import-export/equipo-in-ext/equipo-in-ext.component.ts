@@ -131,8 +131,14 @@ export class EquipoInExtComponent implements OnInit {
          this.hayEquipos = 1;
          for(var i = 0; i< equiposJson.length; i++){
             for(var j = 0; j < this.equipos2.length; j++){
-              if(equiposJson[i].serial== this.equipos2[j].serial){
-                equiposJson[i].subtipo_funcionamiento_equipo = "Equipo ya Existe";
+              if(equiposJson[i].serial== this.equipos2[j].serial || equiposJson[i].tag == this.equipos2[j].tag ){
+                equiposJson[i].subtipo_funcionamiento_equipo = "Serial ya Existe";
+                equiposJson[i].subtipo = "Eliminelo del archivo";
+                this.existentes = 1;
+                contadorDeIguales = contadorDeIguales + 1;   
+              }
+              if(equiposJson[i].tag == this.equipos2[j].tag ){
+                equiposJson[i].subtipo_funcionamiento_equipo = "Tag ya Existe";
                 equiposJson[i].subtipo = "Eliminelo del archivo";
                 this.existentes = 1;
                 contadorDeIguales = contadorDeIguales + 1;   

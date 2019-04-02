@@ -79,6 +79,7 @@ export class OrdenesInExComponent implements OnInit {
    }
 
   ngOnInit() {
+    this.tipoEquipoFunction();
     this.identity = this._userServices.getIdentity();
           //Este jquery activa la funcionalidad del input file para que se vea bien
           $(document).ready(function() {
@@ -143,6 +144,7 @@ export class OrdenesInExComponent implements OnInit {
   }  
   //subimos el archivo al backend
   cambiarArchivo()  {
+    console.log(this.tipoEquipo);
     this._ordenService.subirOrdenesxlsx(this.archivoSubir, this.identity.tercero, this.tipoEquipo); 
     this.validar = 1;
     this.carga = 0;      
@@ -152,7 +154,7 @@ export class OrdenesInExComponent implements OnInit {
     let ordenJson = this._ordenService.RevisarDatos();
     console.log(ordenJson);
     this.hayOrden = 1;
-    this.ordenes = ordenJson;
+    this.ordenes = ordenJson; 
     this.ExisteEquipo = 0;
     this.ExisteLibreria = 0;
     this.ExisteUbicacion = 0;
@@ -257,8 +259,9 @@ export class OrdenesInExComponent implements OnInit {
   tipoEquipoFunction(){
     let urlActual =  window.location.href;
     let extraer = urlActual.split('/');
-    let tipo = extraer[5];
+    let tipo = extraer[4];
     this.tipoEquipo = tipo;
+   
   }
 
 }

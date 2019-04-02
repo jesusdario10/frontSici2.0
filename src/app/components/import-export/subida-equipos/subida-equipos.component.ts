@@ -23,6 +23,9 @@ export class SubidaEquiposComponent implements OnInit {
     if(value == 'Valvulas'){
       this.router.navigate(['/import-export/equipo/Valvulas']);
     }
+    if(value == 'Switches'){
+      this.router.navigate(['/import-export/equipo/Switches']);
+    }
   }
 
 }

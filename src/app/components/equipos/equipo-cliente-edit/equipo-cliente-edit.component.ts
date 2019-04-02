@@ -42,7 +42,7 @@ export class EquipoClienteEditComponent implements OnInit {
   indicador_auxiliar;
   req_especial;
   //Transmisores
-  alimientacion_electrica;
+  alimentacion_electrica;
   exactitud;
   elemento_medicion;
   comunicacion;
@@ -94,6 +94,7 @@ export class EquipoClienteEditComponent implements OnInit {
     this._equipoServices.listarUnSoloEquipoCliente(this.idEquipo)
         .subscribe((datos:any)=>{
           this.equipo = datos.equipo;
+          console.log(this.equipo.alimentacion_electrica);
            
           this.tipoEquipo = this.equipo.tipo;
           this.sub_tipo = this.equipo.subtipo;
@@ -116,7 +117,7 @@ export class EquipoClienteEditComponent implements OnInit {
           this.indicador_auxiliar = this.equipo.indicador_auxiliar;
           this.req_especial = this.equipo.req_especial;
           //transmisores
-          this.alimientacion_electrica = this.equipo.alimientacion_electrica;
+          this.alimentacion_electrica = this.equipo.alimentacion_electrica;
           this.exactitud = this.equipo.exactitud;
           this.elemento_medicion = this.equipo.elemento_medicion;
           this.comunicacion = this.equipo.comunicacion;
@@ -151,7 +152,7 @@ export class EquipoClienteEditComponent implements OnInit {
       tipo_elemento: this.tipo_elemento,
       indicador_auxiliar: this.indicador_auxiliar,
       req_especial: this.req_especial,
-      alimientacion_electrica : this.alimientacion_electrica,
+      alimentacion_electrica : this.alimentacion_electrica,
       exactitud : this.exactitud,
       elemento_medicion : this.elemento_medicion,
       comunicacion : this.comunicacion,
@@ -161,16 +162,20 @@ export class EquipoClienteEditComponent implements OnInit {
       usuario_creador : this.identity._id,
       tercero : this.identity.tercero
     };
-    console.log(this.idEquipo);
+    console.log(editEquipoCliente);
 
     this._equipoServices.UpdateEquiposCliente(editEquipoCliente, this.idEquipo)
         .subscribe((datos:any)=>{
           console.log(datos);
-          this.listarUnsoloEquipoCliente();
           swal('!Exito', "Se ha Editado su Equipo", "success");
+          this.listarUnsoloEquipoCliente();
         })
 
-  }    
+  }
+  //Capturando el funcionamiento
+  funcionEquipo(event){
+    this.funcionamiento = event.path[0].value;
+  }   
 
 
 

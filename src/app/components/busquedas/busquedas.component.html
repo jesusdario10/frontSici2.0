@@ -19,10 +19,9 @@
                 </div>
               </div>
             </div>
-            <br>
-            
+            <br>   
           <div *ngIf="simple =='activada'" class="row">
-              <div class="col-md-12" style="text-align:center">
+              <div class="col-md-6" style="text-align:center">
                 <div class="card">
                   <div class="card-body">
                       <h4>Serial</h4>
@@ -31,7 +30,15 @@
                 </div>
                 <br><br>
               </div>
-
+              <div class="col-md-6" style="text-align:center">
+                <div class="card">
+                  <div class="card-body">
+                      <h4>Tag</h4>
+                      <input type="text" class="form-control" #input2 (keyup)="buscarEquiposporTag(input2.value)">
+                  </div>
+                </div>
+                <br><br>
+            </div>
             <div class="col-md-12" style="text-align:center">
               <div class="card">
                 <div class="card-body">
@@ -44,7 +51,7 @@
                           <th class="centrado">Tipo</th>
                           <th class="centrado">Subtipo</th>
                           <th class="centrado">Funcion</th>
-                          <th class="centrado">Serial</th>
+                          <th class="centrado">tag</th>
                           <th class="centrado">Marca</th>
                           <th class="centrado">Descripcion</th>
                           <th class="centrado">Edit</th>
@@ -55,17 +62,96 @@
                           <td>{{equipo.tipo}}</td>
                           <td>{{equipo.subtipo}}</td>
                           <td>{{equipo.subtipoFuncionEquipo}}</td>
-                          <td>{{equipo.serial}}</td>
+                          <td>{{equipo.tag}}</td>
                           <td>{{equipo.marca}}</td>
                           <td style="text-align:justify">
-                            (<strong>Modelo:</strong> {{equipo.modelo}}) (<strong>Nomenclatura:</strong> {{equipo.nomenclatura}} )
-                            (<strong>Funcionamiento:</strong>{{equipo.funcionamiento}}) (<strong>Dial:</strong>{{equipo.tamano_dial}})
-                            (<strong>Dimension conexion:</strong> {{equipo.dimension_conexion}}) (<strong>Tipo de conexion:</strong>{{equipo.tipo_conexion}})
-                            (<strong>Material carcaza:</strong>) {{equipo.material_carcaza}} (<strong>Unidad de rango:</strong > {{equipo.unidades_rango}})
-                            (<strong>Rango min:</strong>  {{equipo.rango_min}}) (<strong>Rango max:</strong >{{equipo.rango_max}})  
-                            (<strong>P.Funcionamiento:</strong> {{equipo.p_funcionamiento}}) (<strong>Tipo de elemento:</strong> {{equipo.tipo_elemento}} )
-                            (<strong>Indicador auxiliar:</strong>  {{equipo.indicador_auxiliar}}) (<strong>Requerimiento especial:</strong >{{equipo.req_especial}})  
+                            <!--TRANSMISORES-->
+                            <p *ngIf="equipo.tipo == 'INSTRUMENTACION' && equipo.subtipo =='TRANSMISORES' && equipo.subtipoFuncionEquipo == 'PRESION'">
+                              (<strong>Modelo:</strong> {{equipo.modelo}}) (<strong>Serial:</strong> {{equipo.serial}} )
+                              (<strong>Exactitud:</strong> {{equipo.exactitud}}) (<strong>Al/Electrica:</strong> {{equipo.alimentacion_electrica}} )
+                              (<strong>P/Medicion:</strong> {{equipo.elemento_medicion}}) (<strong>Rango min:</strong>  {{equipo.rango_min}}) 
+                              (<strong>Rango max:</strong >{{equipo.rango_max}}) (<strong>Comunicacion</strong >{{equipo.comunicacion}})  
+                              (<strong>M/cuerpo</strong >{{equipo.material_cuerpo}})  (<strong>F/manifold</strong >{{equipo.fabricante_manifold}}) 
+                            </p>
+                            <p *ngIf="equipo.tipo == 'INSTRUMENTACION' && equipo.subtipo =='TRANSMISORES' &&  equipo.subtipoFuncionEquipo == 'TEMPERATURA'">
+                              (<strong>Modelo:</strong> {{equipo.modelo}}) (<strong>Serial:</strong> {{equipo.serial}} )
+                              (<strong>Exactitud:</strong> {{equipo.exactitud}}) (<strong>Al/Electrica:</strong> {{equipo.alimentacion_electrica}} )
+                              (<strong>El/medicion:</strong> {{equipo.elemento_medicion}}) (<strong>Tipo/Element:</strong> {{equipo.tipo_elemento}}) 
+                              (<strong>Rango min:</strong>  {{equipo.rango_min}}) (<strong>Rango max:</strong >{{equipo.rango_max}})  
+                              (<strong>M/cuerpo:</strong> {{equipo.material_cuerpo}})  
+                            </p>
+                            <p *ngIf="equipo.tipo == 'INSTRUMENTACION' && equipo.subtipo =='TRANSMISORES' && equipo.subtipoFuncionEquipo == 'FLUJO'">
+                              (<strong>Modelo:</strong> {{equipo.modelo}}) (<strong>Serial:</strong> {{equipo.serial}} )
+                              (<strong>Exactitud:</strong> {{equipo.exactitud}}) (<strong>Al/Electrica:</strong> {{equipo.alimentacion_electrica}} )
+                              (<strong>El/medicion:</strong> {{equipo.elemento_medicion}}) (<strong>Tipo/Element:</strong> {{equipo.tipo_elemento}})  
+                              (<strong>Rango min:</strong>  {{equipo.rango_min}})(<strong>Rango max:</strong >{{equipo.rango_max}})   
+                              (<strong>M/diafragma:</strong>  {{equipo.material_diafragma}}) (<strong>M/cuerpo</strong >{{equipo.material_cuerpo}})
+                              (<strong>Manifold</strong >{{equipo.tipo_manifold}})  (<strong>F/manifold</strong >{{equipo.fabricante_manifold}}) 
+                            </p>
+                            <p *ngIf="equipo.tipo == 'INSTRUMENTACION' && equipo.subtipo =='TRANSMISORES' && equipo.subtipoFuncionEquipo == 'NIVEL'">
+                              (<strong>Modelo:</strong> {{equipo.modelo}}) (<strong>Serial:</strong> {{equipo.serial}} )
+                              (<strong>Exactitud:</strong> {{equipo.exactitud}}) (<strong>Al/Electrica:</strong> {{equipo.alimentacion_electrica}} )
+                              (<strong>El/medicion:</strong> {{equipo.elemento_medicion}}) (<strong>Tipo/Element:</strong> {{equipo.tipo_elemento}})  
+                              (<strong>Rango min:</strong>  {{equipo.rango_min}})(<strong>Rango max:</strong >{{equipo.rango_max}})   
+                              (<strong>M/diafragma:</strong>  {{equipo.material_diafragma}}) (<strong>M/cuerpo</strong >{{equipo.material_cuerpo}})
+                              (<strong>Manifold</strong >{{equipo.tipo_manifold}})  (<strong>F/manifold</strong >{{equipo.fabricante_manifold}}) 
+                            </p>
+                            <!--INDICADORES-->
+                            <p *ngIf="equipo.tipo == 'INSTRUMENTACION' && equipo.subtipo =='INDICADORES' && equipo.subtipoFuncionEquipo == 'PRESION'">
+                              (<strong>Modelo:</strong>{{equipo.modelo}})(<strong>Serial:</strong> {{equipo.serial}} )
+                              (<strong>Funcionamiento:</strong>{{equipo.funcionamiento}})(<strong>Dial:</strong>{{equipo.tamano_dial}})
+                              (<strong>Conexion Ø:</strong> {{equipo.dimension_conexion}}) (<strong>Tipo de conexion:</strong>{{equipo.tipo_conexion}})
+                              (<strong>Unidad Ing:</strong > {{equipo.unidades_rango}})(<strong>Rango min:</strong>  {{equipo.rango_min}}) 
+                              (<strong>Rango max:</strong >{{equipo.rango_max}})  
+                              (<strong>P.Funcionamiento:</strong> {{equipo.p_funcionamiento}})
+                              (<strong>Indicador auxiliar:</strong>  {{equipo.indicador_auxiliar}}) (<strong>Requerimiento especial:</strong >{{equipo.req_especial}})  
+                            </p>
+                            <p *ngIf="equipo.tipo == 'INSTRUMENTACION' && equipo.subtipo =='INDICADORES' && equipo.subtipoFuncionEquipo == 'TEMPERATURA'">
+                              (<strong>Modelo:</strong>{{equipo.modelo}})(<strong>Serial:</strong> {{equipo.serial}} )
+                              (<strong>Funcionamiento:</strong>{{equipo.funcionamiento}})(<strong>Dial:</strong>{{equipo.tamano_dial}})
+                              (<strong>Conexion Ø:</strong> {{equipo.dimension_conexion}}) (<strong>Tipo de conexion:</strong>{{equipo.tipo_conexion}})
+                              (<strong>Unidad Ing:</strong > {{equipo.unidades_rango}})(<strong>Rango min:</strong>  {{equipo.rango_min}}) 
+                              (<strong>Rango max:</strong >{{equipo.rango_max}})  
+                              (<strong>P.Funcionamiento:</strong> {{equipo.p_funcionamiento}})(<strong>Tipo Elemento</strong> {{equipo.tipo_elemento}})
+                              (<strong>Indicador auxiliar:</strong>  {{equipo.indicador_auxiliar}}) (<strong>Requerimiento especial:</strong >{{equipo.req_especial}}) 
+                            </p>
+                            <p *ngIf="equipo.tipo == 'INSTRUMENTACION' && equipo.subtipo =='INDICADORES' && equipo.subtipoFuncionEquipo == 'PRESION DIFERENCIAL' ">
+                              (<strong>Modelo:</strong>{{equipo.modelo}})(<strong>Serial:</strong> {{equipo.serial}} )
+                              (<strong>Funcionamiento:</strong>{{equipo.funcionamiento}})(<strong>Dial:</strong>{{equipo.tamano_dial}})
+                              (<strong>Conexion Ø:</strong> {{equipo.dimension_conexion}}) (<strong>Tipo de conexion:</strong>{{equipo.tipo_conexion}})
+                              (<strong>Unidad Ing:</strong > {{equipo.unidades_rango}})(<strong>Rango min:</strong>  {{equipo.rango_min}}) 
+                              (<strong>Rango max:</strong >{{equipo.rango_max}})  
+                              (<strong>P.Funcionamiento:</strong> {{equipo.p_funcionamiento}})
+                              (<strong>Indicador auxiliar:</strong>  {{equipo.indicador_auxiliar}}) (<strong>Requerimiento especial:</strong >{{equipo.req_especial}})  
+                            </p>
+                            <p *ngIf="equipo.tipo == 'INSTRUMENTACION' && equipo.subtipo =='INDICADORES' && equipo.subtipoFuncionEquipo == 'FLUJO'">
+                              (<strong>Modelo:</strong>{{equipo.modelo}})(<strong>Serial:</strong> {{equipo.serial}} )
+                              (<strong>Funcionamiento:</strong>{{equipo.funcionamiento}})(<strong>Dial:</strong>{{equipo.tamano_dial}})
+                              (<strong>Conexion Ø:</strong> {{equipo.dimension_conexion}}) (<strong>Tipo de conexion:</strong>{{equipo.tipo_conexion}})
+                              (<strong>Unidad Ing:</strong > {{equipo.unidades_rango}})(<strong>Rango min:</strong>  {{equipo.rango_min}}) 
+                              (<strong>Rango max:</strong >{{equipo.rango_max}})  
+                              (<strong>P.Funcionamiento:</strong> {{equipo.p_funcionamiento}})
+                              (<strong>Indicador auxiliar:</strong>  {{equipo.indicador_auxiliar}}) (<strong>Requerimiento especial:</strong >{{equipo.req_especial}})  
+                            </p>
+                            <p *ngIf="equipo.tipo == 'INSTRUMENTACION' && equipo.subtipo =='INDICADORES' && equipo.subtipoFuncionEquipo == 'NIVEL'">
+                              (<strong>Modelo:</strong>{{equipo.modelo}})(<strong>Serial:</strong> {{equipo.serial}} )
+                              (<strong>Funcionamiento:</strong>{{equipo.funcionamiento}})(<strong>Dial:</strong>{{equipo.tamano_dial}})
+                              (<strong>Conexion Ø:</strong> {{equipo.dimension_conexion}}) (<strong>Tipo de conexion:</strong>{{equipo.tipo_conexion}})
+                              (<strong>Unidad Ing:</strong > {{equipo.unidades_rango}})(<strong>Rango min:</strong>  {{equipo.rango_min}}) 
+                              (<strong>Rango max:</strong >{{equipo.rango_max}})  
+                              (<strong>P.Funcionamiento:</strong> {{equipo.p_funcionamiento}})
+                              (<strong>Indicador auxiliar:</strong>  {{equipo.indicador_auxiliar}}) (<strong>Requerimiento especial:</strong >{{equipo.req_especial}})  
+                            </p>
+                            <p *ngIf="equipo.tipo == 'INSTRUMENTACION' && equipo.subtipo =='SWITCHES'" >
+                              (<strong>Modelo:</strong>{{equipo.modelo}})(<strong>Serial:</strong> {{equipo.serial}} )
+                              (<strong>Al/Electrica:</strong> {{equipo.alimentacion_electrica}} )
+                              (<strong>Tipo de conexion:</strong>{{equipo.tipo_conexion}})
+                              (<strong>M/cuerpo</strong >{{equipo.material_cuerpo}})
+                              (<strong>Requerimiento especial:</strong >{{equipo.req_especial}})  
+                            </p>
+
                           </td>
+
                           <td style="text-align:center">
                               <i class="fas fa-edit pointer" [routerLink]="['/equiposClienteEdit', equipo._id]"></i>
                           </td>

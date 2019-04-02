@@ -43,7 +43,7 @@
                                    <option>FLUJO</option>
                                 </select>
                           </div>
-                          <div class="col-md-2 sinpaddintop">
+                          <!--<div class="col-md-2 sinpaddintop">
                               <label >Nomen</label>
                               <select class="form-control" name='nomenclatura' [(ngModel)]='nomenclatura' >
                                  <option disabled>Elija</option>
@@ -52,6 +52,12 @@
                                  <option>DPI</option>
                                  <option>FI</option>
                               </select>
+                          </div>-->
+                          <div class="col-md-2 sinpaddintop">
+                            <div class="form-group sinpaddintop">
+                              <label for="tag">Tag</label>
+                              <input type="text" class="form-control" name='tag' [(ngModel)]='tag' >
+                            </div>
                           </div>
                           <div class="col-md-2 sinpaddintop">
                             <div class="form-group sinpaddintop">
@@ -65,24 +71,27 @@
                               <input type="text" class="form-control" name='serial' [(ngModel)]='serial'>
                             </div>
                           </div>
-                          <div class="col-md-2 sinpaddintop">
-                            <div class="form-group sinpaddintop">
-                              <label for="tag">Tag</label>
-                              <input type="text" class="form-control" name='tag' [(ngModel)]='tag' >
-                            </div>
-                          </div>
+
                           <div class="col-md-2 sinpaddintop">
                             <div class="form-group sinpaddintop">
                               <label for="modelo">Modelo</label>
                               <input type="text" class="form-control" name='modelo' [(ngModel)]='modelo' >
                             </div>
                           </div>
-                          <div class="col-md-2 sinpaddintop">
+                        <div class="col-md-2 sinpaddintop">
                             <label>Funcionamiento</label>
-                            <select class="form-control"  name='funcionamiento' [(ngModel)]='funcionamiento'>
+                            <select class="form-control"  name='funcionamiento' [(ngModel)]='funcionamiento'  (change)="funcionEquipo($event)">
                                <option disabled>Elija</option>
                                <option>DIGITAL</option>
                                <option>ANALOGO</option>
+                            </select>
+                          </div>
+                          <div class="col-md-2 sinpaddintop"  *ngIf="funcionamiento == 'DIGITAL' || funcionamiento == 'ANALOGO' ">
+                            <label>Al/electrica</label>
+                            <select class="form-control"  name='alimientacionele' [(ngModel)]='alimentacion_electrica'>
+                               <option disabled>Elija</option>
+                               <option>24V</option>
+                               <option>110V</option>
                             </select>
                           </div>
                           <div class="col-md-2 sinpaddintop">
@@ -102,7 +111,7 @@
                               </select>
                             </div>
                             <div class="col-md-2 sinpaddintop">
-                                <label>DConexion</label>
+                                <label>Conexion Ø</label>
                                 <select class="form-control"  name='dimension_conexion' [(ngModel)]='dimension_conexion'  >
                                    <option disabled>Elija</option>
                                    <option>1/2"</option>
@@ -119,7 +128,7 @@
                                <option>NPT-F</option>
                             </select>
                           </div>
-                          <div class="col-md-2 sinpaddintop">
+                          <!--<div class="col-md-2 sinpaddintop">
                             <label>Carcaza</label>
                             <select class="form-control"   name='carcaza' [(ngModel)]='carcaza'   >
                                <option disabled>Elija</option>
@@ -127,7 +136,7 @@
                                <option>HIERRO</option>
                                <option>PLASTICO</option>
                             </select>
-                          </div>
+                          </div>-->
                           <div class="col-md-2 sinpaddintop">
                             <label>Uni_Rango</label>
                             <select class="form-control"  name='unidades_rango'   [(ngModel)]='unidades_rango'  >
@@ -153,13 +162,21 @@
                             <label>PFuncion</label>
                             <select class="form-control" name='p_funcionamiento' [(ngModel)]='p_funcionamiento' >
                                <option disabled>Elija</option>
-                               <option>BOURDON</option>
-                               <option>DIAFRAGNA</option>
-                               <option>DIGITAL</option>
-                               <option>PRESION</option>
+                               <option *ngIf="subtipoFuncionEquipo == 'PRESION'">BOURDON</option>
+                               <option *ngIf="subtipoFuncionEquipo == 'TEMPERATURA'">TC</option>
+                               <option *ngIf="subtipoFuncionEquipo == 'TEMPERATURA'">RTD</option>
+                               <option *ngIf="subtipoFuncionEquipo == 'TEMPERATURA'">BIMETALICO</option>
+                               <option *ngIf="subtipoFuncionEquipo == 'PRESION DIFERENCIAL'">DIAFRAGMA</option>
+                               <option *ngIf="subtipoFuncionEquipo == 'FLUJO'">PRESION DIREFENCIAL</option>
+                               <option *ngIf="subtipoFuncionEquipo == 'FLUJO'">CORIOLIS</option>
+                               <option *ngIf="subtipoFuncionEquipo == 'FLUJO'">VORTEX</option>
+                               <option *ngIf="subtipoFuncionEquipo == 'FLUJO'">TERMAL</option>
+                               <option *ngIf="subtipoFuncionEquipo == 'FLUJO'">TURBINA</option>
+                               <option *ngIf="subtipoFuncionEquipo == 'FLUJO'">ULTRASONIDO</option>
+                               <option *ngIf="subtipoFuncionEquipo == 'FLUJO'">ROTAMIENTO</option> 
                             </select>
                           </div>
-                          <div class="col-md-2 sinpaddintop">
+                          <div class="col-md-2 sinpaddintop" *ngIf="subtipoFuncionEquipo == 'TEMPERATURA'">
                             <label>Tipo Elemento</label>
                             <select class="form-control"  name='tipo_elemento' [(ngModel)]='tipo_elemento' >
                               <option disabled>Elija</option>
@@ -167,6 +184,15 @@
                               <option>N</option>
                               <option>K</option>
                               <option>J</option>
+                              <option>R</option>
+                              <option>S</option>
+                              <option>B</option>
+                              <option>V</option>
+                              <option>U</option>
+                              <option>Pt-100</option>
+                              <option>Pt-1000</option>
+                              <option>PTC</option>
+                              <option>NTC</option>
                             </select>
                           </div>
                           <div class="col-md-2 sinpaddintop">
@@ -204,7 +230,7 @@
                                  <option>NIVEL</option>
                               </select>
                         </div>
-                        <div class="col-md-2 sinpaddintop">
+                        <!--<div class="col-md-2 sinpaddintop">
                             <label >Nomen</label>
                             <select class="form-control" name='nomenclatura' [(ngModel)]="nomenclatura" >
                                <option disabled>Elija</option>
@@ -213,6 +239,12 @@
                                <option>FT</option>
                                <option>LT</option>
                             </select>
+                        </div>-->
+                        <div class="col-md-2 sinpaddintop">
+                          <div class="form-group sinpaddintop">
+                            <label for="tag">Tag</label>
+                            <input type="text" class="form-control" name='tag' [(ngModel)]="tag" >
+                          </div>
                         </div>
                         <div class="col-md-2 sinpaddintop">
                           <div class="form-group sinpaddintop">
@@ -226,19 +258,14 @@
                             <input type="text" class="form-control" name='serial' [(ngModel)]="serial" >
                           </div>
                         </div>
-                        <div class="col-md-2 sinpaddintop">
-                            <div class="form-group sinpaddintop">
-                              <label for="tag">Tag</label>
-                              <input type="text" class="form-control" name='tag' [(ngModel)]="tag" >
-                            </div>
-                          </div>
+
                           <div class="col-md-2 sinpaddintop">
                             <div class="form-group sinpaddintop">
                               <label for="modelo">Modelo</label>
                               <input type="text" class="form-control" name='modelo' [(ngModel)]="modelo" >
                             </div>
                           </div>
-                          <div class="col-md-2 sinpaddintop">
+                          <!--<div class="col-md-2 sinpaddintop">
                               <label>Carcaza</label>
                               <select class="form-control"   name='carcaza' [(ngModel)]="carcaza"  >
                                  <option disabled>Elija</option>
@@ -246,29 +273,65 @@
                                  <option>HIERRO</option>
                                  <option>PLASTICO</option>
                               </select>
+                            </div>-->
+                          <div class="col-md-2 sinpaddintop">
+                            <div class="form-group sinpaddintop">
+                              <label >Al/electrica</label>
+                              <select class="form-control" name="al_electrica"  [(ngModel)]="alimentacion_electrica">
+                                  <option>24V</option>
+                                  <option>110V</option>
+                              </select>
                             </div>
+                          </div>  
                           <div class="col-md-2 sinpaddintop">
                               <div class="form-group sinpaddintop">
-                                <label for="modelo">Al/electrica</label>
-                                <input type="text" class="form-control" name='al_electrica' [(ngModel)]="alimientacion_electrica" >
-                              </div>
-                          </div>
-                          <div class="col-md-2 sinpaddintop">
-                              <div class="form-group sinpaddintop">
-                                <label for="modelo">Exactitud</label>
+                                <label >Exactitud</label>
                                 <input type="text" class="form-control" name='exactitud' [(ngModel)]="exactitud" >
                               </div>
                           </div>
-                          <div class="col-md-2 sinpaddintop">
-                              <label>El/medicion</label>
+                          <div class="col-md-2 sinpaddintop" *ngIf="sub_tipo == 'TRANSMISORES' && subtipoFuncionEquipo == 'PRESION' ">
+                              <label>P/medicion</label>
                               <select class="form-control"   name='ele_medicion' [(ngModel)]="elemento_medicion"  >
                                  <option disabled>Elija</option>
                                  <option>DIAFRAGMA</option>
-                                 <option>PRESION DIFERENCIAL</option>
-                                 <option>TERMOCUPLA</option>
+                                 <option>MECANICO</option>
+                                 <option>SELLO</option>
                               </select>
                           </div>
-                          <div class="col-md-2 sinpaddintop">
+                          <div class="col-md-2 sinpaddintop" *ngIf="sub_tipo == 'TRANSMISORES' && subtipoFuncionEquipo == 'TEMPERATURA' ">
+                              <label>El/medicion</label>
+                              <select class="form-control"   name='ele_medicion' [(ngModel)]="elemento_medicion"  >
+                                 <option disabled>Elija</option>
+                                 <option>TC</option>
+                                 <option>RTD</option>
+                              </select>
+                          </div>
+                          <div class="col-md-2 sinpaddintop" *ngIf="sub_tipo == 'TRANSMISORES' && subtipoFuncionEquipo == 'FLUJO' ">
+                            <label>El/medicion</label>
+                            <select class="form-control"   name='ele_medicion' [(ngModel)]="elemento_medicion"  >
+                               <option disabled>Elija</option>
+                               <option>PRESION DIFERENCIAL</option>
+                               <option>CORIOLIS</option>
+                               <option>VORTEX</option>
+                               <option>MAGNETICO</option>
+                               <option>TERMAL</option>
+                               <option>TURBINA</option>
+                               <option>ULTRASONIC</option>
+                               <option>ROTAMIENTO</option>
+                            </select>
+                          </div>
+                          <div class="col-md-2 sinpaddintop" *ngIf="sub_tipo == 'TRANSMISORES' && subtipoFuncionEquipo == 'NIVEL' ">
+                            <label>El/medicion</label>
+                            <select class="form-control"   name='ele_medicion' [(ngModel)]="elemento_medicion"  >
+                               <option disabled>Elija</option>
+                               <option >PRESION DIFERENCIAL</option>
+                               <option >D/PW/D-SEALS</option>
+                               <option >DESPLAZAMIENTO</option>
+                               <option >MAGNETICO</option>
+                               <option >RADAR</option>
+                            </select>
+                          </div>
+                          <div class="col-md-2 sinpaddintop" *ngIf="sub_tipo == 'TRANSMISORES' && subtipoFuncionEquipo != 'PRESION' ">
                               <label>Tipo/Element</label>
                               <select class="form-control"   name='tipo_elemento' [(ngModel)]="tipo_elemento" >
                                  <option disabled>Elija</option>
@@ -291,42 +354,60 @@
                               <input type="number" class="form-control" min='0' name='rango_max' [(ngModel)]="rango_max" >
                             </div>
                           </div>
-                          <div class="col-md-2 sinpaddintop">
-                              <div class="form-group sinpaddintop">
-                                <label for="modelo">Comunicacion</label>
-                                <input type="text" class="form-control" name='comunicacion' [(ngModel)]="comunicacion" >
-                              </div>
+                          <div class="col-md-2 sinpaddintop" *ngIf="sub_tipo == 'TRANSMISORES' && subtipoFuncionEquipo == 'NIVEL' || subtipoFuncionEquipo == 'FLUJO' ">
+                            <div class="form-group sinpaddintop">
+                              <label for="modelo">M/diafragma</label>
+                              <input type="text" class="form-control" name='m_diafragma' [(ngModel)]="material_diafragma">
+                            </div>
+                         </div>
+                          <div class="col-md-2 sinpaddintop" *ngIf="sub_tipo == 'TRANSMISORES' && subtipoFuncionEquipo == 'PRESION' ">
+                            <div class="form-group sinpaddintop" >
+                              <label for="modelo">Comunicacion</label>
+                              <select class="form-control" name='comunicacion' [(ngModel)]="comunicacion">
+                                  <option class="elija" disabled>ELIJA</option>
+                                  <option>HART</option>
+                                  <option>SMART</option>
+                               </select>
+                            </div>
                           </div>
-                          <div class="col-md-2 sinpaddintop" *ngIf="subtipoFuncionEquipo != 'TEMPERATURA'" >
-                              <div class="form-group sinpaddintop">
-                                <label for="modelo">M/diafragma</label>
-                                <input type="text" class="form-control" name='m_diafragma' [(ngModel)]="material_diafragma">
-                              </div>
-                          </div>
+
+
                           <div class="col-md-2 sinpaddintop">
-                              <div class="form-group sinpaddintop">
-                                <label for="modelo">M/Cuerpo</label>
-                                <input type="text" class="form-control" name='m_cuerpo' [(ngModel)]="material_cuerpo" >
-                              </div>
+                            <div class="form-group sinpaddintop">
+                              <label for="modelo">M/Cuerpo</label>
+                              <select  class="form-control" name='m_cuerpo'  [(ngModel)]="material_cuerpo" >
+                                  <option class="elija" disabled>ELIJA</option>
+                                  <option>316 SS</option>
+                                  <option>304 SS</option>
+                               </select>
+                            </div>
                           </div>
-                          <div class="col-md-2 sinpaddintop">
-                              <div class="form-group sinpaddintop">
-                                <label for="modelo">Manifold</label>
-                                <input type="text" class="form-control" name='manifold' [(ngModel)]="tipo_manifold" >
-                              </div>
+
+                          <div class="col-md-2 sinpaddintop" *ngIf="sub_tipo == 'TRANSMISORES' && subtipoFuncionEquipo != 'TEMPERATURA' ">
+                            <div class="form-group sinpaddintop" >
+                              <label for="modelo">Manifold</label>
+                              <select  class="form-control" name='manifold'  [(ngModel)]="tipo_manifold">
+                                  <option class="elija" disabled>ELIJA</option>
+                                  <option>2 WAY</option>
+                                  <option>3 WAY</option>
+                                  <option>5 WAY</option>
+                               </select>
+                            </div>
                           </div>
-                          <div class="col-md-2 sinpaddintop">
+                          <div class="col-md-2 sinpaddintop" *ngIf="sub_tipo == 'TRANSMISORES' && subtipoFuncionEquipo != 'TEMPERATURA' ">
                               <div class="form-group sinpaddintop">
                                 <label for="modelo">F/manifold</label>
                                 <input type="text" class="form-control" name='f_manifold' [(ngModel)]="fabricante_manifold" >
                               </div>
                           </div>
-                          <div *ngIf="subtipoFuncionEquipo != 'TEMPERATURA'" class="col-md-2 sinpaddintop">
+                          
+                          <div class="col-md-2 sinpaddintop" *ngIf="subtipoFuncionEquipo != 'TEMPERATURA'" class="col-md-2 sinpaddintop">
                               <div class="form-group sinpaddintop">
                                 <label for="modelo">R especial</label>
                                 <input type="text" class="form-control" name='req_especial' [(ngModel)]="req_especial" >
                               </div>
                           </div>
+                          
                       </div>
                       <div style="text-align:center">
                           <input type="button" (click)="editEquipoCliente()" class="btn btn-outline-success" value="Agregar">

@@ -4,6 +4,8 @@ import { ActividadModel } from 'src/app/models/actividadModel';
 import { UserService } from 'src/app/services/user.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ExportExcelService } from 'src/app/services/export-excel.service';
+declare var jQuery:any;
+declare var $:any;
 
 @Component({
   selector: 'app-ordenes-cliente',
@@ -47,6 +49,7 @@ export class OrdenesClienteComponent implements OnInit {
   ngOnInit() {
     this.identity = this._UserService.getIdentity();
     this.actualPage();
+    
   }
   //Efectos
   leave(e){

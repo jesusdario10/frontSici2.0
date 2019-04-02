@@ -21,7 +21,8 @@ export class EquipoClienteComponent implements OnInit {
   public form1 : FormGroup;
   //Formulario Transmisores
   public form2 : FormGroup;
-  
+  //Formulario Transmisores
+  public form3 : FormGroup;  
   
 
   //Variables de formularios
@@ -29,6 +30,7 @@ export class EquipoClienteComponent implements OnInit {
   sub_tipo;
   sub_tipo_tipo;
   tipodeltipo;
+  funcionamiento;
 
 
   
@@ -51,6 +53,7 @@ export class EquipoClienteComponent implements OnInit {
       tag: [ "", Validators.required ],
       modelo: [ "", Validators.required ],
       funcionamiento: ["", Validators.required],
+      al_electrica : ["", Validators.required],
       tamano_dial : ["", Validators.required],
       dimension_conexion : [ "", Validators.required ],
       conexion: [ "", Validators.required ],
@@ -84,7 +87,64 @@ export class EquipoClienteComponent implements OnInit {
       f_manifold: [ "", Validators.required ],
       req_especial: [ "", Validators.required ]
     });
+    this.form3 = this.fb.group({
+      subtipoFuncionEquipo:["", Validators.required],//si
+      marca : ["", Validators.required],//si
+      serial : [ "", Validators.required ],//si
+      tag: [ "", Validators.required ],//ai
+      modelo: [ "", Validators.required ],//si
+      al_electrica : ["", Validators.required],//si
+      tipo_elemento: ["", Validators.required],
+      tipo_conexion: ["", Validators.required],
+      m_cuerpo: [ "", Validators.required ],
+      req_especial: [ "", Validators.required ]
+    });
 
+  }
+  //Crear Equipos
+  createEquipoClienteSwitch(form3, equipoForm3){
+    console.log("ya llegue aqui");
+    const formModel = this.form3.value;
+    let saveEquipo: EquipoModel ={
+      tipo : this.tipoEquipo,
+      subtipo : this.sub_tipo,
+      subtipoFuncionEquipo : formModel.subtipoFuncionEquipo as string,//si
+      marca: formModel.marca as string,//si
+      serial: formModel.serial as string,//si
+      tag: formModel.tag as string,//si
+      modelo: formModel.modelo as string,//si
+      alimentacion_electrica :formModel.al_electrica as string,
+      tipo_elemento : formModel.tipo_elemento as string,
+      tipo_conexion : formModel.tipo_conexion as string,
+      material_cuerpo : formModel.m_cuerpo as string,
+      req_especial : formModel.req_especial as string,
+      usuario_creador : this.identity._id,
+      tercero : this.identity.tercero
+    };
+    console.log(saveEquipo);
+    this._equipoServices.createEquipoCliente(saveEquipo)
+        .subscribe((datos:any)=>{
+          if(datos.message == "Equipo ya existe"){
+            swal("No es Posible", "Equipo ya Existe", "warning");         
+          }else if( datos.message == 'No completo los datos minimos requeridos'){
+            swal("error", "No completo los datos minimos requeridos", "warning");
+          }else{
+            swal("Exito", "Equipo Creado", "success");
+            form3.reset();
+            this.form3 = this.fb.group({
+              subtipoFuncionEquipo:["", Validators.required],//si
+              marca : ["", Validators.required],//si
+              serial : [ "", Validators.required ],//si
+              tag: [ "", Validators.required ],//ai
+              modelo: [ "", Validators.required ],//si
+              al_electrica : ["", Validators.required],//si
+              tipo_elemento: ["", Validators.required],
+              tipo_conexion: ["", Validators.required],
+              m_cuerpo: [ "", Validators.required ],
+              req_especial: [ "", Validators.required ]
+            });
+          }  
+    });
   }
   //Crear Equipos
   createEquipoClienteIndicadores(form1, EquipoFormE){
@@ -100,6 +160,7 @@ export class EquipoClienteComponent implements OnInit {
       tag: formModel.tag as string,
       modelo: formModel.modelo as string,
       funcionamiento: formModel.funcionamiento as string,
+      alimentacion_electrica :formModel.al_electrica as string,
       tamano_dial: formModel.tamano_dial as string,
       dimension_conexion: formModel.dimension_conexion as string,
       tipo_conexion: formModel.conexion as string,
@@ -118,14 +179,32 @@ export class EquipoClienteComponent implements OnInit {
     this._equipoServices.createEquipoCliente(saveEquipo)
         .subscribe((datos:any)=>{
           if(datos.message == "Equipo ya existe"){
-            swal("No es Posible", "Equipo ya Existe", "warning");
-
-            
+            swal("No es Posible", "Equipo ya Existe", "warning");            
           }else if( datos.message == 'No completo los datos minimos requeridos'){
             swal("error", "No completo los datos minimos requeridos", "warning");
           }else{
             swal("Exito", "Equipo Creado", "success");
-            //form1.reset();
+            this.form1 = this.fb.group({
+              subtipoFuncionEquipo:["", Validators.required],
+              nomenclatura: ["", Validators.required],
+              marca : ["", Validators.required],
+              serial : [ "", Validators.required ],
+              tag: [ "", Validators.required ],
+              modelo: [ "", Validators.required ],
+              funcionamiento: ["", Validators.required],
+              al_electrica : ["", Validators.required],
+              tamano_dial : ["", Validators.required],
+              dimension_conexion : [ "", Validators.required ],
+              conexion: [ "", Validators.required ],
+              carcaza: [ "", Validators.required ],
+              unidades_rango: ["", Validators.required],
+              rango_min : [0, Validators.required],
+              rango_max : [ 0, Validators.required ],
+              p_funcionamiento: [ "", Validators.required ],
+              tipo_elemento: [ "", Validators.required ],
+              indicador_auxiliar: [ "", Validators.required ],
+              req_especial: [ "", Validators.required ]
+            });
           }  
     });
   }
@@ -143,7 +222,7 @@ export class EquipoClienteComponent implements OnInit {
         tag: formModel.tag as string,
         modelo: formModel.modelo as string,
         material_carcaza: formModel.carcaza as string,
-        alimientacion_electrica :formModel.al_electrica as string,
+        alimentacion_electrica :formModel.al_electrica as string,
         exactitud : formModel.exactitud as string,
         elemento_medicion : formModel.ele_medicion as string,
         tipo_elemento : formModel.tipo_elemento as string,
@@ -169,7 +248,7 @@ export class EquipoClienteComponent implements OnInit {
               swal("error", "No completo los datos minimos requeridos", "warning");
             }else{
               swal("Exito", "Equipo Creado", "success");
-              //form1.reset();
+              form2.reset();
             }  
       });
   }
@@ -185,6 +264,11 @@ export class EquipoClienteComponent implements OnInit {
   //Captura de tipo de equipo
   subtipoFuncionEquipo(event){
     this.tipodeltipo = event.path[0].value;
+    console.log(this.tipodeltipo);
+  }
+  //Capturando el funcionamiento
+  funcionEquipo(event){
+    this.funcionamiento = event.path[0].value;
   }
  
 

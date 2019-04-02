@@ -79,8 +79,7 @@ export class BusquedasComponent implements OnInit {
         this.equipos = datos.equipos;
         this.total = datos.total;
         this.pages = datos.pages;
-        console.log(datos);
-  
+        
       })
   }
   //Buscar Equipos dede el campo input dinamicamente
@@ -93,6 +92,18 @@ export class BusquedasComponent implements OnInit {
         .subscribe((datos:any)=>{
           this.equipos = datos.equipos;
     })
-  }  
+  }
+  //Buscar Equipos dede el campo input dinamicamente
+  buscarEquiposporTag(termino:string){
+    if(termino.length<=0){
+      this.listarEquiposCliente(this.page)
+      return;
+    }
+    this._equipoServices.buscarEquiposInputDinamicoporTag(termino)
+        .subscribe((datos:any)=>{
+          this.equipos = datos.equipos;
+    })
+  }
+   
 
 }

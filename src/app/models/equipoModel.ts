@@ -20,7 +20,7 @@ export class EquipoModel{
         public tipo_elemento?: string,
         public indicador_auxiliar?: string,
         public req_especial?:string ,
-        public alimientacion_electrica?:string ,
+        public alimentacion_electrica?:string ,
         public exactitud?:string ,
         public elemento_medicion?:string ,
         public comunicacion?:string ,

@@ -47,11 +47,17 @@ export class EquipoService {
                                    .set('Authorization', this.token);
     return this._http.get(this.URL+'equipo/listarEquiposCliente/'+page, {headers:headers});
   }
-  //Buscar mediante el Input equipos para los clientes
-  buscarEquiposInputDinamico(terminio:string):Observable<any>{
+  //Buscar mediante el Input equipos para los clientes por el serial
+  buscarEquiposInputDinamico(termino:string):Observable<any>{
     let headers = new HttpHeaders().set('Content-Type', 'application/json')
                                      .set('Authorization', this.token);
-    return this._http.get(this.URL+'busqueda/equipos/'+terminio, {headers:headers});                               
+    return this._http.get(this.URL+'busqueda/equipos/'+termino, {headers:headers});                               
+  }
+  //Buscar mediante el Input equipos para los clientes por el tag
+  buscarEquiposInputDinamicoporTag(termino:string):Observable<any>{
+    let headers = new HttpHeaders().set('Content-Type', 'application/json')
+                                     .set('Authorization', this.token);
+    return this._http.get(this.URL+'busqueda/tag/'+termino, {headers:headers});                               
   }
   //Listar todos los equipos de un cliente en orden alfabetico
   listarTodoslosEquiposdelClientesinPaginacion(tercero:string):Observable<any>{
