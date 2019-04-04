@@ -1,0 +1,17 @@
+<h1>Angular ng-select <small class="text-muted"><a target="_blank" href="https://github.com/ng-select/ng-select">Open in Github</a></small></h1>
+<label>Your first ng-select</label>
+<ng-select [items]="cities"
+           bindLabel="name"
+           placeholder="Select city"
+           [(ngModel)]="selectedCity">
+</ng-select>
+
+<p>
+    Selected Equipo: {{selectedCity | json}}
+</p>
+
+
+<hr />
+
+
+<div style="margin-top:300px"></div>

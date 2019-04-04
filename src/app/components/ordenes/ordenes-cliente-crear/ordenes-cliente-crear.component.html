@@ -20,21 +20,31 @@
             </div>
               <div class="col-md-3">
                 <div class="form-group">  
-                    <div class="form-group ">
                       <label for="selectCargo">Ubicacion</label>
-                      <select class="form-control" name="ubicacionO"  formControlName="UbicacionO" required>
-                        <option *ngFor="let ubicacion of ubicaciones" [value]="ubicacion._id">{{ubicacion.nombre}}</option>
-                      </select>
-                    </div>
+                      <ng-select     
+                          [items]="ubicaciones"
+                          bindLabel="nombre"
+                          placeholder="Select Ubicacion"
+                          formControlName="UbicacionO"
+                          [(ngModel)]="selectedUbicacion">    
+                      </ng-select>
                 </div>  
               </div>
               <div class="col-md-3">
                 <div class="form-group">  
                   <div class="form-group ">
                     <label for="equipoO">Equipo</label>
-                    <select class="form-control" name="equipoO" formControlName="equipoO" required>
+                    <!--<select class="form-control" name="equipoO" formControlName="equipoO" required>
                       <option *ngFor="let equipo of equipos" [value]="equipo._id">{{equipo.serial}} | {{equipo.subtipo}}</option>
-                    </select>
+                    </select>-->
+                    <ng-select     
+                        [items]="equipos"
+                        bindLabel="serial"
+                        placeholder="Select Equipo"
+                        formControlName="equipoO"
+                        [(ngModel)]="selectedEquipo">    
+                    </ng-select>
+
                   </div>
                 </div> 
               </div>

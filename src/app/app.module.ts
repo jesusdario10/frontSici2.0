@@ -16,7 +16,9 @@ import {MatButtonModule,
         MatDatepickerModule,
         MatNativeDateModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { NgSelectModule } from '@ng-select/ng-select';
 import {FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 
 
@@ -66,6 +68,7 @@ import { SubirArchivosService } from './services/subir-archivos.service';
 import { OrdenesInExComponent } from './components/import-export/ordenes-in-ex/ordenes-in-ex.component';
 import { BusquedasComponent } from './components/busquedas/busquedas.component';
 import { SubidaEquiposComponent } from './components/import-export/subida-equipos/subida-equipos.component';
+import { SelectlistoComponent } from './components/selectlisto/selectlisto.component';
 
 
 
@@ -113,6 +116,7 @@ import { SubidaEquiposComponent } from './components/import-export/subida-equipo
     OrdenesInExComponent,
     BusquedasComponent,
     SubidaEquiposComponent,
+    SelectlistoComponent,
     
 
 
@@ -120,6 +124,7 @@ import { SubidaEquiposComponent } from './components/import-export/subida-equipo
   ],
   imports: [
     BrowserModule,
+    NgSelectModule,
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,

@@ -29,7 +29,8 @@ export class OrdenesClienteCrearComponent implements OnInit {
   form : FormGroup;
   formSubmit: boolean;
   
-
+  selectedEquipo : any;
+  selectedUbicacion : any;
 
   constructor(
     private _ubicacionService : UbicacionService,
@@ -86,7 +87,7 @@ export class OrdenesClienteCrearComponent implements OnInit {
   //Crear Orden para el Cliente
   crearOrdenCliente(form, OrdenForm){
     const formModel = this.form.value;
-
+    console.log(formModel.equipoO);
     let saveOrden : ActividadModel = {
       fecha_creacion: formModel.fechaCreacionO as string,
       fecha_requerida: formModel.fechaRequeridaO as string,
