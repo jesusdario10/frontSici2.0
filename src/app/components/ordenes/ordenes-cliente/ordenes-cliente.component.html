@@ -158,9 +158,9 @@
                       <td>
                         <p >
                           <i *ngIf="orden.estado == 'ACTIVA' || orden.estado == 'EJECUCION'" class="far fa-eye cursor" style="color:chartreuse"    title="Ver Orden"></i>
-                          <i *ngIf="orden.estado == 'EJECUTADA' || orden.estado == 'DETENIDA'"class="far fa-eye cursor" style="color:chartreuse" [routerLink]="['/ordenesCver', orden._id]"   title="Ver Orden"></i>
+                          <i *ngIf="orden.estado == 'EJECUTADA' || orden.estado == 'DETENIDA'"class="far fa-eye cursor" style="color:chartreuse" (click)="listarUnaOrdenCliente(orden._id)"  data-toggle="modal" data-target="#exampleModalLong"   title="Ver Orden"></i>
                           <i *ngIf="orden.estado == 'ACTIVA' || orden.estado == 'EJECUCION'" class="fas fa-pencil-alt cursor" style="color:chocolate" [routerLink]="['/ordenesCgestion', orden._id]"   title="Gestionar Orden"></i>
-                          <i *ngIf="orden.estado == 'EJECUTADA' || orden.estado == 'DETENIDA'" class="fas fa-pencil-alt cursor" style="color:chocolate"   title="Gestionar Orden"></i>
+                          <i *ngIf="orden.estado == 'EJECUTADA' || orden.estado == 'DETENIDA'" class="fas fa-pencil-alt cursor" style="color:chocolate" [routerLink]="['/ordenesCgestion', orden._id]"    title="Gestionar Orden"></i>
                         </p>
                       </td>
                     </tr>
@@ -176,5 +176,42 @@
           </div>
         </div>
       </div>
+  </div>
+</div>
+<!-- Modal -->
+<!--[routerLink]="['/graficoClienteLineaVer', orden._id]"-->
+<div class="modal fade elmodal" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header centrado">
+        <h5 class="modal-title" id="exampleModalLongTitle">Orden No : &nbsp; {{noOrden}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><strong>Tag:</strong></span>&nbsp;{{tag}}<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><strong>Ubicacion:</strong></span>&nbsp;{{ubicacion2}}<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><strong>Fecha Creacion:</strong></span>&nbsp;{{fechaCreacion}}<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><strong>Fecha Requerida:</strong></span>&nbsp;{{fechaRequerida}}<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><strong>Nombre Equipo:</strong></span>&nbsp;{{nombreEquipo}}<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><strong>Estado:</strong></span>&nbsp;{{estadouna}}<br>
+        <br>
+        <div *ngIf="estadouna =='DETENIDA'" >
+            <div class="relojContainer centrado">
+                Meses: {{mesesdif}} - Dias: {{diasdif}} - Horas: {{hoursdif}}
+                <div class="reloj">
+                  {{hora}}
+                </div>
+            </div>
+            <div class="form-group centrado">
+                <label><strong>Motivo de la Restriccion</strong></label>
+                <textarea disabled class="form-control" rows="3" [(ngModel)]="restriccion"></textarea>
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
   </div>
 </div>

@@ -6,6 +6,7 @@ import { TerceroService } from 'src/app/services/tercero.service';
 import { ConsecutivoModel } from 'src/app/models/consecutivoModel';
 import { TerceroModel } from 'src/app/models/terceroModel';
 import { ConsecutivoService } from 'src/app/services/consecutivo.service';
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-consecutivos',

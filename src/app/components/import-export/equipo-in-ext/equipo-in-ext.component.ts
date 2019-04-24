@@ -109,17 +109,36 @@ export class EquipoInExtComponent implements OnInit {
     this.validar = 1;
     this.carga = 0;   
   }  
-  //Capturamos el json que nos devuelve el backend y lo traemso al componente
+  //Capturamos el json que nos devuelve el backend y lo traemos al componente
   revisarDatos(){
+    var correcto = false;
     let equiposJson = this._equipoService.RevisarDatos();
-    console.log(equiposJson);
     var contador = 0;
+    var contador2 = 0;
+    var contador3 = 0;
     if(equiposJson.message){
       swal('error', "Archivo con estructura errada", "error")
     }else{
       //si es la primera vez que voy a ingresar equipos entro por aqui
       if(this.equipos2.length == 0){
         this.equipos = equiposJson;
+        //comparamos si los seriales y los tag son los mismos
+        for(let a= 0; a < equiposJson.length; a++){
+          for(let b = 0; b < this.equipos.length; b++){
+            if(equiposJson[a].tag == this.equipos[b].tag){
+              contador2++;
+            }
+          }
+          for(let c = 0; c < this.equipos.length; c++){
+            if(equiposJson[a].serial == this.equipos[c].serial){
+              contador3++;
+            }
+          }
+        }
+        if(contador2 > this.equipos.length || contador3 > this.equipos.length){
+          swal('Error', 'Verificar el archivo, seriales o tags estan repetidos');
+          return false;
+        }
         this.hayEquipos = 1;
          //this.existentes == 1; OJO SI NO FUNCIONA ES PORQUE ESTA COMENTADA ESTA LINEA
           swal("Exito", "Archivo validado", "success");

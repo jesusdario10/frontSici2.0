@@ -1,5 +1,6 @@
 export class UbicacionModel{
     constructor(
+        public codigo?:string,
         public nombre? :string,
         public usuario_creador? : string,
         public fecha_creacion?: string,

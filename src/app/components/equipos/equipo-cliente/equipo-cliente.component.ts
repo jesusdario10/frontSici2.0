@@ -4,6 +4,8 @@ import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular
 import { Router, ActivatedRoute } from '@angular/router';
 import { EquipoModel } from 'src/app/models/equipoModel';
 import { EquipoService } from 'src/app/services/equipo.service';
+import { UbicacionModel } from 'src/app/models/ubicacionModel';
+import { UbicacionService } from 'src/app/services/ubicacion.service';
 declare var swal:any;
 
 @Component({
@@ -31,18 +33,22 @@ export class EquipoClienteComponent implements OnInit {
   sub_tipo_tipo;
   tipodeltipo;
   funcionamiento;
+  ubicaciones : UbicacionModel[]=[];
+  selectedUbicacion : any;
 
 
   
   constructor(
     private _userServices : UserService,
     private _equipoServices : EquipoService,
+    private _ubicacionService : UbicacionService,
     private fb: FormBuilder,
     private _router : Router,
     private _route:ActivatedRoute,
   ) { }
 
   ngOnInit() {
+    this.listarUbicacionesCliente();
     this.identity = this._userServices.getIdentity();
     //inicializando el formulario
     this.form1 = this.fb.group({
@@ -64,7 +70,9 @@ export class EquipoClienteComponent implements OnInit {
       p_funcionamiento: [ "", Validators.required ],
       tipo_elemento: [ "", Validators.required ],
       indicador_auxiliar: [ "", Validators.required ],
-      req_especial: [ "", Validators.required ]
+      req_especial: [ "", Validators.required ],
+      ubicacionI: [ "", Validators.required ]
+
     });
     this.form2 = this.fb.group({
       subtipoFuncionEquipo:["", Validators.required],
@@ -85,7 +93,8 @@ export class EquipoClienteComponent implements OnInit {
       m_cuerpo: [ "", Validators.required ],
       manifold: [ "", Validators.required ],
       f_manifold: [ "", Validators.required ],
-      req_especial: [ "", Validators.required ]
+      req_especial: [ "", Validators.required ],
+      ubicacionT : [ "", Validators.required ]
     });
     this.form3 = this.fb.group({
       subtipoFuncionEquipo:["", Validators.required],//si
@@ -97,7 +106,8 @@ export class EquipoClienteComponent implements OnInit {
       tipo_elemento: ["", Validators.required],
       tipo_conexion: ["", Validators.required],
       m_cuerpo: [ "", Validators.required ],
-      req_especial: [ "", Validators.required ]
+      req_especial: [ "", Validators.required ],
+      ubicacionS: ["", Validators.required]
     });
 
   }
@@ -118,11 +128,12 @@ export class EquipoClienteComponent implements OnInit {
       tipo_conexion : formModel.tipo_conexion as string,
       material_cuerpo : formModel.m_cuerpo as string,
       req_especial : formModel.req_especial as string,
+      ubicacion : formModel.ubicacionS as string,
       usuario_creador : this.identity._id,
       tercero : this.identity.tercero
     };
     console.log(saveEquipo);
-    this._equipoServices.createEquipoCliente(saveEquipo)
+     this._equipoServices.createEquipoCliente(saveEquipo)
         .subscribe((datos:any)=>{
           if(datos.message == "Equipo ya existe"){
             swal("No es Posible", "Equipo ya Existe", "warning");         
@@ -132,19 +143,20 @@ export class EquipoClienteComponent implements OnInit {
             swal("Exito", "Equipo Creado", "success");
             form3.reset();
             this.form3 = this.fb.group({
-              subtipoFuncionEquipo:["", Validators.required],//si
-              marca : ["", Validators.required],//si
-              serial : [ "", Validators.required ],//si
-              tag: [ "", Validators.required ],//ai
-              modelo: [ "", Validators.required ],//si
-              al_electrica : ["", Validators.required],//si
+              subtipoFuncionEquipo:["", Validators.required],
+              marca : ["", Validators.required],
+              serial : [ "", Validators.required ],
+              tag: [ "", Validators.required ],
+              modelo: [ "", Validators.required ],
+              al_electrica : ["", Validators.required],
               tipo_elemento: ["", Validators.required],
               tipo_conexion: ["", Validators.required],
               m_cuerpo: [ "", Validators.required ],
-              req_especial: [ "", Validators.required ]
+              req_especial: [ "", Validators.required ],
+              ubicacionS : [ "", Validators.required ],
             });
           }  
-    });
+    }); 
   }
   //Crear Equipos
   createEquipoClienteIndicadores(form1, EquipoFormE){
@@ -172,6 +184,7 @@ export class EquipoClienteComponent implements OnInit {
       tipo_elemento: formModel.tipo_elemento as string,
       indicador_auxiliar: formModel.indicador_auxiliar as string,
       req_especial: formModel.req_especial as string,
+      ubicacion : formModel.ubicacionI as string,
       usuario_creador : this.identity._id,
       tercero : this.identity.tercero
     };
@@ -203,54 +216,56 @@ export class EquipoClienteComponent implements OnInit {
               p_funcionamiento: [ "", Validators.required ],
               tipo_elemento: [ "", Validators.required ],
               indicador_auxiliar: [ "", Validators.required ],
-              req_especial: [ "", Validators.required ]
+              req_especial: [ "", Validators.required ],
+              ubicacionI : ["", Validators.required]
             });
           }  
     });
   }
-    //Crear Equipos
-    createEquipoClienteTransmisores(form2, equipoForm2){
-      console.log("ya llegue aqui");
-      const formModel = this.form2.value;
-      let saveEquipo: EquipoModel ={
-        tipo : this.tipoEquipo,
-        subtipo : this.sub_tipo,
-        subtipoFuncionEquipo : formModel.subtipoFuncionEquipo as string,
-        nomenclatura: formModel.nomenclatura as string,
-        marca: formModel.marca as string,
-        serial: formModel.serial as string,
-        tag: formModel.tag as string,
-        modelo: formModel.modelo as string,
-        material_carcaza: formModel.carcaza as string,
-        alimentacion_electrica :formModel.al_electrica as string,
-        exactitud : formModel.exactitud as string,
-        elemento_medicion : formModel.ele_medicion as string,
-        tipo_elemento : formModel.tipo_elemento as string,
-        rango_min: formModel.rango_min as number,
-        rango_max: formModel.rango_max as number,
-        comunicacion : formModel.comunicacion as string,
-        material_diafragma : formModel.m_diafragma as string,
-        material_cuerpo : formModel.m_cuerpo as string,
-        tipo_manifold : formModel.manifold as string,
-        fabricante_manifold : formModel.f_manifold as string,
-        req_especial : formModel.req_especial as string,
-        usuario_creador : this.identity._id,
-        tercero : this.identity.tercero
-      };
-      console.log(saveEquipo);
-      this._equipoServices.createEquipoCliente(saveEquipo)
-          .subscribe((datos:any)=>{
-            if(datos.message == "Equipo ya existe"){
-              swal("No es Posible", "Equipo ya Existe", "warning");
-  
-              
-            }else if( datos.message == 'No completo los datos minimos requeridos'){
-              swal("error", "No completo los datos minimos requeridos", "warning");
-            }else{
-              swal("Exito", "Equipo Creado", "success");
-              form2.reset();
-            }  
-      });
+  //Crear Equipos
+  createEquipoClienteTransmisores(form2, equipoForm2){
+    console.log("ya llegue aqui");
+    const formModel = this.form2.value;
+    let saveEquipo: EquipoModel ={
+      tipo : this.tipoEquipo,
+      subtipo : this.sub_tipo,
+      subtipoFuncionEquipo : formModel.subtipoFuncionEquipo as string,
+      nomenclatura: formModel.nomenclatura as string,
+      marca: formModel.marca as string,
+      serial: formModel.serial as string,
+      tag: formModel.tag as string,
+      modelo: formModel.modelo as string,
+      material_carcaza: formModel.carcaza as string,
+      alimentacion_electrica :formModel.al_electrica as string,
+      exactitud : formModel.exactitud as string,
+      elemento_medicion : formModel.ele_medicion as string,
+      tipo_elemento : formModel.tipo_elemento as string,
+      rango_min: formModel.rango_min as number,
+      rango_max: formModel.rango_max as number,
+      comunicacion : formModel.comunicacion as string,
+      material_diafragma : formModel.m_diafragma as string,
+      material_cuerpo : formModel.m_cuerpo as string,
+      tipo_manifold : formModel.manifold as string,
+      fabricante_manifold : formModel.f_manifold as string,
+      req_especial : formModel.req_especial as string,
+      ubicacion : formModel.ubicacionT as string,
+      usuario_creador : this.identity._id,
+      tercero : this.identity.tercero
+    };
+    console.log(saveEquipo);
+    this._equipoServices.createEquipoCliente(saveEquipo)
+        .subscribe((datos:any)=>{
+          if(datos.message == "Equipo ya existe"){
+            swal("No es Posible", "Equipo ya Existe", "warning");
+
+            
+          }else if( datos.message == 'No completo los datos minimos requeridos'){
+            swal("error", "No completo los datos minimos requeridos", "warning");
+          }else{
+            swal("Exito", "Equipo Creado", "success");
+            form2.reset();
+          }  
+    });
   }
 
   //Captura de tipo de equipo
@@ -269,6 +284,13 @@ export class EquipoClienteComponent implements OnInit {
   //Capturando el funcionamiento
   funcionEquipo(event){
     this.funcionamiento = event.path[0].value;
+  }
+  //Lista las ubicaciones del cliente
+  listarUbicacionesCliente(){
+    this._ubicacionService.listarUbicacionesClienteautocomplete()
+        .subscribe((datos:any)=>{
+          this.ubicaciones = datos.ubicaciones;      
+        })
   }
  
 

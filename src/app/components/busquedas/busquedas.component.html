@@ -51,7 +51,7 @@
                           <th class="centrado">Tipo</th>
                           <th class="centrado">Subtipo</th>
                           <th class="centrado">Funcion</th>
-                          <th class="centrado">tag</th>
+                          <th class="centrado">IndicadorTag</th>
                           <th class="centrado">Marca</th>
                           <th class="centrado">Descripcion</th>
                           <th class="centrado">Edit</th>
@@ -59,11 +59,11 @@
                       </thead>
                       <tbody>
                         <tr *ngFor="let equipo of equipos">
-                          <td>{{equipo.tipo}}</td>
-                          <td>{{equipo.subtipo}}</td>
-                          <td>{{equipo.subtipoFuncionEquipo}}</td>
-                          <td>{{equipo.tag}}</td>
-                          <td>{{equipo.marca}}</td>
+                          <td><span>{{equipo.tipo}}</span></td>
+                          <td><span>{{equipo.subtipo}}</span></td>
+                          <td><span>{{equipo.subtipoFuncionEquipo}}</span></td>
+                          <td><span>{{equipo.tag}}</span></td>
+                          <td><span>{{equipo.marca}}</span></td>
                           <td style="text-align:justify">
                             <!--TRANSMISORES-->
                             <p *ngIf="equipo.tipo == 'INSTRUMENTACION' && equipo.subtipo =='TRANSMISORES' && equipo.subtipoFuncionEquipo == 'PRESION'">
@@ -92,6 +92,14 @@
                               (<strong>Modelo:</strong> {{equipo.modelo}}) (<strong>Serial:</strong> {{equipo.serial}} )
                               (<strong>Exactitud:</strong> {{equipo.exactitud}}) (<strong>Al/Electrica:</strong> {{equipo.alimentacion_electrica}} )
                               (<strong>El/medicion:</strong> {{equipo.elemento_medicion}}) (<strong>Tipo/Element:</strong> {{equipo.tipo_elemento}})  
+                              (<strong>Rango min:</strong>  {{equipo.rango_min}})(<strong>Rango max:</strong >{{equipo.rango_max}})   
+                              (<strong>M/diafragma:</strong>  {{equipo.material_diafragma}}) (<strong>M/cuerpo</strong >{{equipo.material_cuerpo}})
+                              (<strong>Manifold</strong >{{equipo.tipo_manifold}})  (<strong>F/manifold</strong >{{equipo.fabricante_manifold}}) 
+                            </p>
+                            <p *ngIf="equipo.tipo == 'INSTRUMENTACION' && equipo.subtipo =='TRANSMISORES' && equipo.subtipoFuncionEquipo == 'PRESION DIFERENCIAL'">
+                              (<strong>Modelo:</strong> {{equipo.modelo}}) (<strong>Serial:</strong> {{equipo.serial}} )
+                              (<strong>Exactitud:</strong> {{equipo.exactitud}}) (<strong>Al/Electrica:</strong> {{equipo.alimentacion_electrica}} )
+                              (<strong>Uni Rango::</strong> {{equipo.unidades_rango}}) (<strong>Tipo/Element:</strong> {{equipo.tipo_elemento}})  
                               (<strong>Rango min:</strong>  {{equipo.rango_min}})(<strong>Rango max:</strong >{{equipo.rango_max}})   
                               (<strong>M/diafragma:</strong>  {{equipo.material_diafragma}}) (<strong>M/cuerpo</strong >{{equipo.material_cuerpo}})
                               (<strong>Manifold</strong >{{equipo.tipo_manifold}})  (<strong>F/manifold</strong >{{equipo.fabricante_manifold}}) 

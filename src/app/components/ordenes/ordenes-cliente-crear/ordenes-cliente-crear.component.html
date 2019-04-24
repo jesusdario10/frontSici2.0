@@ -21,7 +21,7 @@
               <div class="col-md-3">
                 <div class="form-group">  
                       <label for="selectCargo">Ubicacion</label>
-                      <ng-select     
+                      <ng-select required    (change)="seleccionUbicacion()"
                           [items]="ubicaciones"
                           bindLabel="nombre"
                           placeholder="Select Ubicacion"
@@ -34,12 +34,10 @@
                 <div class="form-group">  
                   <div class="form-group ">
                     <label for="equipoO">Equipo</label>
-                    <!--<select class="form-control" name="equipoO" formControlName="equipoO" required>
-                      <option *ngFor="let equipo of equipos" [value]="equipo._id">{{equipo.serial}} | {{equipo.subtipo}}</option>
-                    </select>-->
+
                     <ng-select     
                         [items]="equipos"
-                        bindLabel="serial"
+                        bindLabel="tag"
                         placeholder="Select Equipo"
                         formControlName="equipoO"
                         [(ngModel)]="selectedEquipo">    

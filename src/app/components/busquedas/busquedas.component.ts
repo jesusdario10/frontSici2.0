@@ -76,6 +76,7 @@ export class BusquedasComponent implements OnInit {
   listarEquiposCliente(page){
     this._equipoServices.listarEquiposClientes(page)
       .subscribe((datos:any)=>{
+        console.log(datos);
         this.equipos = datos.equipos;
         this.total = datos.total;
         this.pages = datos.pages;

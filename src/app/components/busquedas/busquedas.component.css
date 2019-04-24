@@ -8,3 +8,10 @@
 .centrado{
     text-align: center !important;
 }
+p{
+    font-size: 0.8rem;
+}
+span{
+    font-size: 0.8rem;
+    font-weight: bold;
+}

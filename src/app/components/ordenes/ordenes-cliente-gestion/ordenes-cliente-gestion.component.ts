@@ -24,6 +24,7 @@ export class OrdenesClienteGestionComponent implements OnInit {
   solicitante : string;
   noOrden: string;
   prioridad : string;
+  creacion : string;
 
   //Captura de datos para la gestion
   fechaEjecucion: string;
@@ -86,6 +87,7 @@ export class OrdenesClienteGestionComponent implements OnInit {
         .subscribe((datos:any)=>{
           console.log(datos);
           this.tag = datos.actividad.equipo.tag;
+          this.creacion = datos.fechas.fecha_creacion;
           this.solicitante = datos.actividad.solicitante;
           this.noOrden = datos.actividad.consecutivo;
           this.prioridad = datos.actividad.prioridad;
@@ -123,7 +125,7 @@ export class OrdenesClienteGestionComponent implements OnInit {
               return false;
             }
             if(datos.actividad){
-              swal('Existoo!', "Gestion Realizada", 'success')
+              swal('Exito!', "Gestion Realizada", 'success')
             }
       })
     }
@@ -177,7 +179,7 @@ export class OrdenesClienteGestionComponent implements OnInit {
     }
     this._ordenServices.eliminarRecursoActividadCliente(eliminarRecurso, this.idOrden, index )
         .subscribe((datos:any)=>{
-          swal('!Exitoo', 'Recurso eliminado correctamente', 'error');
+          swal('!Exito', 'Recurso eliminado correctamente', 'error');
           this._ordenServices.listarUnaOrdenParaelCliente(this.identity.tercero, this.idOrden)
             .subscribe((datos:any)=>{
               this.recursos = datos.actividad.recurso;

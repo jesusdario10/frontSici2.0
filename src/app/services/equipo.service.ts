@@ -38,6 +38,10 @@ export class EquipoService {
       map((resp:any)=>{
         console.log(resp);
         return resp;
+      }),
+      catchError(err=>{
+        swal('Error', err.error.message, 'error');
+        return throwError(err) //nos retorna un observable
       })
     );
   }
@@ -63,6 +67,12 @@ export class EquipoService {
   listarTodoslosEquiposdelClientesinPaginacion(tercero:string):Observable<any>{
     let headers = new HttpHeaders().set('Content-Type', 'application/json')
                                    .set('Authorization', this.token);
+    return this._http.get(this.URL+'equipo/listarEquiposClientesinPaginacion/'+tercero, {headers:headers});                                 
+  }
+  //Listar todos los equipos de un cliente en orden alfabetico por tag dependiendo de la ubicacion del cliente
+  listarTodoslosEquiposdelClientesinPaginacionporUbicacion(tercero:string):Observable<any>{
+    let headers = new HttpHeaders().set('Content-Type', 'application/json')
+                                    .set('Authorization', this.token);
     return this._http.get(this.URL+'equipo/listarEquiposClientesinPaginacion/'+tercero, {headers:headers});                                 
   }
   //listar Un Equipo para el cliente

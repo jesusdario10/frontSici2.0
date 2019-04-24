@@ -95,7 +95,7 @@ export class UbicacionService {
   }  
   //subir archivo de Cargos desde un archivo xlsx
   subirUbicacionesxlsx(archivo:File,  tercero, tipoEquipo){
-    this._subirArchivos.subirArchivo(archivo, 'cargo', tercero, tipoEquipo)
+    this._subirArchivos.subirArchivo(archivo, 'ubicacion', tercero, tipoEquipo)
       .then(resp=>{
         let mensaje:any = resp;
        this.leerDatosUbicacionJson(resp)

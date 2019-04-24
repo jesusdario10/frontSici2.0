@@ -18,6 +18,10 @@
                               <h6 style="text-align:center">Datos de la Orden</h6>
                               <p>No ({{noOrden}})</p>
                             </div>
+                            <div class="col-md-2 col-sm-12">
+                              <label>Creacion</label>
+                              <input disabled type="text" class="form-control" name="solicitanteO" [(ngModel)]="creacion" >
+                            </div>
                             <div class="col-md-2 centrado col-sm-12">
                               <label for="">Tag</label>&nbsp; <i class="far fa-eye cursor"    title="Ver Equipo"></i>
                               <input disabled type="text" class="form-control" name="tag" [(ngModel)]="tag" >
@@ -26,7 +30,7 @@
                               <label >Solicitante</label>
                               <input disabled type="text" class="form-control" name="solicitanteO" [(ngModel)]="solicitante" >
                             </div>
-                            <div class="col-md-4 col-sm-12">
+                            <div class="col-md-2 col-sm-12">
                               <label >Prioridad</label>
                               <input disabled type="text" class="form-control" name="solicitanteO" [(ngModel)]="prioridad" >
                             </div>

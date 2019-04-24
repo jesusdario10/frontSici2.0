@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UbicacionModel } from 'src/app/models/ubicacionModel';
@@ -23,6 +22,7 @@ export class OrdenesClienteCrearComponent implements OnInit {
   ubicaciones : UbicacionModel[]=[];
   equipos : EquipoModel[]=[];
   librerias : LibreriaModel[]=[];
+  saveOrden : ActividadModel;
   
   
   //Formulario
@@ -47,7 +47,6 @@ export class OrdenesClienteCrearComponent implements OnInit {
   
     this.identity = this._UserService.getIdentity();
     this.listarUbicacionesCliente();
-    this.listarEquiposClienteporTag();
     this.listarLibreriaporNombreSinPaginacion();
    
     //inicializando el formulario
@@ -63,6 +62,18 @@ export class OrdenesClienteCrearComponent implements OnInit {
     });
     
   }
+  //metodo para controlar los equipos que se muestran dependiendo de la ubicacion
+  seleccionUbicacion(){
+    if(this.selectedUbicacion == null){
+      this.equipos = null;
+      this.selectedEquipo = null;
+    }else{
+
+      this.listarEquiposClienteporTagsegunUbicacion();
+    }
+    
+    
+  }
   //Lista las ubicaciones del cliente
   listarUbicacionesCliente(){
     this._ubicacionService.listarUbicacionesClienteautocomplete()
@@ -70,9 +81,9 @@ export class OrdenesClienteCrearComponent implements OnInit {
           this.ubicaciones = datos.ubicaciones;        
         })
   }
-  //Lista los Equipos del cliente alfabeticamente por tag
-  listarEquiposClienteporTag(){
-    this._EquipoServices.listarTodoslosEquiposdelClientesinPaginacion(this.identity.tercero)
+  //Lista los Equipos del cliente alfabeticamente por tag dependiendo de su ubicacion
+  listarEquiposClienteporTagsegunUbicacion(){
+    this._EquipoServices.listarTodoslosEquiposdelClientesinPaginacionporUbicacion(this.identity.tercero)
         .subscribe((datos:any)=>{
           this.equipos = datos.equipos; 
         })
@@ -88,24 +99,27 @@ export class OrdenesClienteCrearComponent implements OnInit {
   crearOrdenCliente(form, OrdenForm){
     const formModel = this.form.value;
     console.log(formModel.equipoO);
-    let saveOrden : ActividadModel = {
+    this.saveOrden = {
       fecha_creacion: formModel.fechaCreacionO as string,
       fecha_requerida: formModel.fechaRequeridaO as string,
       ubicacion: formModel.UbicacionO as string,
-      equipo: formModel.equipoO as string,
+      equipo: this.selectedEquipo as string,
       solicitante: formModel.solicitanteO as string,
       prioridad: formModel.prioridadO as string,
       libreria: formModel.libreriaO as string,
       descripcion: formModel.descripcionO as string,
       tercero : this.identity.tercero
     }
-    console.log(saveOrden);
-    this._OrdenService.crearOrdenCliente(saveOrden)
+    console.log(this.saveOrden);
+   this._OrdenService.crearOrdenCliente(this.saveOrden)
         .subscribe((datos:any)=>{
           if(datos.message == "Fecha de creacion no puede ser menor a la fecha requerida"){
             swal("Cuidado", datos.message, "warning");
             return false;
-          }else{
+          }else if(datos.message == "Suministre todos los campos requeridos"){
+            swal("Cuidado", datos.message, "warning");
+          }
+          else{
             form.reset();
             swal("Exito", "Orden Creada", "success"); 
           }

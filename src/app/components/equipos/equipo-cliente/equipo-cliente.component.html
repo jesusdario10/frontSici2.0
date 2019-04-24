@@ -37,7 +37,7 @@
                       <div class="row sinpaddintop">    
                         <div class="col-md-2 sinpaddintop">
                               <label >Tipo</label>
-                              <select class="form-control" name='subtipoFuncionEquipo' (change)="subtipoFuncionEquipo($event)"  formControlName="subtipoFuncionEquipo" >
+                              <select class="form-control" name='subtipoFuncionEquipo' (change)="subtipoFuncionEquipo($event)"  formControlName="subtipoFuncionEquipo" required>
                                  <option disabled class="elija">ELIJA</option>
                                  <option>PRESION</option>
                                  <option>TEMPERATURA</option>
@@ -46,20 +46,10 @@
                                  <option>NIVEL</option>
                               </select>
                         </div>
-                        <!--<div *ngIf="sub_tipo == 'INDICADORESotrO' && tipoEquipo == 'OTROEQUIPO' " class="col-md-2 sinpaddintop">
-                            <label >Nomen</label>
-                            <select class="form-control" name='nomenclatura'  formControlName="nomenclatura" >
-                               <option disabled>ELIJA</option>
-                               <option *ngIf="tipodeltipo == 'TEMPERATURA'">TI</option>
-                               <option *ngIf="tipodeltipo == 'PRESION'">PI</option>
-                               <option *ngIf="tipodeltipo == 'PRESION DIFERENCIAL'">DPI</option>
-                               <option *ngIf="tipodeltipo == 'FLUJO'">FI</option>
-                            </select>
-                        </div>-->
                         <div class="col-md-2 sinpaddintop">
                           <div class="form-group sinpaddintop">
                             <label for="tag">Tag</label>
-                            <input type="text" class="form-control" name='tag' formControlName="tag">
+                            <input type="text" class="form-control" name='tag' formControlName="tag" required>
                           </div>
                         </div>
                         <div class="col-md-2 sinpaddintop">
@@ -74,9 +64,6 @@
                             <input type="text" class="form-control" name='serial' formControlName="serial">
                           </div>
                         </div>
-
-                     
-                      
                         <div class="col-md-2 sinpaddintop">
                           <div class="form-group sinpaddintop">
                             <label for="modelo">Modelo</label>
@@ -135,15 +122,6 @@
                              <option>NPT-F</option>
                           </select>
                         </div>
-                        <!--<div class="col-md-2 sinpaddintop">
-                          <label>Carcaza</label>
-                          <select class="form-control"   name='carcaza' formControlName="carcaza" >
-                             <option disabled>ELIJA</option>
-                             <option>ACERO</option>
-                             <option>HIERRO</option>
-                             <option>PLASTICO</option>
-                          </select>
-                        </div>-->
                         <div class="col-md-2 sinpaddintop">
                           <label>Uni Ing</label>
                           <select class="form-control"  name='unidades_rango' formControlName="unidades_rango" >
@@ -218,6 +196,20 @@
                               <label>Req Especial</label>
                               <input type="text" class="form-control" name='req_especial' formControlName="req_especial">
                             </div>
+                        </div>
+                        <div class="col-md-4  sinpaddintop">
+                          <div class="form-group sinpaddintop">  
+                                <label for="selectCargo">Ubicacion</label>
+                                <ng-select
+                                    required     
+                                    [items]="ubicaciones"
+                                    bindLabel="nombre"
+                                    placeholder="Select Ubicacion"
+                                    formControlName="ubicacionI"
+                                    [(ngModel)]="selectedUbicacion">    
+                                    
+                                </ng-select>
+                          </div>  
                         </div> 
                       </div>
                       <div style="text-align:center">
@@ -229,7 +221,7 @@
                         <div class="row sinpaddintop">
                           <div class="col-md-2 sinpaddintop">
                                 <label >Tipo</label>
-                                <select class="form-control" name='subtipoFuncionEquipo' (change)="subtipoFuncionEquipo($event)" formControlName="subtipoFuncionEquipo" >
+                                <select class="form-control" name='subtipoFuncionEquipo' (change)="subtipoFuncionEquipo($event)" formControlName="subtipoFuncionEquipo" required >
                                    <option class="elija" disabled>ELIJA</option>
                                    <option>PRESION</option>
                                    <option>TEMPERATURA</option>
@@ -237,20 +229,10 @@
                                    <option>NIVEL</option>
                                 </select>
                           </div>
-                          <!--<div class="col-md-2 sinpaddintop">
-                              <label >Nomen</label>
-                              <select class="form-control" name='nomenclatura'  formControlName="nomenclatura" >
-                                 <option disabled>ELIJA</option>
-                                 <option *ngIf="tipodeltipo == 'TEMPERATURA'">TT</option>
-                                 <option *ngIf="tipodeltipo == 'PRESION'">PT</option>
-                                 <option *ngIf="tipodeltipo == 'FLUJO'">FT</option>
-                                 <option *ngIf="tipodeltipo == 'NIVEL'">LT</option>
-                              </select>
-                          </div>-->
                           <div class="col-md-2 sinpaddintop">
                             <div class="form-group sinpaddintop">
                               <label for="tag">Tag</label>
-                              <input type="text" class="form-control" name='tag' formControlName="tag">
+                              <input type="text" class="form-control" name='tag' formControlName="tag" required>
                             </div>
                           </div>
                           <div class="col-md-2 sinpaddintop">
@@ -278,15 +260,6 @@
                               <input type="text" class="form-control" name='exactitud' formControlName="exactitud">
                             </div>
                         </div>
-                          <!--<div class="col-md-2 sinpaddintop">
-                              <label>Carcaza</label>
-                              <select class="form-control"   name='carcaza' formControlName="carcaza" >
-                                 <option disabled>ELIJA</option>
-                                 <option>ACERO</option>
-                                 <option>HIERRO</option>
-                                 <option>PLASTICO</option>
-                              </select>
-                            </div>-->
                           <div class="col-md-2 sinpaddintop">
                               <div class="form-group sinpaddintop">
                                 <label for="modelo">Al/electrica</label>
@@ -333,7 +306,17 @@
                                  <option>J</option>
                               </select>
                           </div>
-
+                          <div class="col-md-2 sinpaddintop">
+                            <label>Uni Ing</label>
+                            <select class="form-control"  name='unidades_rango' formControlName="unidades_rango" >
+                               <option disabled class="elija">ELIJA</option>
+                               <option>PSI</option>
+                               <option>PSI-G</option>
+                               <option>INH2O</option>
+                               <option>KG/CM2</option>
+                               <option>°F</option>
+                            </select>
+                          </div>
                           <div class="col-md-2 sinpaddintop">
                             <div class="form-group sinpaddintop">
                               <label >Rango Min</label>
@@ -395,6 +378,21 @@
                                 <input type="text" class="form-control" name='req_especial' formControlName="req_especial">
                               </div>
                           </div>
+                          <div class="col-md-4  sinpaddintop">
+                            <div class="form-group sinpaddintop">  
+                                  <label for="selectCargo">Ubicacion</label>
+                                  <ng-select 
+                                      required
+                                      [selectableGroup] = 'true'
+                                      [items]="ubicaciones"
+                                      bindLabel="nombre"
+                                      placeholder="Select Ubicacion"
+                                      formControlName="ubicacionT"
+                                      [(ngModel)]="selectedUbicacion"> 
+                                       
+                                  </ng-select>
+                            </div>  
+                          </div>
                           <div style="text-align:center !important; width: 100% !important;">
                               <input type="submit" class="btn btn-outline-success" value="Agregar">
                           </div>
@@ -404,7 +402,7 @@
                       <div class="row sinpaddintop">
                         <div class="col-md-2 sinpaddintop">
                               <label >Tipo</label>
-                              <select class="form-control" name='subtipoFuncionEquipo' (change)="subtipoFuncionEquipo($event)" formControlName="subtipoFuncionEquipo" >
+                              <select class="form-control" name='subtipoFuncionEquipo' (change)="subtipoFuncionEquipo($event)" formControlName="subtipoFuncionEquipo" required>
                                  <option class="elija" disabled>ELIJA</option>
                                  <option>PRESION</option>
                                  <option>TEMPERATURA</option>
@@ -414,20 +412,10 @@
                                  <option>POSICION</option>
                               </select>
                         </div>
-                        <!--<div class="col-md-2 sinpaddintop">
-                            <label >Nomen</label>
-                            <select class="form-control" name='nomenclatura'  formControlName="nomenclatura" >
-                               <option disabled>ELIJA</option>
-                               <option *ngIf="tipodeltipo == 'TEMPERATURA'">TT</option>
-                               <option *ngIf="tipodeltipo == 'PRESION'">PT</option>
-                               <option *ngIf="tipodeltipo == 'FLUJO'">FT</option>
-                               <option *ngIf="tipodeltipo == 'NIVEL'">LT</option>
-                            </select>
-                        </div>-->
                         <div class="col-md-2 sinpaddintop">
                           <div class="form-group sinpaddintop">
                             <label for="tag">Tag</label>
-                            <input type="text" class="form-control" name='tag' formControlName="tag">
+                            <input type="text" class="form-control" name='tag' formControlName="tag" required>
                           </div>
                         </div>
                         <div class="col-md-2 sinpaddintop">
@@ -513,6 +501,18 @@
                               <input type="text" class="form-control" name='req_especial' formControlName="req_especial">
                             </div>
                         </div>
+                        <div class="col-md-4  sinpaddintop">
+                          <div class="form-group sinpaddintop">  
+                                <label for="selectCargo">Ubicacion</label>
+                                <ng-select     required
+                                    [items]="ubicaciones"
+                                    bindLabel="nombre"
+                                    placeholder="Select Ubicacion"
+                                    formControlName="ubicacionS"
+                                    [(ngModel)]="selectedUbicacion">    
+                                </ng-select>
+                          </div>  
+                        </div>
                         <div style="text-align:center !important; width: 100% !important;">
                             <input type="submit" class="btn btn-outline-success" value="Agregar">
                         </div>
@@ -524,59 +524,5 @@
           </div>
         </div>
     </div>
-  </div>
-  <!--
-        <div class="col-md-7 col-sm-12">
-        <div class="card">
-          <div class="card-body">
-            <h5 style="text-align:center">Buscar Equipos</h5>
-            <br>
-            <div class="card">
-              <div class="card-body">
-                <label for="">Buscar</label>
-                <input #input (keyup)="buscarEquipos(input.value)" type="text" class="form-control" name="" id="">
-                <div class="row">
-                  <div class="col-md-12">
-                      <table class="table table-hover table-bordered table-responsive">
-                          <thead class="table-warning">
-                            <tr>
-                              <th>#</th>
-                              <th>Serie</th>
-                              <th>Tag</th>
-                              <th>descripcion del Equipo</th>
-                              <th>Estado</th>
-                              <th>Editar</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr *ngFor="let equipo of equipos; let i = index">
-                              <td>{{i}}</td>
-                              <td>{{equipo.serial}}</td>
-                              <td>{{equipo.tag}}</td>
-                              <td>{{equipo.nombre_equipo}}</td>
-                              <td>{{equipo.estado}}</td>
-                              <td style="text-align:center">
-                                <i class="fas fa-edit pointer" [routerLink]="['/equiposClienteEdit', equipo._id]"></i>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      
-                      <div class="antsig" style="text-align:center">
-                        <button type="button" *ngIf="page >= 2" [routerLink]="['/equipoCliente', pre_page]" class="btn btn-outline-info">Anterior</button>
-                        <button type="button" *ngIf="pages != page" [routerLink]="['/equipoCliente', next_page]" class="btn btn-outline-info ">Siguiente</button>
-                    </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  -->
-  
-
-
- 
+  </div> 
 </div>

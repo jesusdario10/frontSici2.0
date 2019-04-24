@@ -112,6 +112,8 @@ export class UbicacionInExComponent implements OnInit {
   }
   revisarDatos(){
     let ubicacionJson = this._ubicacionService.RevisarDatos();
+    console.log(ubicacionJson);
+
     var contador = 0;
     if(this.repetidas == 1){
       this.ubicaciones = ubicacionJson;
@@ -133,8 +135,8 @@ export class UbicacionInExComponent implements OnInit {
         var contadorDeIguales = 0;
         for(var i = 0; i<ubicacionJson.length; i++){
           for(var j = 0; j < this.ubicaciones2.length; j++){
-            if(ubicacionJson[i].nombre == this.ubicaciones2[j].nombre){
-              ubicacionJson[i].nombre = ubicacionJson[i].nombre + ' - '+ 'Ubicacion Existe';
+            if(ubicacionJson[i].codigo == this.ubicaciones2[j].codigo){
+              ubicacionJson[i].codigo = ubicacionJson[i].codigo + ' - '+ 'Ubicacion Existe';
               this.repetidas = 1;
               contadorDeIguales = contadorDeIguales + 1;
             }

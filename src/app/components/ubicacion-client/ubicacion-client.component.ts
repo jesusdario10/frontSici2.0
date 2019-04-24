@@ -35,6 +35,7 @@ export class UbicacionClientComponent implements OnInit {
     this.identity = this._userServices.getIdentity();
     //inicializando el formulario
     this.form = this.fb.group({
+      codigo :[ "", Validators.required ],
       nombreC : [ "", Validators.required ]
     });
     //listarUbicaciones y saber cual es la pagina actual
@@ -45,6 +46,7 @@ export class UbicacionClientComponent implements OnInit {
   createUbicacionCliente(form, ubicacionFormC){
     const formModel = this.form.value;
     let saveUbicacion: UbicacionModel ={
+      codigo : formModel.codigo as string,
       nombre : formModel.nombreC as string,
       tercero : this.identity.tercero,
     };

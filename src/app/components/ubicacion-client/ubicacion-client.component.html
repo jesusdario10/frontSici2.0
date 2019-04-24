@@ -6,26 +6,29 @@
           <div class="card">
             <div class="card-body centroiconos">
                 <h5 style="text-align:center">Creacion de Ubicaciones</h5>
-                <i class="fas fa-compass fa-2x fa-lg"></i>
-                
-                
-                
-              <div class="card">
-                <div class="card-body">
-                    <form ngNativeValidate [formGroup]="form"  #ubicacionFormC="ngForm" (ngSubmit)="createUbicacionCliente(form, ubicacionFormC)">
-                        <div class="col-md-12 col-sm-12">
-                            <div class="form-group" style="text-align:center">
-                              <label for="nombreUbicacion" class="negrita" >Nombre Ubicacion</label>
-                              <input type="text"  formControlName="nombreC" class="form-control" required>
-                            </div>
+                <i class="fas fa-compass fa-2x fa-lg"></i>  
+                <div class="card">
+                  <div class="card-body">
+                      <form ngNativeValidate [formGroup]="form"  #ubicacionFormC="ngForm" (ngSubmit)="createUbicacionCliente(form, ubicacionFormC)">
+                          <div class="col-md-12 col-sm-12">
+                              <div class="form-group" style="text-align:center">
+                                <label for="codigo" class="negrita" >Codigo Ubicacion</label>
+                                <input type="text"  formControlName="codigo" class="form-control" required>
+                              </div>
+                          </div>
+                          <div class="col-md-12 col-sm-12">
+                              <div class="form-group" style="text-align:center">
+                                <label for="nombreUbicacion" class="negrita" >Nombre Ubicacion</label>
+                                <input type="text"  formControlName="nombreC" class="form-control" required>
+                              </div>
+                          </div>
+                        <div style="text-align:center">
+                          <input type="submit" class="btn btn-outline-success" value="Agregar">
                         </div>
-                      <div style="text-align:center">
-                        <input type="submit" class="btn btn-outline-success" value="Agregar">
+                      </form>
                     </div>
-                  </form>
-                </div>
+                  </div>
               </div>
-            </div>
           </div>
       </div>
       <div class="col-md-7 col-sm-12">
