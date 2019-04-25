@@ -153,7 +153,7 @@ export class AvanceClienteDonaComponent implements OnInit {
         }
         if(this.confecha == 1){
           console.log("con fecha:",this.confecha);
-          this.resultadosFechaSinPaginacion(page);
+          this.resultadosFechaSinPaginacion("", "", page);
         }
         
         
@@ -222,7 +222,7 @@ export class AvanceClienteDonaComponent implements OnInit {
     this.estados = "Semaforo"
   }
   //Listar resultados por fecha sin paginacion
-  resultadosFechaSinPaginacion(page){
+  resultadosFechaSinPaginacion(form, fecha, page){
     const formModel = this.form.value;
     let fecha_Inicial = formModel.fechaInicial as string;
     let fecha_Final = formModel.fechaFinal as string;

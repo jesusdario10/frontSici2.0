@@ -83,7 +83,7 @@ export class OrdenesClienteCrearComponent implements OnInit {
   }
   //Lista los Equipos del cliente alfabeticamente por tag dependiendo de su ubicacion
   listarEquiposClienteporTagsegunUbicacion(){
-    this._EquipoServices.listarTodoslosEquiposdelClientesinPaginacionporUbicacion(this.identity.tercero)
+    this._EquipoServices.listarTodoslosEquiposdelClientesinPaginacionporUbicacion(this.identity.tercero, this.selectedUbicacion._id)
         .subscribe((datos:any)=>{
           this.equipos = datos.equipos; 
         })

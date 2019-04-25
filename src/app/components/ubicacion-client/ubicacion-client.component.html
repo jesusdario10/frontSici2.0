@@ -46,6 +46,7 @@
                             <thead class="table-success">
                               <tr>
                                 <th>#</th>
+                                <th>Codigo</th>
                                 <th>Nombre Ubicacion</th>
                                 <th>Estado</th>
                                 <th>Editar</th>
@@ -54,6 +55,7 @@
                             <tbody>
                               <tr *ngFor="let ubi of ubicaciones; let i = index">
                                 <td>{{i}}</td>
+                                <td>{{ubi.codigo}}</td>
                                 <td>{{ubi.nombre}}</td>
                                 <td>{{ubi.estado}}</td>
                                 <td style="text-align:center">

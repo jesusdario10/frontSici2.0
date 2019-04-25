@@ -51,17 +51,23 @@ export class EquipoService {
                                    .set('Authorization', this.token);
     return this._http.get(this.URL+'equipo/listarEquiposCliente/'+page, {headers:headers});
   }
+  //Listar Equipos para los clientes de manera paginada
+  listarEquiposClientes2(page=null):Observable<any>{
+    let headers = new HttpHeaders().set('Content-Type', 'application/json')
+                                    .set('Authorization', this.token);
+    return this._http.get(this.URL+'equipo/listarEquiposCliente/'+page, {headers:headers});
+  }
   //Buscar mediante el Input equipos para los clientes por el serial
-  buscarEquiposInputDinamico(termino:string):Observable<any>{
+  buscarEquiposInputDinamico(termino:string, page=null):Observable<any>{
     let headers = new HttpHeaders().set('Content-Type', 'application/json')
                                      .set('Authorization', this.token);
-    return this._http.get(this.URL+'busqueda/equipos/'+termino, {headers:headers});                               
+    return this._http.get(this.URL+'busqueda/serial/'+termino+'/'+page, {headers:headers});                               
   }
   //Buscar mediante el Input equipos para los clientes por el tag
-  buscarEquiposInputDinamicoporTag(termino:string):Observable<any>{
+  buscarEquiposInputDinamicoporTag(termino:string, page=null):Observable<any>{
     let headers = new HttpHeaders().set('Content-Type', 'application/json')
                                      .set('Authorization', this.token);
-    return this._http.get(this.URL+'busqueda/tag/'+termino, {headers:headers});                               
+    return this._http.get(this.URL+'busqueda/tag/'+termino+'/'+page, {headers:headers});                               
   }
   //Listar todos los equipos de un cliente en orden alfabetico
   listarTodoslosEquiposdelClientesinPaginacion(tercero:string):Observable<any>{
@@ -70,10 +76,10 @@ export class EquipoService {
     return this._http.get(this.URL+'equipo/listarEquiposClientesinPaginacion/'+tercero, {headers:headers});                                 
   }
   //Listar todos los equipos de un cliente en orden alfabetico por tag dependiendo de la ubicacion del cliente
-  listarTodoslosEquiposdelClientesinPaginacionporUbicacion(tercero:string):Observable<any>{
+  listarTodoslosEquiposdelClientesinPaginacionporUbicacion(tercero:string, ubicacion:string):Observable<any>{
     let headers = new HttpHeaders().set('Content-Type', 'application/json')
                                     .set('Authorization', this.token);
-    return this._http.get(this.URL+'equipo/listarEquiposClientesinPaginacion/'+tercero, {headers:headers});                                 
+    return this._http.get(this.URL+'equipo/listarEquiposClientesinPaginacion/'+tercero+'/'+ubicacion, {headers:headers});                                 
   }
   //listar Un Equipo para el cliente
   listarUnSoloEquipoCliente(id):Observable<any>{

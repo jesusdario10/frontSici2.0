@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular
 import { Router, ActivatedRoute } from '@angular/router';
 import { TerceroModel } from 'src/app/models/terceroModel';
 import { TerceroService } from 'src/app/services/tercero.service';
+declare var swal:any;
 
 @Component({
   selector: 'app-clientes',
@@ -13,6 +14,9 @@ import { TerceroService } from 'src/app/services/tercero.service';
 export class ClientesComponent implements OnInit {
   public terceros :TerceroModel[]=[];
   public newTercero: TerceroModel;
+
+  public estado;
+
   public identity : any;
 
   public form : FormGroup;

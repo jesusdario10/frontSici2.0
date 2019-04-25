@@ -22,15 +22,25 @@ export class BusquedasComponent implements OnInit {
   total: any;
   pages: any;
 
+  longitudTerminoTag:any;
+  terminoTag:any;
+  longitudTerminoSerial: any;
+  terminoSerial: string;
+
+ 
+
   constructor(
     private _userServices : UserService,
     private _equipoServices : EquipoService,
     private _router : Router,
     private _route:ActivatedRoute,
   ) { 
+    this.pages = 1;
     this.simple =   'activada';
     this.avanzada = 'desactivada';
-  }
+    this.longitudTerminoTag = 0;
+    this.longitudTerminoSerial = 0;
+    }
 
   ngOnInit() {
     this.identity = this._userServices.getIdentity();
@@ -68,8 +78,27 @@ export class BusquedasComponent implements OnInit {
       if(page >= this.pages){
         page = this.pages
       }
-      //ejecutar traer todos los usuarios
-      this.listarEquiposCliente(page)
+      console.log("este es page:", this.page);
+      console.log("este es pages:", this.pages);
+        
+      if(this.longitudTerminoTag > 0){
+        this._equipoServices.buscarEquiposInputDinamicoporTag(this.terminoTag, page)
+          .subscribe((datos:any)=>{
+            this.equipos = datos.equipos;
+            this.total = datos.total;
+            this.pages = datos.pages;
+          })
+      }else if(this.longitudTerminoSerial > 0 ){
+        this._equipoServices.buscarEquiposInputDinamico(this.terminoSerial, page)
+        .subscribe((datos:any)=>{
+            console.log(datos);
+            this.equipos = datos.equipos;
+            this.total = datos.total;
+            this.pages = datos.pages;
+        });
+      } else{
+        this.listarEquiposCliente(page)
+      }
     })
   }
   //Listar Equipos de los clientes
@@ -85,24 +114,46 @@ export class BusquedasComponent implements OnInit {
   }
   //Buscar Equipos dede el campo input dinamicamente
   buscarEquipos(termino:string){
+    this.pages = 1;
+    this._router.navigate(['/busquedas/1']);
+    this.longitudTerminoTag = 0;
+    this.longitudTerminoSerial = termino.length;
+    this.terminoSerial = termino;
+
     if(termino.length<=0){
+      this.longitudTerminoSerial = 0;
       this.listarEquiposCliente(this.page)
       return;
-    }
-    this._equipoServices.buscarEquiposInputDinamico(termino)
+    }else{
+      this._equipoServices.buscarEquiposInputDinamico(termino, 1)
         .subscribe((datos:any)=>{
-          this.equipos = datos.equipos;
-    })
+            console.log(datos);
+            this.equipos = datos.equipos;
+            this.total = datos.total;
+            this.pages = datos.pages;
+        });
+    }
+
   }
   //Buscar Equipos dede el campo input dinamicamente
-  buscarEquiposporTag(termino:string){
+  buscarEquiposporTag(termino:any){
+    this.pages = 1;
+    this._router.navigate(['/busquedas/1']);
+    this.longitudTerminoSerial = 0;
+    this.longitudTerminoTag = termino.length;
+    this.terminoTag = termino;
+
     if(termino.length<=0){
+      this.longitudTerminoTag = 0;
       this.listarEquiposCliente(this.page)
       return;
     }
-    this._equipoServices.buscarEquiposInputDinamicoporTag(termino)
+    this._equipoServices.buscarEquiposInputDinamicoporTag(termino, 1)
         .subscribe((datos:any)=>{
+          console.log(datos);
           this.equipos = datos.equipos;
+          this.total = datos.total;
+          this.pages = datos.pages;
     })
   }
    
