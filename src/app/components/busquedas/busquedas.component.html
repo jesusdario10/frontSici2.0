@@ -4,22 +4,10 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-tittle" style="text-align:center">
+            <br> 
             <h3>Busqueda de Equipos</h3>
           </div>
-          <div class="card-body">
-            <div class="row">
-              <div class="col-md-6 offset-md-3">
-                <div class="row">
-                  <div class="col-md-6" style="text-align:center">
-                      <button type="button" (click)="activarSimple()" class="btn btn-outline-success">Busqueda Simple</button>
-                  </div>
-                  <div class="col-md-6" style="text-align:center">
-                      <button type="button" (click)="activarAvanzada()"  class="btn btn-outline-warning">Busqueda Avanzada</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <br>   
+          <div class="card-body">  
           <div *ngIf="simple =='activada'" class="row">
               <div class="col-md-6" style="text-align:center">
                 <div class="card">
@@ -54,7 +42,7 @@
                           <th class="centrado">IndicadorTag</th>
                           <th class="centrado">Marca</th>
                           <th class="centrado">Descripcion</th>
-                          <th class="centrado">Edit</th>
+                          <th class="centrado">Edit/His</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -162,6 +150,8 @@
 
                           <td style="text-align:center">
                               <i class="fas fa-edit pointer" [routerLink]="['/equiposClienteEdit', equipo._id]"></i>
+                              <br>
+                              <i class="fas fa-history" [routerLink]="['/historia', tercero, equipo._id]"></i>
                           </td>
                         </tr>
                       </tbody>

@@ -136,6 +136,13 @@ export class OrdenesService {
       })
     )                                   
   }
+  listarlasactividadesporClienteyequipo(tercero:string, equipo:string):Observable<any>{
+    
+    let headers = new HttpHeaders().set('Content-Type', 'application/json')
+                                   .set('Authorization', this.token);
+                                   //hay que implementar un manejo de errores
+    return this._http.get(this.URL+'activity/listarordenporequipocliente/'+tercero+'/'+equipo, {headers:headers});                         
+  }
   /*******************************************************************************************************/
   /*************************************GESTIONAR LA SUBIDA DE ARCHIVOS***********************************/
   /*******************************************************************************************************/

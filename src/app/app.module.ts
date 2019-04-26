@@ -69,6 +69,7 @@ import { OrdenesInExComponent } from './components/import-export/ordenes-in-ex/o
 import { BusquedasComponent } from './components/busquedas/busquedas.component';
 import { SubidaEquiposComponent } from './components/import-export/subida-equipos/subida-equipos.component';
 import { SelectlistoComponent } from './components/selectlisto/selectlisto.component';
+import { HistoricoporEquipoComponent } from './components/historicopor-equipo/historicopor-equipo.component';
 
 
 
@@ -117,6 +118,7 @@ import { SelectlistoComponent } from './components/selectlisto/selectlisto.compo
     BusquedasComponent,
     SubidaEquiposComponent,
     SelectlistoComponent,
+    HistoricoporEquipoComponent,
     
 
 

@@ -41,6 +41,7 @@ import { OrdenesInExComponent } from './components/import-export/ordenes-in-ex/o
 import { BusquedasComponent } from './components/busquedas/busquedas.component';
 import { SubidaEquiposComponent } from './components/import-export/subida-equipos/subida-equipos.component';
 import { SelectlistoComponent } from './components/selectlisto/selectlisto.component';
+import { HistoricoporEquipoComponent } from './components/historicopor-equipo/historicopor-equipo.component';
 
 
 
@@ -88,6 +89,7 @@ const appRoutes : Routes = [
     {path: 'busquedas/:page', component: BusquedasComponent, canActivate:[UserGuard]},
     {path: 'import-export/subirequipo', component: SubidaEquiposComponent, canActivate:[UserGuard]},
     {path: 'select', component: SelectlistoComponent, canActivate:[UserGuard]},
+    {path: 'historia/:tercero/:equipo', component: HistoricoporEquipoComponent, canActivate:[UserGuard]},
     {path: '**', component: ErrorComponent},
 ];
 

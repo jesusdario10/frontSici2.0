@@ -1,24 +1,13 @@
-
 .contenedor{
     background-image: url(../../../assets/img/logo/bgctransparente.png);
     background-size: cover;
     padding: 2vh;
 }
-
 .centrado{
     text-align: center !important;
 }
-p{
-    font-size: 0.8rem;
-}
-span{
-    font-size: 0.8rem;
+.serial-tag{
+    
     font-weight: bold;
-}
-.resultados{
-    height: 60vh;
-}
-
-i{
-    cursor: pointer;
+    font-family: 'Gugi', cursive;
 }

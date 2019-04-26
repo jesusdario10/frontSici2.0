@@ -27,6 +27,8 @@ export class BusquedasComponent implements OnInit {
   longitudTerminoSerial: any;
   terminoSerial: string;
 
+  tercero: any;
+
  
 
   constructor(
@@ -40,12 +42,13 @@ export class BusquedasComponent implements OnInit {
     this.avanzada = 'desactivada';
     this.longitudTerminoTag = 0;
     this.longitudTerminoSerial = 0;
+    this.identity = this._userServices.getIdentity();
+    this.tercero = this.identity.tercero;
     }
 
   ngOnInit() {
-    this.identity = this._userServices.getIdentity();
+    console.log(this.tercero);
     this.actualPage();
-    
   }
   activarSimple(){
     this.simple ='activada';

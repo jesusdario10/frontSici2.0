@@ -1,0 +1,93 @@
+<div class="contenedor">
+  <div class="container">
+    <div class="row">
+      <div class="col md-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-12 col-sm-12 centrado">
+                <div class="card">
+                  <div class="card-body">
+                    <h3 class="serial-tag">Informacion del equipo</h3>
+                    <div class="row">
+                      <div class="col-md-6 col-sm-12 centrado">
+                        <p class="serial-tag">Serial</p>
+                      </div>
+                      <div class="col-md-6 col-sm-12 centrado">
+                        <p class="serial-tag">Tag</p>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <p class="serial-tag">Indicador de Presion</p>
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-md-12 espacio">
+        <div class="card">
+          <div class="card-body form-control" style="text-align:center !important">
+            <h5>Resultados</h5>
+            <div class="row">
+              <div class="col-md-12" style="text-align:center !important">
+                <table  class="table table-responsive  table-hover table-bordered">
+                  <thead class="table-primary">
+                    <tr>
+                      <th>#</th>
+                      <th>Serial</th>
+                      <th>Fecha</th>
+                      <th>Ejecucion</th>
+                      <th>Descripcion</th>
+                      <th>Ubicacion</th>
+                      <th>Descripcion de Equipo</th>
+                      <th>Libreria</th>
+                      <th>Solicitante</th>
+                      <th>Estado</th>
+                      <th>Ver</th>
+                    </tr>
+                  </thead>
+<!--                   <tbody>
+                    <tr *ngFor = "let orden of ordenes ; let i = index">
+                      <td>{{orden.consecutivo}}</td>
+                      <td>{{orden.equipo.serial}}</td>
+                      <td>{{orden.fecha_creacion | date}}</td>
+                      <td>{{orden.fecha_ejecucion | date}}</td>
+                      <td>{{orden.historico}}</td>
+                      <td>{{orden.ubicacion.nombre}}</td>
+                      <td>{{orden.equipo.nombre_equipo}}</td>
+                      <td>{{orden.libreria.nombre}}</td>
+                      <td>{{orden.solicitante}}</td>
+                      <td>{{orden.estado}}</td>
+                      <td>
+                        <p >
+                          <i *ngIf="orden.estado == 'ACTIVA' || orden.estado == 'EJECUCION'" class="far fa-eye cursor" style="color:chartreuse"    title="Ver Orden"></i>
+                          <i *ngIf="orden.estado == 'EJECUTADA' || orden.estado == 'DETENIDA'"class="far fa-eye cursor" style="color:chartreuse" (click)="listarUnaOrdenCliente(orden._id)"  data-toggle="modal" data-target="#exampleModalLong"   title="Ver Orden"></i>
+                          <i *ngIf="orden.estado == 'ACTIVA' || orden.estado == 'EJECUCION'" class="fas fa-pencil-alt cursor" style="color:chocolate" [routerLink]="['/ordenesCgestion', orden._id]"   title="Gestionar Orden"></i>
+                          <i *ngIf="orden.estado == 'EJECUTADA' || orden.estado == 'DETENIDA'" class="fas fa-pencil-alt cursor" style="color:chocolate" [routerLink]="['/ordenesCgestion', orden._id]"    title="Gestionar Orden"></i>
+                        </p>
+                      </td>
+                    </tr>
+                  </tbody> -->
+                </table>
+                <!--PAGINACION -->
+                <div  style="text-align:center">
+                    <button type="button" *ngIf="page >= 2 " [routerLink]="['/ordenesC', pre_page]" class="btn btn-outline-info">Anterior</button> &nbsp;
+                    <button type="button" *ngIf="page != pages && pages > 1 " [routerLink]="['/ordenesC', next_page]" class="btn btn-outline-info ">Siguiente</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
