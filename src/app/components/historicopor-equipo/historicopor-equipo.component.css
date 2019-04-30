@@ -2,6 +2,7 @@
     background-image: url(../../../assets/img/logo/bgctransparente.png);
     background-size: cover;
     padding: 2vh;
+    height: 100vh;
 }
 .centrado{
     text-align: center !important;
@@ -10,4 +11,20 @@
     
     font-weight: bold;
     font-family: 'Gugi', cursive;
+}
+/*Ordenamiento de la tabla*/
+.relojContainer{
+    border : 2px solid #ff4444;
+    background-color: black;
+    color: #00C851;
+    font-size: 1.5rem;
+}
+.reloj{
+    background-color: black;
+    color: #00C851;
+    font-size: 2.5rem;
+    font-family: 'Orbitron', sans-serif;
+}
+.altura-tabla{
+    max-height: 650px;
 }
