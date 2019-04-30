@@ -10,6 +10,7 @@ import { LibreriaService } from 'src/app/services/libreria.service';
 import { LibreriaModel } from 'src/app/models/libreriaModel';
 import { OrdenesService } from 'src/app/services/ordenes.service';
 import { ActividadModel } from 'src/app/models/actividadModel';
+import { CcostosService } from 'src/app/services/ccostos.service';
 declare var swal:any;
 
 @Component({
@@ -30,7 +31,9 @@ export class OrdenesClienteCrearComponent implements OnInit {
   formSubmit: boolean;
   
   selectedEquipo : any;
+  selectedCcosto : any;
   selectedUbicacion : any;
+  ccostos: any;
 
   constructor(
     private _ubicacionService : UbicacionService,
@@ -38,6 +41,7 @@ export class OrdenesClienteCrearComponent implements OnInit {
     private _UserService : UserService, 
     private _LibreriaService : LibreriaService,
     private _OrdenService : OrdenesService,
+    private _CcostoService : CcostosService,
     private fb: FormBuilder,
     private _router : Router,
     private _route:ActivatedRoute,
@@ -48,6 +52,7 @@ export class OrdenesClienteCrearComponent implements OnInit {
     this.identity = this._UserService.getIdentity();
     this.listarUbicacionesCliente();
     this.listarLibreriaporNombreSinPaginacion();
+    this.listarCcostosSinPaginado();
    
     //inicializando el formulario
     this.form = this.fb.group({
@@ -59,6 +64,7 @@ export class OrdenesClienteCrearComponent implements OnInit {
       prioridadO: [ "", Validators.required ],
       libreriaO: [ "", Validators.required ],
       descripcionO: [ "", Validators.required ],
+      ccosto: [ "", Validators.required ],
     });
     
   }
@@ -108,6 +114,7 @@ export class OrdenesClienteCrearComponent implements OnInit {
       prioridad: formModel.prioridadO as string,
       libreria: formModel.libreriaO as string,
       descripcion: formModel.descripcionO as string,
+      ccosto : formModel.ccosto as string,
       tercero : this.identity.tercero
     }
     console.log(this.saveOrden);
@@ -123,8 +130,14 @@ export class OrdenesClienteCrearComponent implements OnInit {
             form.reset();
             swal("Exito", "Orden Creada", "success"); 
           }
-
     })
+  }
+  //listar centros de costo sin paginado
+  listarCcostosSinPaginado(){
+    this._CcostoService.listarCentrosdecostosinPaginado(this.identity.tercero)
+        .subscribe((datos:any)=>{
+          this.ccostos = datos.ccostos;
+        })
   }
 
 

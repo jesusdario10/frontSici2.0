@@ -1,0 +1,86 @@
+<div class="col-sm-12 fondo">
+</div>
+<div class="container">
+  <div class="row espacios">
+    <div class="col-md-4">
+        <div class="card">
+          <div class="card-body centroiconos">
+              <h5 style="text-align:center">Creacion de Centros de Costo</h5>
+              <i class="fas fa-compass fa-2x fa-lg"></i>  
+              <div class="card">
+                <div class="card-body">
+                    <form ngNativeValidate [formGroup]="form"  #CcostosFormC="ngForm" (ngSubmit)="createCcostosCliente(form, CcostosFormC)">
+                        <div class="col-md-12 col-sm-12 sinespacios">
+                            <div class="form-group sinespacios" style="text-align:center">
+                              <label for="codigo" class="negrita" >Codigo</label>
+                              <input type="text"  formControlName="codigo" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12 sinespacios">
+                            <div class="form-group sinespacios" style="text-align:center">
+                              <label for="responsable" class="negrita" >Responsable</label>
+                              <input type="text"  formControlName="responsable" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12 sinespacios">
+                          <div class="form-group sinespacios" style="text-align:center">
+                            <label for="descripcion" class="negrita" >Descripcion</label>
+                            <input type="text"  formControlName="descripcion" class="form-control" required>
+                          </div>
+                      </div>
+                      <div style="text-align:center">
+                        <input type="submit" class="btn btn-outline-success" value="Agregar">
+                      </div>
+                    </form>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-7 col-sm-12">
+        <div class="card">
+          <div class="card-body">
+            <h5 style="text-align:center">Buscar Centro de Costo</h5>
+            <br>
+            <div class="card">
+              <div class="card-body" style="text-align:center">
+                <label for="">Buscar</label>
+                <input #input (keyup)="buscarCcostosCliente(input.value)" type="text" class="form-control" name="" id="">
+                <div class="row">
+                  <div class="col-md-12">
+                      <table class="table table-hover table-bordered  table-responsive">
+                          <thead class="table-primary">
+                            <tr>
+                              <th>#</th>
+                              <th>Codigo</th>
+                              <th>Responsable</th>
+                              <th>Descripcion</th>
+                             <!--  <th>Editar</th> -->
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let co of ccostos; let i = index">
+                              <td>{{i}}</td>
+                              <td>{{co.codigo}}</td>
+                              <td>{{co.responsable}}</td>
+                              <td>{{co.descripcion}}</td>
+<!--                               <td style="text-align:center">
+                                <i class="fas fa-edit pointer" [routerLink]="['/ubicacionedit', co._id]"></i>
+                              </td> -->
+                            </tr>
+                          </tbody>
+                        </table>
+                        <!--PAGINACION -->
+                        <div class="antsig" style="text-align:center">
+                            <button type="button" *ngIf="page >= 2" [routerLink]="['/ccostos', pre_page]" class="btn btn-outline-info">Anterior</button>
+                            <button type="button" *ngIf="page == pages" [routerLink]="['/ccostos', next_page]" class="btn btn-outline-info ">Siguiente</button>
+                        </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div> 
+</div>

@@ -67,13 +67,25 @@
                       </select>
                     </div>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-3">
                   <div class="form-group">  
                     <div class="form-group ">
                       <label for="solicitanteO">Solicitante</label>
                       <input type="text" class="form-control" name="solicitanteO" formControlName="solicitanteO" required>
                     </div>
                   </div> 
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">  
+                        <label for="selectCargo">Ccosto</label>
+                        <ng-select required    (change)="seleccionUbicacion()"
+                            [items]="ccostos"
+                            bindLabel="codigo"
+                            placeholder="Select Ccostos"
+                            formControlName="ccosto"
+                            [(ngModel)]="selectedCcosto">    
+                        </ng-select>
+                  </div>  
                 </div>
               <div class="col-md-12">
                 <div class="form-group">  

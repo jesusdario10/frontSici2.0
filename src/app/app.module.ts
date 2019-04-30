@@ -70,6 +70,8 @@ import { BusquedasComponent } from './components/busquedas/busquedas.component';
 import { SubidaEquiposComponent } from './components/import-export/subida-equipos/subida-equipos.component';
 import { SelectlistoComponent } from './components/selectlisto/selectlisto.component';
 import { HistoricoporEquipoComponent } from './components/historicopor-equipo/historicopor-equipo.component';
+import { CcostosComponent } from './components/ccostos/ccostos.component';
+
 
 
 
@@ -119,6 +121,8 @@ import { HistoricoporEquipoComponent } from './components/historicopor-equipo/hi
     SubidaEquiposComponent,
     SelectlistoComponent,
     HistoricoporEquipoComponent,
+    CcostosComponent,
+  
     
 
 

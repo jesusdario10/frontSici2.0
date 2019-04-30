@@ -20,6 +20,7 @@ export class ActividadModel{
         public horas_hombre? :string,
         public valor? :number,
         public historico?:string,
+        public ccosto?:string,
         public _id?: string,
     ){}
 }

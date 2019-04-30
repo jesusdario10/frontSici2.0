@@ -42,6 +42,7 @@ import { BusquedasComponent } from './components/busquedas/busquedas.component';
 import { SubidaEquiposComponent } from './components/import-export/subida-equipos/subida-equipos.component';
 import { SelectlistoComponent } from './components/selectlisto/selectlisto.component';
 import { HistoricoporEquipoComponent } from './components/historicopor-equipo/historicopor-equipo.component';
+import { CcostosComponent } from './components/ccostos/ccostos.component';
 
 
 
@@ -90,6 +91,7 @@ const appRoutes : Routes = [
     {path: 'import-export/subirequipo', component: SubidaEquiposComponent, canActivate:[UserGuard]},
     {path: 'select', component: SelectlistoComponent, canActivate:[UserGuard]},
     {path: 'historia/:tercero/:equipo', component: HistoricoporEquipoComponent, canActivate:[UserGuard]},
+    {path: 'ccostos/:id', component: CcostosComponent, canActivate:[UserGuard]},
     {path: '**', component: ErrorComponent},
 ];
 
