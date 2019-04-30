@@ -47,6 +47,10 @@ export class BusquedasComponent implements OnInit {
     }
 
   ngOnInit() {
+<<<<<<< HEAD
+=======
+    console.log(this.tercero);
+>>>>>>> 5f9dee0937e57cf277663db412909c37a175ab7d
     this.actualPage();
   }
   activarSimple(){
