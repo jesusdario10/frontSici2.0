@@ -1,17 +1,10 @@
 /*fondo del componente principal*/
-.fondo{
-    background-image: url(../../../assets/img/logo/bgc.jpg);
-    background-position: left;
-    border: 1px solid black !important;
+.contenedor{
+    background-image: url(../../../assets/img/logo/bgctransparente.png);
     background-size: cover;
-    height: 90.2% !important;
-    opacity: 0.2;
-    z-index: 1;
-    position: absolute;
-}
-.container{
-    z-index: 2;
-    position: relative;
+    padding: 2vh;
+    min-height: 90vh;
+    
 }
 .espacios{
     margin: 1vh;
@@ -26,10 +19,8 @@
     box-shadow: inset 0 0 0 3px #3a7999;
     color : black !important;
     font-weight: bold;
-    
 }
 .efectoBotones2:before{
-    content:”;
     position: absolute;
     top: 0px;
     left: 0px;

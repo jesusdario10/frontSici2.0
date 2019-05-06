@@ -1,80 +1,81 @@
-<div class="col-sm-12 fondo">
-  </div>
-  <div class="container">
-    <div class="row espacios">
-      <div class="col-md-4">
-          <div class="card">
-            <div class="card-body centroiconos">
-                <h5 style="text-align:center">Creacion de Ubicaciones</h5>
-                <i class="fas fa-compass fa-2x fa-lg"></i>  
-                <div class="card">
-                  <div class="card-body">
-                      <form ngNativeValidate [formGroup]="form"  #ubicacionFormC="ngForm" (ngSubmit)="createUbicacionCliente(form, ubicacionFormC)">
-                          <div class="col-md-12 col-sm-12">
-                              <div class="form-group" style="text-align:center">
-                                <label for="codigo" class="negrita" >Codigo Ubicacion</label>
-                                <input type="text"  formControlName="codigo" class="form-control" required>
+<div class="contenedor">
+    <div class="container">
+        <div class="row espacios">
+          <div class="col-md-4">
+              <div class="card">
+                <div class="card-body centroiconos">
+                    <h5 style="text-align:center">Creacion de Ubicaciones</h5>
+                    <i class="fas fa-compass fa-2x fa-lg"></i>  
+                    <div class="card">
+                      <div class="card-body">
+                          <form ngNativeValidate [formGroup]="form"  #ubicacionFormC="ngForm" (ngSubmit)="createUbicacionCliente(form, ubicacionFormC)">
+                              <div class="col-md-12 col-sm-12">
+                                  <div class="form-group" style="text-align:center">
+                                    <label for="codigo" class="negrita" >Codigo Ubicacion</label>
+                                    <input type="text"  formControlName="codigo" class="form-control" required>
+                                  </div>
                               </div>
-                          </div>
-                          <div class="col-md-12 col-sm-12">
-                              <div class="form-group" style="text-align:center">
-                                <label for="nombreUbicacion" class="negrita" >Nombre Ubicacion</label>
-                                <input type="text"  formControlName="nombreC" class="form-control" required>
+                              <div class="col-md-12 col-sm-12">
+                                  <div class="form-group" style="text-align:center">
+                                    <label for="nombreUbicacion" class="negrita" >Nombre Ubicacion</label>
+                                    <input type="text"  formControlName="nombreC" class="form-control" required>
+                                  </div>
                               </div>
-                          </div>
-                        <div style="text-align:center">
-                          <input type="submit" class="btn btn-outline-success" value="Agregar">
+                            <div style="text-align:center">
+                              <input type="submit" class="btn btn-outline-success" value="Agregar">
+                            </div>
+                          </form>
                         </div>
-                      </form>
-                    </div>
+                      </div>
                   </div>
               </div>
           </div>
-      </div>
-      <div class="col-md-7 col-sm-12">
-          <div class="card">
-            <div class="card-body">
-              <h5 style="text-align:center">Buscar Ubicacion</h5>
-              <br>
+          <div class="col-md-7 col-sm-12">
               <div class="card">
-                <div class="card-body" style="text-align:center">
-                  <label for="">Buscar</label>
-                  <input #input (keyup)="buscarUbicacionCliente(input.value)" type="text" class="form-control" name="" id="">
-                  <div class="row">
-                    <div class="col-md-12">
-                        <table class="table table-hover table-bordered ">
-                            <thead class="table-success">
-                              <tr>
-                                <th>#</th>
-                                <th>Codigo</th>
-                                <th>Nombre Ubicacion</th>
-                                <th>Estado</th>
-                                <th>Editar</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr *ngFor="let ubi of ubicaciones; let i = index">
-                                <td>{{i}}</td>
-                                <td>{{ubi.codigo}}</td>
-                                <td>{{ubi.nombre}}</td>
-                                <td>{{ubi.estado}}</td>
-                                <td style="text-align:center">
-                                  <i class="fas fa-edit pointer" [routerLink]="['/ubicacionedit', ubi._id]"></i>
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
-                          <!--PAGINACION -->
-                          <div class="antsig" style="text-align:center">
-                              <button type="button" *ngIf="page >= 2" [routerLink]="['/ubicacion', pre_page]" class="btn btn-outline-info">Anterior</button>
-                              <button type="button" *ngIf="pages != page" [routerLink]="['/ubicacion', next_page]" class="btn btn-outline-info ">Siguiente</button>
-                          </div>
+                <div class="card-body">
+                  <h5 style="text-align:center">Buscar Ubicacion</h5>
+                  <br>
+                  <div class="card">
+                    <div class="card-body" style="text-align:center">
+                      <label for="">Buscar</label>
+                      <input #input (keyup)="buscarUbicacionCliente(input.value)" type="text" class="form-control" name="" id="">
+                      <div class="row">
+                        <div class="col-md-12">
+                            <table class="table table-hover table-bordered table-responsive">
+                                <thead class="table-success">
+                                  <tr>
+                                    <th>#</th>
+                                    <th>Codigo</th>
+                                    <th>Nombre Ubicacion</th>
+                                    <th>Estado</th>
+                                    <th>Editar</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr *ngFor="let ubi of ubicaciones; let i = index">
+                                    <td>{{i}}</td>
+                                    <td>{{ubi.codigo}}</td>
+                                    <td>{{ubi.nombre}}</td>
+                                    <td>{{ubi.estado}}</td>
+                                    <td style="text-align:center">
+                                      <i class="fas fa-edit pointer" [routerLink]="['/ubicacionedit', ubi._id]"></i>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                              <!--PAGINACION -->
+                              <div class="antsig" style="text-align:center">
+                                  <button type="button" *ngIf="page >= 2" [routerLink]="['/ubicacion', pre_page]" class="btn btn-outline-info">Anterior</button>
+                                  <button type="button" *ngIf="pages != page" [routerLink]="['/ubicacion', next_page]" class="btn btn-outline-info ">Siguiente</button>
+                              </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-    </div> 
+        </div> 
+    </div>
 </div>
+ 

@@ -4,6 +4,8 @@ import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import { UserService } from 'src/app/services/user.service';
 import { UserModel } from 'src/app/models/userModel';
+import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
+declare var swal:any;
 
 @Component({
   selector: 'app-perfil',
@@ -17,9 +19,14 @@ export class PerfilComponent implements OnInit{
   public passwordNew : string;
   public passwordConfirm : string;
 
+  public form : FormGroup;
+  public form2 : FormGroup;
+  public formSubmit: boolean;
+
 
   constructor(
-    private UserServices: UserService
+    private UserServices: UserService,
+    private fb: FormBuilder,
   ){
 
   }
@@ -27,6 +34,34 @@ export class PerfilComponent implements OnInit{
   ngOnInit(){
     this.identity = this.UserServices.getIdentity();
     console.log(this.identity);
+
+    //inicializando el formulario
+    this.form = this.fb.group({
+      nombre : ["", Validators.required ],
+      correo: ["", Validators.required ],
+      celular: ["", Validators.required ]
+    });
+
+    this.form2 = this.fb.group({
+      passwordAnt : ["", Validators.required ],
+      passwordNew: ["", Validators.required ],
+      passwordConfirm: ["", Validators.required ]
+    });
+  }
+  actualizarPerfil(form, perfil){
+    const formModel = this.form.value;
+    let actualizados : UserModel = {
+      nombre : formModel.nombre as string,
+      correo : formModel.correo as string,
+      celular : formModel.celular as string
+    }
+
+    this.UserServices.updateUserPerfil(actualizados, this.identity._id)
+        .subscribe((data:any)=>{
+          console.log(data);
+          this.identity = data.userUpdate;
+          swal('Exito', "Datos Actualizados", 'success');
+        })
   }
 
 

@@ -52,10 +52,9 @@ import { OrdenesClienteComponent } from './components/ordenes/ordenes-cliente/or
 import { OrdenesClienteCrearComponent } from './components/ordenes/ordenes-cliente-crear/ordenes-cliente-crear.component';
 import { OrdenesClienteGestionComponent } from './components/ordenes/ordenes-cliente-gestion/ordenes-cliente-gestion.component';
 import { OrdenesClienteVerComponent } from './components/ordenes/ordenes-cliente-ver/ordenes-cliente-ver.component';
-import { AvanceClienteComponent } from './components/avance/avance-cliente/avance-cliente.component';
-import { AvanceClienteDonaComponent } from './components/avance/avance-cliente-dona/avance-cliente-dona.component';
+
+
 import { AvanceClienteLineaComponent } from './components/avance/avance-cliente-linea/avance-cliente-linea.component';
-import { AvanceClienteVerComponent } from './components/avance/avance-cliente-ver/avance-cliente-ver.component';
 import { AvanceClienteLineaVerComponent } from './components/avance/avance-cliente-linea-ver/avance-cliente-linea-ver.component';
 import { ExcelExportComponent } from './components/excel-export/excel-export.component';
 import { ExportExcelService } from './services/export-excel.service';
@@ -105,10 +104,7 @@ import { CcostosComponent } from './components/ccostos/ccostos.component';
     OrdenesClienteCrearComponent,
     OrdenesClienteGestionComponent,
     OrdenesClienteVerComponent,
-    AvanceClienteComponent,
-    AvanceClienteDonaComponent,
     AvanceClienteLineaComponent,
-    AvanceClienteVerComponent,
     AvanceClienteLineaVerComponent,
     ExcelExportComponent,
     ImportExportComponent,
@@ -151,7 +147,7 @@ import { CcostosComponent } from './components/ccostos/ccostos.component';
               UserService,
               UserGuard,
               ExportExcelService,
-              SubirArchivosService
+              SubirArchivosService         
              ],
   bootstrap: [AppComponent]
 })

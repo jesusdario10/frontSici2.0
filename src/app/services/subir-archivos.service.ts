@@ -35,14 +35,13 @@ export class SubirArchivosService {
             console.log("archivo subido");
             resolve(JSON.parse(xhr.response));
           }else{
-            console.log('fallo la subida');
+            console.log('fallo la subida', xhr.status);
             reject(JSON.parse(xhr.response));
           }
         }
       }
       let url = this.URL+'import/csv/'+tercero+'/'+tipo +'/'+tipoEquipo;
-      console.log("la urllllllllllllllllllllllllll");
-      console.log(url);
+
 
       xhr.open('POST', url, true);
       xhr.setRequestHeader('Authorization', this.token);

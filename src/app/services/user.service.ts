@@ -20,21 +20,22 @@ export class UserService {
     public _http:HttpClient
   ) { 
     this.url = GLOBAL.url;
+    
   }
   //servicio de login
   login(user:UserModel, gettoken=null){
     if(gettoken !=null){
       user.gettoken = gettoken;
     }
-
     let params = JSON.stringify(user);
     let headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this._http.post('http://localhost:3800/user/login', params, {headers:headers}).pipe(
+                                   
+    return this._http.post(this.url+'user/login', params, {headers:headers}).pipe(
       map((resp:any)=>{
         return resp
       }),
       catchError(err=>{
-        swal('!Ya Existe la Cuenta', err.error.message, 'error');
+        swal('!error', err.error.message, 'error');
         return throwError(err) //nos retorna un observable
       })
     );
@@ -61,6 +62,18 @@ export class UserService {
       this.token = null;
     }
     return this.token;
+  }
+  //actualizar usuario en informacion de perfil
+  updateUserPerfil(user:UserModel, id){
+    this.getToken()
+    let params = JSON.stringify(user);
+    let headers = new HttpHeaders().set('Content-Type', 'application/json')
+                                   .set('Authorization', this.token)
+    return this._http.post(this.url+'user/updateperfil/'+id, params, {headers:headers}).pipe(
+      map((resp:any)=>{
+        return resp;
+      })
+    )
   }
   
 }

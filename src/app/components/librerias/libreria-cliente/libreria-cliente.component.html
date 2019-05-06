@@ -1,85 +1,85 @@
-<div class="col-sm-12 fondo">
-</div>
-<div class="container">
-  <div class="row espacios">
-    <div class="col-md-5">
-        <div class="card">
-          <div class="card-body centroiconos">
-              <h5 style="text-align:center">Creacion de Librerias</h5>
-              <i class="fas fa-book fa-2x fa-lg"></i>
-              <br><br>
-            <div class="card">
-              <div class="card-body">
-                  <form ngNativeValidate [formGroup]="form"  #libreriaFormC="ngForm" (ngSubmit)="createLibreria(form, libreriaFormC)">
-                      <div class="col-md-12 col-sm-12">
-                          <div class="form-group">
-                            <label for="nombreLibreria" class="negrita">Nombre del libreria</label>
-                            <input type="text"  formControlName="nombreL" class="form-control" required>
-                          </div>
-                      </div>
-                      <div class="col-md-12 col-sm-12">
-                        <div class="form-group">
-                          <label for="descripcion" class="negrita">Descripcion de la Libreria</label>
-                          <input type="text"  formControlName="descripcionL"  class="form-control"  required>
+<div class="contenedor">
+    <div class="container">
+        <div class="row espacios">
+          <div class="col-md-5">
+              <div class="card">
+                <div class="card-body centroiconos">
+                    <h5 style="text-align:center">Creacion de Librerias</h5>
+                    <i class="fas fa-book fa-2x fa-lg"></i>
+                    <br><br>
+                  <div class="card">
+                    <div class="card-body">
+                        <form ngNativeValidate [formGroup]="form"  #libreriaFormC="ngForm" (ngSubmit)="createLibreria(form, libreriaFormC)">
+                            <div class="col-md-12 col-sm-12">
+                                <div class="form-group">
+                                  <label for="nombreLibreria" class="negrita">Nombre del libreria</label>
+                                  <input type="text"  formControlName="nombreL" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-sm-12">
+                              <div class="form-group">
+                                <label for="descripcion" class="negrita">Descripcion de la Libreria</label>
+                                <input type="text"  formControlName="descripcionL"  class="form-control"  required>
+                              </div>
+                            </div>  
+                          <div style="text-align:center">
+                            <input type="submit" class="btn btn-outline-success" value="Agregar">
                         </div>
-                      </div>  
-                    <div style="text-align:center">
-                      <input type="submit" class="btn btn-outline-success" value="Agregar">
+                      </form>
+                    </div>
                   </div>
-                </form>
+                </div>
               </div>
-            </div>
           </div>
-        </div>
-    </div>
-    <div class="col-md-7 col-sm-12">
-        <div class="card">
-          <div class="card-body">
-            <h5 style="text-align:center">Buscar Librerias</h5>
-            <br>
-            <div class="card">
-              <div class="card-body">
-                <label for="">Buscar</label>
-                <input #input (keyup)="buscarLibrerias(input.value)" type="text" class="form-control" name="" id="">
-                <div class="row">
-                  <div class="col-md-12">
-                      <table class="table table-hover table-bordered table-responsive">
-                          <thead class="table-secondary">
-                            <tr>
-                              <th>#</th>
-                              <th>Nombre</th>
-                              <th>Descripcion de Libreria</th>
-                              <th>Estado</th>
-                              <th>Editar</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr *ngFor="let libreria of librerias; let i = index">
-                              <td>{{i}}</td>
-                              <td>{{libreria.nombre}}</td>
-                              <td>{{libreria.descripcion}}</td>
-                              <td>{{libreria.estado}}</td>
-                              <td style="text-align:center">
-                                <i class="fas fa-edit pointer" [routerLink]="['/libreriaClienteEdit', libreria._id]"></i>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      <!--PAGINACION -->
-                        <div class="antsig" style="text-align:center">
-                            <button type="button" *ngIf="page >= 2" [routerLink]="['/libreriasCliente', pre_page]" class="btn btn-outline-info">Anterior</button>
-                            <button type="button" *ngIf="pages != page" [routerLink]="['/libreriasCliente', next_page]" class="btn btn-outline-info ">Siguiente</button>
+          <div class="col-md-7 col-sm-12">
+              <div class="card">
+                <div class="card-body">
+                  <h5 style="text-align:center">Buscar Librerias</h5>
+                  <br>
+                  <div class="card">
+                    <div class="card-body">
+                      <label for="">Buscar</label>
+                      <input #input (keyup)="buscarLibrerias(input.value)" type="text" class="form-control" name="" id="">
+                      <div class="row">
+                        <div class="col-md-12">
+                            <table class="table table-hover table-bordered table-responsive">
+                                <thead class="table-secondary">
+                                  <tr>
+                                    <th>#</th>
+                                    <th>Nombre</th>
+                                    <th>Descripcion de Libreria</th>
+                                    <th>Estado</th>
+                                    <th>Editar</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr *ngFor="let libreria of librerias; let i = index">
+                                    <td>{{i}}</td>
+                                    <td>{{libreria.nombre}}</td>
+                                    <td>{{libreria.descripcion}}</td>
+                                    <td>{{libreria.estado}}</td>
+                                    <td style="text-align:center">
+                                      <i class="fas fa-edit pointer" [routerLink]="['/libreriaClienteEdit', libreria._id]"></i>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            <!--PAGINACION -->
+                              <div class="antsig" style="text-align:center">
+                                  <button type="button" *ngIf="page >= 2" [routerLink]="['/libreriasCliente', pre_page]" class="btn btn-outline-info">Anterior</button>
+                                  <button type="button" *ngIf="pages != page" [routerLink]="['/libreriasCliente', next_page]" class="btn btn-outline-info ">Siguiente</button>
+                              </div>
                         </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
         </div>
+        
+      
+      
+       
       </div>
-  </div>
-  
-
-
- 
 </div>

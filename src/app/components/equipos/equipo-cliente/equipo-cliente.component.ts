@@ -86,6 +86,7 @@ export class EquipoClienteComponent implements OnInit {
       ele_medicion: [ "", Validators.required ],
       carcaza: [ "", Validators.required ],
       tipo_elemento: ["", Validators.required],
+      unidades_rango: ["", Validators.required],
       rango_min : [0, Validators.required],
       rango_max : [ 0, Validators.required ],
       comunicacion: [ "", Validators.required ],
@@ -240,6 +241,7 @@ export class EquipoClienteComponent implements OnInit {
       exactitud : formModel.exactitud as string,
       elemento_medicion : formModel.ele_medicion as string,
       tipo_elemento : formModel.tipo_elemento as string,
+      unidades_rango: formModel.unidades_rango as string,
       rango_min: formModel.rango_min as number,
       rango_max: formModel.rango_max as number,
       comunicacion : formModel.comunicacion as string,
@@ -263,7 +265,29 @@ export class EquipoClienteComponent implements OnInit {
             swal("error", "No completo los datos minimos requeridos", "warning");
           }else{
             swal("Exito", "Equipo Creado", "success");
-            form2.reset();
+            this.form2 = this.fb.group({
+              subtipoFuncionEquipo:["", Validators.required],
+              nomenclatura: ["", Validators.required],
+              marca : ["", Validators.required],
+              serial : [ "", Validators.required ],
+              tag: [ "", Validators.required ],
+              modelo: [ "", Validators.required ],
+              al_electrica : ["", Validators.required],
+              exactitud : [ "", Validators.required ],
+              ele_medicion: [ "", Validators.required ],
+              carcaza: [ "", Validators.required ],
+              tipo_elemento: ["", Validators.required],
+              unidades_rango: ["", Validators.required],
+              rango_min : [0, Validators.required],
+              rango_max : [ 0, Validators.required ],
+              comunicacion: [ "", Validators.required ],
+              m_diafragma: [ "", Validators.required ],
+              m_cuerpo: [ "", Validators.required ],
+              manifold: [ "", Validators.required ],
+              f_manifold: [ "", Validators.required ],
+              req_especial: [ "", Validators.required ],
+              ubicacionT : [ "", Validators.required ]
+            });
           }  
     });
   }

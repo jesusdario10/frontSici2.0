@@ -1,83 +1,83 @@
-<div class="col-sm-12 fondo">
-  </div>
-  <div class="container">
-    <div class="row espacios">
-      <div class="col-md-4">
-          <div class="card">
-            <div class="card-body centroiconos">
-                <h5 style="text-align:center">Creacion de Consecutivos</h5>
-                <i class="fas fa-sort-numeric-up fa-2x fa-lg"></i>
+<div class="contenedor">
+    <div class="container">
+        <div class="row espacios">
+          <div class="col-md-4">
               <div class="card">
-                <div class="card-body">
-                    <form ngNativeValidate [formGroup]="form"  #consecutivoFormC="ngForm" (ngSubmit)="createConsecutivo(form, consecutivoFormC)">
-                        <div class="col-md-12 col-sm-12">
-                            <div class="form-group" style="text-align:center">
-                              <label for="nombreUbicacion" class="negrita" >Prefijo</label>
-                              <input type="text"  formControlName="prefijoC" class="form-control" required>
+                <div class="card-body centroiconos">
+                    <h5 style="text-align:center">Creacion de Consecutivos</h5>
+                    <i class="fas fa-sort-numeric-up fa-2x fa-lg"></i>
+                  <div class="card">
+                    <div class="card-body">
+                        <form ngNativeValidate [formGroup]="form"  #consecutivoFormC="ngForm" (ngSubmit)="createConsecutivo(form, consecutivoFormC)">
+                            <div class="col-md-12 col-sm-12">
+                                <div class="form-group" style="text-align:center">
+                                  <label for="nombreUbicacion" class="negrita" >Prefijo</label>
+                                  <input type="text"  formControlName="prefijoC" class="form-control" required>
+                                </div>
                             </div>
+                            <div class="col-md-12 col-sm-12">
+                                <div class="form-group">
+                                    <label for="">Tercero</label>
+                                    <select #tercero class="custom-select custom-select-lg mb-3"   name="tercero" formControlName="terceroC" class="form-control"   required>
+                                      <option value="" disabled selected>Open</option>
+                                      <option  *ngFor="let tercero of terceros" [value]="tercero._id" >{{tercero.nombre}}</option>
+                                    </select>
+                                  </div>
+                            </div>
+                          <div style="text-align:center">
+                            <input type="submit" class="btn btn-outline-success" value="Agregar">
                         </div>
-                        <div class="col-md-12 col-sm-12">
-                            <div class="form-group">
-                                <label for="">Tercero</label>
-                                <select #tercero class="custom-select custom-select-lg mb-3"   name="tercero" formControlName="terceroC" class="form-control"   required>
-                                  <option value="" disabled selected>Open</option>
-                                  <option  *ngFor="let tercero of terceros" [value]="tercero._id" >{{tercero.nombre}}</option>
-                                </select>
-                              </div>
-                        </div>
-                      <div style="text-align:center">
-                        <input type="submit" class="btn btn-outline-success" value="Agregar">
+                      </form>
                     </div>
-                  </form>
+                  </div>
                 </div>
               </div>
-            </div>
           </div>
-      </div>
-      <div class="col-md-7 col-sm-12">
-          <div class="card">
-            <div class="card-body">
-              <h5 style="text-align:center">Buscar Consecutivos</h5>
-              <br>
+          <div class="col-md-7 col-sm-12">
               <div class="card">
-                <div class="card-body" style="text-align:center">
-                  <label for="">Buscar</label>
-                  <input #input (keyup)="buscarInputDinamic(input.value)" type="text" class="form-control" name="" id="">
-                  <div class="row">
-                    <div class="col-md-12">
-                        <table class="table table-hover table-bordered ">
-                            <thead style="background:#2E2E2E">
-                              <tr style="color:white">
-                                <th>#</th>
-                                <th>Tercero</th>
-                                <th>Prefijo</th>
-                                <th>Consecutivo</th>
-                                <th>Edit</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr *ngFor="let consecu of consecutivos; let i = index">
-                                <td>{{i}}</td>
-                                <td>{{consecu.tercero.nombre}}</td>
-                                <td>{{consecu.prefijo}}</td>
-                                <td>{{consecu.consecutivo}}</td>
-                                <td style="text-align:center">
-                                  <i class="fas fa-edit pointer" [routerLink]="['/consecutivoEdit', consecu._id]"></i>
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
-                          <!--PAGINACION -->
-                          <div class="antsig" style="text-align:center">
-                              <button type="button" *ngIf="page >= 2" [routerLink]="['/consecutivos', pre_page]" class="btn btn-outline-info">Anterior</button>
-                              <button type="button" *ngIf="pages != page" [routerLink]="['/consecutivos', next_page]" class="btn btn-outline-info ">Siguiente</button>
-                          </div>
+                <div class="card-body">
+                  <h5 style="text-align:center">Buscar Consecutivos</h5>
+                  <br>
+                  <div class="card">
+                    <div class="card-body" style="text-align:center">
+                      <label for="">Buscar</label>
+                      <input #input (keyup)="buscarInputDinamic(input.value)" type="text" class="form-control" name="" id="">
+                      <div class="row">
+                        <div class="col-md-12">
+                            <table class="table table-hover table-bordered  table-responsive">
+                                <thead style="background:#2E2E2E">
+                                  <tr style="color:white">
+                                    <th>#</th>
+                                    <th>Tercero</th>
+                                    <th>Prefijo</th>
+                                    <th>Consecutivo</th>
+                                    <th>Edit</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr *ngFor="let consecu of consecutivos; let i = index">
+                                    <td>{{i}}</td>
+                                    <td>{{consecu.tercero.nombre}}</td>
+                                    <td>{{consecu.prefijo}}</td>
+                                    <td>{{consecu.consecutivo}}</td>
+                                    <td style="text-align:center">
+                                      <i class="fas fa-edit pointer" [routerLink]="['/consecutivoEdit', consecu._id]"></i>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                              <!--PAGINACION -->
+                              <div class="antsig" style="text-align:center">
+                                  <button type="button" *ngIf="page >= 2" [routerLink]="['/consecutivos', pre_page]" class="btn btn-outline-info">Anterior</button>
+                                  <button type="button" *ngIf="pages != page" [routerLink]="['/consecutivos', next_page]" class="btn btn-outline-info ">Siguiente</button>
+                              </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-    </div> 
+        </div> 
+    </div>
 </div>

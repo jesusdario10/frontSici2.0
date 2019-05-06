@@ -80,8 +80,6 @@ export class BusquedasComponent implements OnInit {
       if(page >= this.pages){
         page = this.pages
       }
-      console.log("este es page:", this.page);
-      console.log("este es pages:", this.pages);
         
       if(this.longitudTerminoTag > 0){
         this._equipoServices.buscarEquiposInputDinamicoporTag(this.terminoTag, page)
@@ -93,7 +91,7 @@ export class BusquedasComponent implements OnInit {
       }else if(this.longitudTerminoSerial > 0 ){
         this._equipoServices.buscarEquiposInputDinamico(this.terminoSerial, page)
         .subscribe((datos:any)=>{
-            console.log(datos);
+            
             this.equipos = datos.equipos;
             this.total = datos.total;
             this.pages = datos.pages;
@@ -107,7 +105,7 @@ export class BusquedasComponent implements OnInit {
   listarEquiposCliente(page){
     this._equipoServices.listarEquiposClientes(page)
       .subscribe((datos:any)=>{
-        console.log(datos);
+        
         this.equipos = datos.equipos;
         this.total = datos.total;
         this.pages = datos.pages;
@@ -129,7 +127,7 @@ export class BusquedasComponent implements OnInit {
     }else{
       this._equipoServices.buscarEquiposInputDinamico(termino, 1)
         .subscribe((datos:any)=>{
-            console.log(datos);
+            
             this.equipos = datos.equipos;
             this.total = datos.total;
             this.pages = datos.pages;
@@ -152,7 +150,7 @@ export class BusquedasComponent implements OnInit {
     }
     this._equipoServices.buscarEquiposInputDinamicoporTag(termino, 1)
         .subscribe((datos:any)=>{
-          console.log(datos);
+         
           this.equipos = datos.equipos;
           this.total = datos.total;
           this.pages = datos.pages;
