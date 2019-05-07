@@ -22,6 +22,9 @@ export class CargosClienteComponent implements OnInit {
   pre_page: number;
   total: any;
   pages: any;
+  tipo:string;
+
+
 
   constructor(
     private _userServices : UserService,
@@ -38,7 +41,9 @@ export class CargosClienteComponent implements OnInit {
     //inicializando el formulario
     this.form = this.fb.group({
       nombreC : [ "", Validators.required ],
-      vhora_hombreC: [ 0, Validators.required ]
+      tipo: [ "", Validators.required ],
+      rendimiento: [ 0, Validators.required ],
+      salario_dia: [ 0, Validators.required ]
     });
     //listarCargos
     this.actualPage();
@@ -49,17 +54,19 @@ export class CargosClienteComponent implements OnInit {
     const formModel = this.form.value;
     let saveCargo: CargoModel ={
       nombre : formModel.nombreC as string,
-      vhora_hombre :formModel.vhora_hombreC as number,
-      usuario_creador : this.identity._id,
+      tipo :formModel.tipo as string,
+      rendimiento : formModel.rendimiento as number,
+      salario_dia : formModel.salario_dia as number,
       tercero : this.identity.tercero,
     };
-    this._cargoServices.createCargo(saveCargo)
+    console.log(saveCargo);
+     this._cargoServices.crearCargoCliente(saveCargo)
         .subscribe((datos:any)=>{
           console.log(datos);
           form.reset();
           swal("Exito", "Cargo Creado", "success");
           this.listarCargoCliente(this.page);
-    });
+    }); 
   }
   actualPage(){
     //asi capturo paramtros de la url
@@ -110,6 +117,11 @@ export class CargosClienteComponent implements OnInit {
         .subscribe((datos:any)=>{
           this.cargos = datos.cargos;
         })
+  }
+ 
+  capturaTipo(event){
+    this.tipo = event.path[0].value;  
+    console.log(this.tipo);
   }
 
 }

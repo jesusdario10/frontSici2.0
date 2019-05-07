@@ -1,7 +1,7 @@
 <div class="contenedor">
     <div class="container">
-        <div class="row espacios">
-          <div class="col-md-4">
+        <div class="row">
+          <div class="col-md-12 espacios">
               <div class="card">
                 <div class="card-body centroiconos">
                     <h5 style="text-align:center">Creacion de Cargos</h5>
@@ -10,28 +10,46 @@
                   <div class="card">
                     <div class="card-body">
                         <form ngNativeValidate [formGroup]="form"  #cargoFormC="ngForm" (ngSubmit)="createCargo(form, cargoFormC)">
-                            <div class="col-md-12 col-sm-12">
+                          <div class="row">
+                            <div class="col-md-3 col-sm-12">
                                 <div class="form-group">
-                                  <label for="nombreUsuario" class="negrita">Nombre del Cargo</label>
+                                  <label for="nombreUsuario" class="negrita">Cargo</label>
                                   <input type="text"  formControlName="nombreC" class="form-control" required>
                                 </div>
                             </div>
-                            <div class="col-md-12 col-sm-12">
+                            <div  class="col-md-3 col-sm-12">
+                              <label >Tipo</label>
+                              <select class="form-control" name='tipo' formControlName="tipo"  (change)="capturaTipo($event)">
+                                 <option disabled class="elija">ELIJA</option>
+                                 <option>OPERATIVO</option>
+                                 <option>SUPERVISOR</option>
+                              </select>
+                            </div>
+                            <div class="col-md-3 col-sm-12" *ngIf = "tipo =='OPERATIVO'">
                               <div class="form-group">
-                                <label for="vhora" class="negrita">Valor de la Hora Hombre</label>
-                                <input type="number"  formControlName="vhora_hombreC"  class="form-control"  required>
+                                <label for="rendimiento" class="negrita">Rendimiento</label>
+                                <input type="number" step="0.1"  formControlName="rendimiento" class="form-control" required>
+                              </div>
+                            </div> 
+                            <div class="col-md-3 col-sm-12">
+                              <div class="form-group">
+                                <label for="salario_dia" class="negrita">Salario/Dia</label>
+                                <input type="number" min = 0  formControlName="salario_dia"  class="form-control"  required>
                               </div>
                             </div>  
-                          <div style="text-align:center">
-                            <input type="submit" class="btn btn-outline-success" value="Agregar">
-                        </div>
+                            <div class="col-md-12 col-sm-12">
+                              <div style="text-align:center">
+                                <input type="submit" class="btn btn-outline-success" value="Agregar">
+                              </div>
+                            </div>
+                          </div>
                       </form>
                     </div>
                   </div>
                 </div>
               </div>
           </div>
-          <div class="col-md-7 col-sm-12">
+          <div class="col-md-12 col-sm-12">
               <div class="card">
                 <div class="card-body">
                   <h5 style="text-align:center">Buscar Cargos</h5>
@@ -40,6 +58,7 @@
                     <div class="card-body">
                       <label for="">Buscar</label>
                       <input #input (keyup)="buscarCargo(input.value)" type="text" class="form-control" name="" id="">
+                      <br>
                       <div class="row">
                         <div class="col-md-12">
                             <table class="table table-hover table-bordered table-responsive">
@@ -47,7 +66,9 @@
                                   <tr>
                                     <th>#</th>
                                     <th>Nombre Cargo</th>
-                                    <th>Valor HH</th>
+                                    <th>Tipo</th>
+                                    <th>Rendimiento</th>
+                                    <th>Salario/Dia</th>
                                     <th>Estado</th>
                                     <th>Editar</th>
                                   </tr>
@@ -56,7 +77,9 @@
                                   <tr *ngFor="let cargo of cargos; let i = index">
                                     <td>{{i}}</td>
                                     <td>{{cargo.nombre}}</td>
-                                    <td>{{cargo.vhora_hombre | currency:'USD':true:'1.0-3'}}</td>
+                                    <td>{{cargo.tipo}}</td>
+                                    <td>{{cargo.rendimiento}}</td>
+                                    <td>{{cargo.salario_dia | currency:'USD':true:'1.0-3'}}</td>
                                     <td>{{cargo.estado}}</td>
                                     <td style="text-align:center">
                                       <i class="fas fa-edit pointer" [routerLink]="['/cargosedit', cargo._id]"></i>

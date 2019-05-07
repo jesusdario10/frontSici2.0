@@ -11,18 +11,29 @@
               <form ngNativeValidate [formGroup]="form"  #cargoFormE="ngForm" (ngSubmit)="editCargo(form, cargoFormE)">
                 <div class="col-md-12 col-sm-12">
                     <div class="form-group">
-                      <label for="nombreCargo" class="negrita">Nombre del Cargo</label>
-                      <input type="text"  formControlName="nombreC"  [(ngModel)]="nombreCargo" class="form-control" required>
+                      <label for="nombreCargo" class="negrita">Cargo</label>
+                      <input type="text"  formControlName="nombre"  [(ngModel)]="nombreCargo" class="form-control" required>
                     </div>
                 </div>
                 <div class="col-md-12 col-sm-12">
                   <div class="form-group">
-                    <label for="vhora" class="negrita">Valor de la Hora Hombre</label>
-                    <input type="number"   formControlName="vhora_hombreC" [(ngModel)]="valorHHombre"  class="form-control"  required>
+                    <label for="vhora" class="negrita">Tipo</label>
+                    <input type="number"   formControlName="tipo" [(ngModel)]="tipo"  class="form-control"  required>
+                  </div>
+                </div>
+                <div class="col-md-12 col-sm-12">
+                  <div class="form-group">
+                    <label for="rendimiento" class="negrita">Rendimiento</label>
+                    <input type="number"   formControlName="rendimiento" [(ngModel)]="rendimiento"  class="form-control"  required>
+                  </div>
+                </div>
+                <div class="col-md-12 col-sm-12">
+                  <div class="form-group">
+                    <label for="salario_dia" class="negrita">Rendimiento</label>
+                    <input type="number"   formControlName="salario_dia" [(ngModel)]="salario_dia"  class="form-control"  required>
                   </div>
                 </div>
                 <div class="form-group">
-                  
                   <div class="form-group padselect">
                     <label for="selectCargo">Estado</label>
                     <select class="form-control" name="estadoC" formControlName="estadoC" [(ngModel)]="estado">

@@ -3,9 +3,13 @@ export class CargoModel{
         public nombre? :string,
         public vhora_hombre? : number,
         public usuario_creador? :string,
+        public usuario_modificador? :string,
         public estado? : string,
         public tercero? : string,
-        public _id?: string,
+        public salario_dia?: number,
+        public rendimiento?:number,
+        public tipo?:string,
+        public _id?: string
     ){}
 }
 export class CargoEdit{

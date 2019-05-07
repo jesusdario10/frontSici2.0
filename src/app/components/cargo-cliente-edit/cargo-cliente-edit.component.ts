@@ -14,8 +14,10 @@ declare var swal:any;
 export class CargoClienteEditComponent implements OnInit {
   public identity : any;
   public ediCargo : CargoModel;
-  public nombreCargo : string;
-  public valorHHombre : number;
+  public nombre : string;
+  public tipo : string;
+  public rendimiento : number;
+  public salario_dia : number 
   public estado :string;
   public form : FormGroup;
   public formSubmit: boolean;
@@ -35,9 +37,12 @@ export class CargoClienteEditComponent implements OnInit {
     this.identity = this._userServices.getIdentity();
     //inicializando el formulario
     this.form = this.fb.group({
-      nombreC : [ "", Validators.required ],
-      vhora_hombreC: [ 0, Validators.required ],
-      estadoC :["", Validators.required]
+      nombre : [ "", Validators.required ],
+      tipo: [ "", Validators.required ],
+      rendimiento :[0, Validators.required],
+      salario_dia : [0, Validators.required],
+      estado : [ "", Validators.required ]
+
     });
     //buscando el cargo para editar
     this.buscarCargo();
@@ -69,13 +74,15 @@ export class CargoClienteEditComponent implements OnInit {
     let extraer = urlActual.split('/');
     let id = extraer[4];
 
-    this._cargoServices.buscarUnCargoCliente(id)
+    this._cargoServices.buscarUnCargoCliente(id, this.identity.tercero)
         .subscribe((datos:any)=>{
           console.log(datos);
           this.ediCargo = datos.cargo;
           console.log(this.ediCargo);
-          this.nombreCargo = datos.cargo.nombre;
-          this.valorHHombre = datos.cargo.vhora_hombre;
+          this.nombre = datos.cargo.nombre;
+          this.tipo = datos.cargo.tipo;
+          this.rendimiento = datos.cargo.rendimiento;
+          this.salario_dia = datos.cargo.salario_dia;
           this.estado = datos.cargo.estado;
         })
   }

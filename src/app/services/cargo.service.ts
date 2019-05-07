@@ -38,6 +38,20 @@ export class CargoService {
                 /******CLIENTES************/
 
    /*************************************************** */
+
+   crearCargoCliente(cargo:CargoModel):Observable<any>{
+    let params = JSON.stringify(cargo);
+    let headers = new HttpHeaders().set('Content-Type', 'application/json')
+                                   .set('Authorization', this.token);
+    return this._http.post(this.URL+'cargo/saveC', params, {headers:headers}).pipe(
+      map((resp:any)=>{
+        console.log(resp);
+        return resp;
+      })
+    );        
+   }
+
+
    listarCargoClienteSinpaginacion(tercero:string):Observable<any>{
     let headers = new HttpHeaders().set('Content-Type', 'application/json')
                                    .set('Authorization', this.token);
@@ -69,7 +83,7 @@ export class CargoService {
       })
     );
   }
-  //Listar Cargos para los clientes paginado
+  //Listar Cargos para los clientes paginado empujando ando
   listarCargosClientes(page=null):Observable<any>{
     let headers = new HttpHeaders().set('Content-Type', 'application/json')
                                    .set('Authorization', this.token);
@@ -82,10 +96,10 @@ export class CargoService {
     return this._http.get(this.URL+'busqueda/cargos/'+terminio, {headers:headers})                               ;
   }
   //Buscar un solo cargo para poder editarlo este es para clientes
-  buscarUnCargoCliente(id):Observable<any>{
+  buscarUnCargoCliente(id, tercero):Observable<any>{
     let headers = new HttpHeaders().set('Content-Type', 'application/json')
                                    .set('Authorization', this.token);
-    return this._http.get(this.URL+'cargo/listarcargo/'+id, {headers:headers})
+    return this._http.get(this.URL+'cargo/uncargoCliente/'+tercero+'/'+id, {headers:headers})
   }
   //Editar Cargos para clientes
   editarCargoCliente(cargo:CargoModel, id):Observable<any>{

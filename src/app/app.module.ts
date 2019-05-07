@@ -6,15 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ChartsModule } from 'ng2-charts';
 
 //Angular Material Modules
-import {MatButtonModule,
-        MatFormFieldModule,
-        MatCheckboxModule,
-        MatInputModule,
-        MatAutocompleteModule,
-        MatSelectModule,
-        MatGridListModule,
-        MatDatepickerModule,
-        MatNativeDateModule} from '@angular/material';
+
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgSelectModule } from '@ng-select/ng-select';
 import {FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -130,15 +122,7 @@ import { CcostosComponent } from './components/ccostos/ccostos.component';
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    MatButtonModule,
-    MatCheckboxModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatAutocompleteModule,
-    MatSelectModule,
-    MatGridListModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
+
     HttpClientModule,
     routing,
     ChartsModule

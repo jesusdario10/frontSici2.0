@@ -63,6 +63,9 @@ export class PerfilComponent implements OnInit{
           swal('Exito', "Datos Actualizados", 'success');
         })
   }
+  cambiarPassword(form, password){
+    console.log("aun no");
+  }
 
 
 }

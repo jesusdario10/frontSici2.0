@@ -7,13 +7,12 @@
 }
 .espacios{
     padding: 2vh;
+    margin-bottom: 3vh;
 }
 button{
     margin: 3vh;
 }
-.espacios div{
-    padding-top: 3vh;
-}
+
 .pointer{
     cursor: pointer;
 }
