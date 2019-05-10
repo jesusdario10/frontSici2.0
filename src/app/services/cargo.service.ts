@@ -39,6 +39,7 @@ export class CargoService {
 
    /*************************************************** */
 
+   //Crear cargos clientes
    crearCargoCliente(cargo:CargoModel):Observable<any>{
     let params = JSON.stringify(cargo);
     let headers = new HttpHeaders().set('Content-Type', 'application/json')
@@ -49,6 +50,18 @@ export class CargoService {
         return resp;
       })
     );        
+   }
+
+   //Update Cargo para clientes 
+   updateCargoCliente(cargo:CargoModel, id):Observable<any>{
+    let params = JSON.stringify(cargo);
+    let headers = new HttpHeaders().set('Content-Type', 'application/json')
+                                   .set('Authorization', this.token);
+    return this._http.post(this.URL+'cargo/updateC/'+id, params, {headers:headers}).pipe(
+      map((resp:any)=>{
+        return resp;
+      })
+    )
    }
 
 
@@ -64,13 +77,27 @@ export class CargoService {
       return this._http.get(this.URL+'cargo/uncargoCliente/'+tercero+'/'+id, {headers})  
    }
 
+  //Listar Cargos para los clientes paginado empujando ando
+  listarCargosClientes(page=null):Observable<any>{
+    let headers = new HttpHeaders().set('Content-Type', 'application/json')
+                                   .set('Authorization', this.token);
+    return this._http.get(this.URL+'cargo/listarcargocliente/'+page, {headers:headers});
+  }
+
+  //Buscar un solo cargo para poder editarlo 
+  buscarUnCargoCliente(id, tercero):Observable<any>{
+    let headers = new HttpHeaders().set('Content-Type', 'application/json')
+                                    .set('Authorization', this.token);
+    return this._http.get(this.URL+'cargo/uncargoCliente/'+tercero+'/'+id, {headers:headers})
+  }
+
    /******************************************************* */
 
               /********ADMINISTRADORES*********** */
 
    /******************************************************* */
 
-  //Crear Cargos para clientes
+  //Crear Cargos 
   createCargo(cargo:CargoModel):Observable<any>{
     let params = JSON.stringify(cargo);
     let headers = new HttpHeaders().set('Content-Type', 'application/json')
@@ -83,25 +110,14 @@ export class CargoService {
       })
     );
   }
-  //Listar Cargos para los clientes paginado empujando ando
-  listarCargosClientes(page=null):Observable<any>{
-    let headers = new HttpHeaders().set('Content-Type', 'application/json')
-                                   .set('Authorization', this.token);
-    return this._http.get(this.URL+'cargo/listarcargocliente/'+page, {headers:headers});
-  }
+
   //Buscar mediante el Input cargos para los clientes
   buscarCargosInputDinamico(terminio:string):Observable<any>{
     let headers = new HttpHeaders().set('Content-Type', 'application/json')
                                    .set('Authorization', this.token);
     return this._http.get(this.URL+'busqueda/cargos/'+terminio, {headers:headers})                               ;
   }
-  //Buscar un solo cargo para poder editarlo este es para clientes
-  buscarUnCargoCliente(id, tercero):Observable<any>{
-    let headers = new HttpHeaders().set('Content-Type', 'application/json')
-                                   .set('Authorization', this.token);
-    return this._http.get(this.URL+'cargo/uncargoCliente/'+tercero+'/'+id, {headers:headers})
-  }
-  //Editar Cargos para clientes
+  //Editar Cargos para admin
   editarCargoCliente(cargo:CargoModel, id):Observable<any>{
     let params = JSON.stringify(cargo);
     let headers = new HttpHeaders().set('Content-Type', 'application/json')
@@ -115,6 +131,7 @@ export class CargoService {
     ))
 
   }
+  
   //subir archivo de Cargos desde un archivo xlsx
   subirCargosxlsx(archivo:File,  tercero, tipoCargo){
     this._subirArchivos.subirArchivo(archivo, 'cargo', tercero, tipoCargo)
@@ -131,7 +148,6 @@ export class CargoService {
       .catch(resp=>{
         console.log(resp);
       })
-
   }
   //agregar los datos obtenidos a una variable
   leerDatosCargosJson(datos){
@@ -152,14 +168,6 @@ export class CargoService {
       })
     );                               
   }
-
-
-
-
-
-
-
-
 
 
 

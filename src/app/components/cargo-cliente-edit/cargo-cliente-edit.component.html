@@ -12,31 +12,33 @@
                 <div class="col-md-12 col-sm-12">
                     <div class="form-group">
                       <label for="nombreCargo" class="negrita">Cargo</label>
-                      <input type="text"  formControlName="nombre"  [(ngModel)]="nombreCargo" class="form-control" required>
+                      <input type="text"  formControlName="nombre"  [(ngModel)]="nombre" class="form-control" required>
                     </div>
                 </div>
-                <div class="col-md-12 col-sm-12">
-                  <div class="form-group">
-                    <label for="vhora" class="negrita">Tipo</label>
-                    <input type="number"   formControlName="tipo" [(ngModel)]="tipo"  class="form-control"  required>
-                  </div>
+                <div  class="col-md-12 col-sm-12">
+                  <label >Tipo</label>
+                  <select class="form-control" name='tipo' formControlName="tipo" [(ngModel)]="tipo"  (change)="capturaTipo($event)" required>
+                     <option disabled class="elija">ELIJA</option>
+                     <option>OPERATIVO</option>
+                     <option>SUPERVISOR</option>
+                  </select>
                 </div>
-                <div class="col-md-12 col-sm-12">
+                <div class="col-md-12 col-sm-12" *ngIf = "tipo =='OPERATIVO'">
                   <div class="form-group">
                     <label for="rendimiento" class="negrita">Rendimiento</label>
-                    <input type="number"   formControlName="rendimiento" [(ngModel)]="rendimiento"  class="form-control"  required>
+                    <input type="number" min=0 step="0.1"  formControlName="rendimiento" [(ngModel)]="rendimiento"  class="form-control"  required>
                   </div>
                 </div>
                 <div class="col-md-12 col-sm-12">
                   <div class="form-group">
-                    <label for="salario_dia" class="negrita">Rendimiento</label>
-                    <input type="number"   formControlName="salario_dia" [(ngModel)]="salario_dia"  class="form-control"  required>
+                    <label for="salario_dia" class="negrita">Salario/Dia</label>
+                    <input type="number" min = 0  formControlName="salario_dia" [(ngModel)]="salario_dia"  class="form-control"  required>
                   </div>
                 </div>
                 <div class="form-group">
                   <div class="form-group padselect">
                     <label for="selectCargo">Estado</label>
-                    <select class="form-control" name="estadoC" formControlName="estadoC" [(ngModel)]="estado">
+                    <select class="form-control" name="estado" formControlName="estado" [(ngModel)]="estado" required>
                       <option [value]="estado" selected>{{estado}}</option>
                       <option value="ACTIVO">ACTIVO</option>
                       <option value="INACTIVO">INACTIVO</option>

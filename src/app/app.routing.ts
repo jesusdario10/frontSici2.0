@@ -41,6 +41,8 @@ import { SubidaEquiposComponent } from './components/import-export/subida-equipo
 import { SelectlistoComponent } from './components/selectlisto/selectlisto.component';
 import { HistoricoporEquipoComponent } from './components/historicopor-equipo/historicopor-equipo.component';
 import { CcostosComponent } from './components/ccostos/ccostos.component';
+import { SuministrosComponent } from './components/suministros/suministros.component';
+
 
 
 
@@ -73,6 +75,7 @@ const appRoutes : Routes = [
     {path: 'ordenesClienteCrear', component: OrdenesClienteCrearComponent, canActivate:[UserGuard]},
     {path: 'ordenesCgestion/:id', component: OrdenesClienteGestionComponent, canActivate:[UserGuard]},
     {path: 'ordenesCver/:id', component: OrdenesClienteVerComponent, canActivate:[UserGuard]},
+    {path: 'suministros', component: SuministrosComponent, canActivate:[UserGuard]},
 
     
     

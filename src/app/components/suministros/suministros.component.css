@@ -1,0 +1,38 @@
+
+.contenedor{
+    background-image: url(../../../assets/img/logo/bgctransparente.png);
+    background-size: cover;
+    padding: 2vh;
+    
+}
+
+.centrado{
+    text-align: center !important;
+}
+
+
+.espacio{
+    padding: 2vw;
+}
+.table-heigth{
+    height: 60vh;
+}
+
+.propio{
+    color:#0099CC
+}
+.alquilar{
+    color:#00C851;
+}
+.seguridad{
+    color:#9933CC;
+}
+.calibracion{
+    color:#FF8800;
+}
+.materiales{
+    color: #00695c;
+}
+.transporte{
+    color:#ff1744 
+}

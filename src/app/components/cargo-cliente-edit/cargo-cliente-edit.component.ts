@@ -52,21 +52,22 @@ export class CargoClienteEditComponent implements OnInit {
   editCargo(form, cargoFormE){
     const formModel = this.form.value;
     let editCargo: CargoModel ={
-      nombre : this.nombreCargo,
-      vhora_hombre :this.valorHHombre,
-      estado : this.estado
+      nombre : formModel.nombre as string,
+      tipo : formModel.tipo as string,
+      rendimiento : formModel.rendimiento as number,
+      salario_dia : formModel.salario_dia  as number,
+      estado : formModel.estado as string,
+      tercero : this.identity.tercero
     };
     let urlActual =  window.location.href;
     let extraer = urlActual.split('/');
     let id = extraer[4];
+    console.log(editCargo);
 
-    this._cargoServices.editarCargoCliente(editCargo, id)
+    this._cargoServices.updateCargoCliente(editCargo, id)
         .subscribe((datos:any)=>{
-          console.log(datos);
-          form.reset();
           swal("Exito", "Cargo Editado", "success");    
-          this._router.navigate(['cargos/1'])
-    });
+    }); 
   }
   //Buscar un solo cargo para guardarlo en una variable y editarlo despues
   buscarCargo(){
@@ -76,15 +77,17 @@ export class CargoClienteEditComponent implements OnInit {
 
     this._cargoServices.buscarUnCargoCliente(id, this.identity.tercero)
         .subscribe((datos:any)=>{
-          console.log(datos);
           this.ediCargo = datos.cargo;
-          console.log(this.ediCargo);
           this.nombre = datos.cargo.nombre;
           this.tipo = datos.cargo.tipo;
           this.rendimiento = datos.cargo.rendimiento;
           this.salario_dia = datos.cargo.salario_dia;
           this.estado = datos.cargo.estado;
         })
+  }
+  capturaTipo(event){
+    this.tipo = event.path[0].value;  
+    
   }
 
 }

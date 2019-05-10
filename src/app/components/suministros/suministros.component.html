@@ -1,0 +1,131 @@
+<div class="contenedor">
+  <div class="container">
+    <div class="row espacio">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-body ">
+            <div class="row">
+              <div class="col-md-12 centrado">
+                <h4>Suministros</h4>
+              </div>
+            </div>
+            <div class="row espacio">
+              <div class="col-md-12 col-lg-12 col-ms-12">
+                <form  ngNativeValidate [formGroup]="form"  #suministroform="ngForm" (ngSubmit)="crearSuministro(form, suministroform)">
+                  <div class="row">
+                      <div class="col-lg-3 col-md-3 col-sm-12 centrado">
+                          <label >Tipo</label>
+                          <select class="form-control" name='tipo' formControlName="tipo" required>
+                              <option disabled class="elija">ELIJA</option>
+                              <option>EQUIPOS Y HTAS PROPIOS</option>
+                              <option>EQUIPOS DE ALQUILAR</option>
+                              <option>EQUIPOS DE SEGURIDAD</option>
+                              <option>EQUIPOS PARA CALIBRACION</option>
+                              <option>MATERIALES</option>
+                              <option>TRANSPORTE</option>
+                              <option>SEGUROS Y OTROS</option>
+                          </select>
+                      </div>
+                      <div class="col-lg-3 col-md-3 col-sm-12">
+                          <div class="form-group centrado">
+                            <label for="nombre">Nombre</label>
+                            <input type="text" class="form-control" name='nombre' formControlName="nombre"required>
+                          </div>
+                        </div>
+                      <div class="col-lg-3 col-md-3 col-sm-12">
+                        <div class="form-group centrado">
+                          <label for="v_dia">Valor Dia</label>
+                          <input type="number" min=0 class="form-control" name='v_dia' formControlName="v_dia"required>
+                        </div>
+                      </div>
+                      <div class="col-lg-3 col-md-3 col-sm-12">
+                        <div class="form-group centrado">
+                          <label for="iva">Iva</label>
+                          <input type="number" min=0 class="form-control" name='iva' formControlName="iva"required>
+                        </div>
+                      </div>
+                      <div class="col-md-12 centrado col-sm-12 col-lg-12">    
+                         <input type="submit" class="btn btn-block btn-outline-success " value="Guardar">
+                    </div>
+                  </div>
+                </form>  
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row espacio">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="row">
+                  <div class="col-md-12 centrado">
+                    <h4>Filtros</h4>
+                  </div>
+                  <div class="col-md-3">
+                      <div class="form-group centrado">
+                          <label for="tipo-buscar">Tipo</label>
+                          <input type="text" #input1 (keyup)="buscarEquiposTipo(input1.value)" class="form-control" name='tipo-buscar' >
+                        </div>
+                  </div>
+                  <div class="col-md-3">
+                      <div class="form-group centrado">
+                          <label for="nombre-buscar">Nombre</label>
+                          <input type="text" #input2 (keyup)="buscarEquiposNombre(input2.value)" class="form-control" name='nombre-buscar' >
+                        </div>
+                  </div>
+                  <div class="col-md-3">
+                      <div class="form-group centrado">
+                          <label for="v_dia-buscar">V Dia</label>
+                          <input type="text" #input3 (keyup)="buscarEquiposValorDia(input3.value)" class="form-control" name='v_dia-buscar' >
+                        </div>
+                  </div>
+                  <div class="col-md-3">
+                      <div class="form-group centrado">
+                          <label for="iva-buscar">Iva</label>
+                          <input type="text" #input4 (keyup)="buscarEquiposNombre(input4.value)" class="form-control" name='iva' >
+                        </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12 centrado">
+                <h4>Resultados</h4>
+              </div>
+              <br>
+              <div class="col-md-12">
+                  <table class=" table-heigth table table-bordered table-responsive">
+                      <thead>
+                        <tr>
+                          <th>Tipo</th>
+                          <th>Nombre</th>
+                          <th>V Dia</th>
+                          <th>Iva</th>
+                          <th>Edit</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let sumi of suministros">
+                          <td [class.propio]="sumi.tipo =='EQUIPOS Y HTAS PROPIOS'" 
+                              [class.alquilar]="sumi.tipo =='EQUIPOS DE ALQUILAR'"
+                              [class.seguridad]="sumi.tipo =='EQUIPOS DE SEGURIDAD'"
+                              [class.calibracion]="sumi.tipo =='EQUIPOS PARA CALIBRACION'"
+                              [class.materiales]="sumi.tipo =='MATERIALES'"
+                              [class.transporte]="sumi.tipo =='TRANSPORTE'"><strong>{{sumi.tipo}}</strong></td>
+                          <td>{{sumi.nombre}}</td>
+                          <td>{{sumi.v_dia | currency:'COP' :true:'1.0-3'}}</td>
+                          <td>{{sumi.iva}}</td>
+                          <td>Icono Para Edicion</td>
+                        </tr>
+                      </tbody>
+                    </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
